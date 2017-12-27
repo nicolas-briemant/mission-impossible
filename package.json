@@ -13,7 +13,7 @@
     "test": "jest src --env=jsdom",
     "eject": "react-scripts eject",
     "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
-    "bundle:stats": "NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --profile --json > stats.json",
+    "bundle:stats": "NODE_ENV=production webpack --config ./node_modules/react-scripts/config/webpack.config.prod.js --profile --json > stats.json",
     "bundle:analyse": "webpack-bundle-analyzer ./stats.json ./build --report --mode=static",
     "lint:eslint": "eslint --ignore-pattern '!.eslintrc.js'",
     "lint:staged": "lint-staged"
@@ -37,7 +37,8 @@
     "pre-commit": "^1.2.2",
     "prettier": "^1.9.2",
     "raf": "^3.4.0",
-    "ramda": "^0.25.0"
+    "ramda": "^0.25.0",
+    "webpack-bundle-analyzer": "^2.9.1"
   },
   "lint-staged": {
     "*.js": [
