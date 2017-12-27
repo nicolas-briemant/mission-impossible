@@ -11,6 +11,35 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+    "eject": "react-scripts eject",
+    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "bundle:stats": "NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --profile --json > stats.json",
+    "bundle:analyse": "webpack-bundle-analyzer ./stats.json ./build --report --mode=static",
+    "lint:eslint": "eslint --ignore-pattern '!.eslintrc.js'",
+    "lint:staged": "lint-staged"
+  },
+  "devDependencies": {
+    "eslint": "^4.14.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
+    "lint-staged": "^6.0.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.9.2"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add",
+      "lint:eslint"
+    ],
+    "*.{css, json}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "pre-commit": "lint:staged"
 }
