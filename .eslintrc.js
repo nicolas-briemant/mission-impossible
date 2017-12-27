@@ -3,7 +3,6 @@ module.exports = {
   extends: ['airbnb', 'prettier'],
   env: {
     browser: true,
-    node: true,
     jest: true,
     es6: true,
   },
@@ -19,6 +18,7 @@ module.exports = {
     },
   },
   rules: {
+    'spaced-comment': 'off',
     'no-return-assign': 'off',
     'global-require': 'off',
     'arrow-body-style': 'off',
@@ -65,4 +65,4 @@ module.exports = {
     'react/self-closing-comp': 0,
     'require-yield': 0,
   },
-};
+}

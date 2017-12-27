@@ -10,7 +10,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "jest src --env=jsdom",
     "eject": "react-scripts eject",
     "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "bundle:stats": "NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --profile --json > stats.json",
@@ -19,6 +19,13 @@
     "lint:staged": "lint-staged"
   },
   "devDependencies": {
+    "babel-plugin-ramda": "^1.4.3",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.14.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -28,7 +35,9 @@
     "eslint-plugin-react": "^7.5.1",
     "lint-staged": "^6.0.0",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.9.2"
+    "prettier": "^1.9.2",
+    "raf": "^3.4.0",
+    "ramda": "^0.25.0"
   },
   "lint-staged": {
     "*.js": [
@@ -41,5 +50,15 @@
       "git add"
     ]
   },
-  "pre-commit": "lint:staged"
+  "pre-commit": "lint:staged",
+  "babel": {
+    "presets": [
+      "latest",
+      "stage-0",
+      "react"
+    ],
+    "plugins": [
+      "ramda"
+    ]
+  }
 }

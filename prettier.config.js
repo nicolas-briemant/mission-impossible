@@ -7,6 +7,6 @@ module.exports = {
   jsxBracketSameLine: false,
   bracketSpacing: true,
   parser: 'babylon',
-  semi: true,
-  rcVerbose: true,
-};
+  semi: false,
+  arrowParens: 'avoid',
+}
