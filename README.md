@@ -1,4 +1,4 @@
-# mission-impossible (nico)
+# mission-impossible (nico, dev0)
 
 > schooljs mission
 
