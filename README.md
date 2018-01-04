@@ -1,4 +1,4 @@
-# mission-impossible
+# mission-impossible (Arnaud)
 
 > schooljs mission
 
