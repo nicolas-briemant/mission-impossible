@@ -3,15 +3,15 @@ import logo from './logo.svg';
 import './App.css';
 import Missions from './components/missions';
 
-function App() {
+const App = datas => {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1 className="App-title">Welcome to mission impossible</h1>
       </header>
-      <Missions />
+      <Missions {...datas} />
     </div>
   );
-}
+};
 export default App;
