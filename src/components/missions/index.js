@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import uniquid from 'uniquid';
+import uniqid from 'uniqid';
 
 const Missions = ({ ...datas }) => {
   const datasCpy = datas;
@@ -25,7 +25,7 @@ const Missions = ({ ...datas }) => {
           <li>managerId: {data.managerId}</li>
           <p>addenda longueur = {data.addenda.length}</p>
           {data.addenda.map(addenda => (
-            <ul key={uniquid()}>
+            <ul key={uniqid()}>
               <li>{addenda.workerId}</li>
             </ul>
           ))}
