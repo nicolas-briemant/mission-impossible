@@ -5,7 +5,7 @@ import uniqid from 'uniqid';
 const Worker = ({ workerId }) => <li>Id: {workerId}</li>;
 
 Worker.propTypes = {
-  workerId: PropTypes.array,
+  workerId: PropTypes.string,
 };
 
 const Mission = ({ name, clientId, partnerId, managerId, addenda }) => (
