@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import uniquid from 'uniquid';
 
 const Missions = ({ ...datas }) => {
-  const test = datas;
+  const datasCpy = datas;
 
-  test.missions.propTypes = {
+  datasCpy.missions.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     clientId: PropTypes.string.isRequired,
