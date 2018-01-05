@@ -1,4 +1,4 @@
-[
+export default [
   {
     _id: 10,
     name: 'soluta aut quia',
