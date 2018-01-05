@@ -64,5 +64,6 @@ module.exports = {
     'react/require-extension': 0,
     'react/self-closing-comp': 0,
     'require-yield': 0,
+    'linebreak-style': 0,
   },
-}
+};
