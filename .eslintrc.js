@@ -63,6 +63,5 @@ module.exports = {
     'react/require-default-props': 0,
     'react/require-extension': 0,
     'react/self-closing-comp': 0,
-    'require-yield': 0,
   },
-}
+};
