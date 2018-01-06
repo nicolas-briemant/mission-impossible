@@ -20,28 +20,22 @@ ShallowWrapper {
       "children": Array [
         <header
           className="App-header"
->
+        >
           <img
-                    alt="logo"
-                    className="App-logo"
-                    src="IMAGE_MOCK"
+            alt="logo"
+            className="App-logo"
+            src="IMAGE_MOCK"
           />
            
           <h1
-                    className="App-title"
+            className="App-title"
           >
-                    Welcome to mission impossible
+            Welcome to mission impossible
           </h1>
-</header>,
-        <p
-          className="App-intro"
->
-          To get started, edit 
-          <code>
-                    src/App.js
-          </code>
-           and save to reload.
-</p>,
+        </header>,
+        <Missions
+          missions={undefined}
+        />,
       ],
       "className": "App",
     },
@@ -57,13 +51,13 @@ ShallowWrapper {
               alt="logo"
               className="App-logo"
               src="IMAGE_MOCK"
-/>,
+            />,
             " ",
             <h1
               className="App-title"
->
+            >
               Welcome to mission impossible
-</h1>,
+            </h1>,
           ],
           "className": "App-header",
         },
@@ -101,34 +95,13 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
+        "nodeType": "function",
         "props": Object {
-          "children": Array [
-            "To get started, edit ",
-            <code>
-              src/App.js
-</code>,
-            " and save to reload.",
-          ],
-          "className": "App-intro",
+          "missions": undefined,
         },
         "ref": null,
-        "rendered": Array [
-          "To get started, edit ",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "src/App.js",
-            },
-            "ref": null,
-            "rendered": "src/App.js",
-            "type": "code",
-          },
-          " and save to reload.",
-        ],
-        "type": "p",
+        "rendered": null,
+        "type": [Function],
       },
     ],
     "type": "div",
@@ -142,28 +115,22 @@ ShallowWrapper {
         "children": Array [
           <header
             className="App-header"
->
+          >
             <img
-                        alt="logo"
-                        className="App-logo"
-                        src="IMAGE_MOCK"
+              alt="logo"
+              className="App-logo"
+              src="IMAGE_MOCK"
             />
              
             <h1
-                        className="App-title"
+              className="App-title"
             >
-                        Welcome to mission impossible
+              Welcome to mission impossible
             </h1>
-</header>,
-          <p
-            className="App-intro"
->
-            To get started, edit 
-            <code>
-                        src/App.js
-            </code>
-             and save to reload.
-</p>,
+          </header>,
+          <Missions
+            missions={undefined}
+          />,
         ],
         "className": "App",
       },
@@ -179,13 +146,13 @@ ShallowWrapper {
                 alt="logo"
                 className="App-logo"
                 src="IMAGE_MOCK"
-/>,
+              />,
               " ",
               <h1
                 className="App-title"
->
+              >
                 Welcome to mission impossible
-</h1>,
+              </h1>,
             ],
             "className": "App-header",
           },
@@ -223,34 +190,13 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
+          "nodeType": "function",
           "props": Object {
-            "children": Array [
-              "To get started, edit ",
-              <code>
-                src/App.js
-</code>,
-              " and save to reload.",
-            ],
-            "className": "App-intro",
+            "missions": undefined,
           },
           "ref": null,
-          "rendered": Array [
-            "To get started, edit ",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "src/App.js",
-              },
-              "ref": null,
-              "rendered": "src/App.js",
-              "type": "code",
-            },
-            " and save to reload.",
-          ],
-          "type": "p",
+          "rendered": null,
+          "type": [Function],
         },
       ],
       "type": "div",
