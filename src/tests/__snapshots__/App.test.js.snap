@@ -32,7 +32,9 @@ ShallowWrapper {
                     Welcome to mission impossible
           </h1>
 </header>,
-        <Missions />,
+        <Missions
+          datas={undefined}
+/>,
       ],
       "className": "App",
     },
@@ -91,7 +93,9 @@ ShallowWrapper {
         "instance": null,
         "key": undefined,
         "nodeType": "function",
-        "props": Object {},
+        "props": Object {
+          "datas": undefined,
+        },
         "ref": null,
         "rendered": null,
         "type": [Function],
@@ -120,7 +124,9 @@ ShallowWrapper {
                         Welcome to mission impossible
             </h1>
 </header>,
-          <Missions />,
+          <Missions
+            datas={undefined}
+/>,
         ],
         "className": "App",
       },
@@ -179,7 +185,9 @@ ShallowWrapper {
           "instance": null,
           "key": undefined,
           "nodeType": "function",
-          "props": Object {},
+          "props": Object {
+            "datas": undefined,
+          },
           "ref": null,
           "rendered": null,
           "type": [Function],
