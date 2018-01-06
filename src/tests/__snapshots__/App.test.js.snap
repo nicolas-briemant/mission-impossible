@@ -20,22 +20,22 @@ ShallowWrapper {
       "children": Array [
         <header
           className="App-header"
-        >
+>
           <img
-            alt="logo"
-            className="App-logo"
-            src="IMAGE_MOCK"
+                    alt="logo"
+                    className="App-logo"
+                    src="IMAGE_MOCK"
           />
            
           <h1
-            className="App-title"
+                    className="App-title"
           >
-            Welcome to mission impossible
+                    Welcome to mission impossible
           </h1>
-        </header>,
+</header>,
         <Missions
           missions={undefined}
-        />,
+/>,
       ],
       "className": "App",
     },
@@ -51,13 +51,13 @@ ShallowWrapper {
               alt="logo"
               className="App-logo"
               src="IMAGE_MOCK"
-            />,
+/>,
             " ",
             <h1
               className="App-title"
-            >
+>
               Welcome to mission impossible
-            </h1>,
+</h1>,
           ],
           "className": "App-header",
         },
@@ -115,22 +115,22 @@ ShallowWrapper {
         "children": Array [
           <header
             className="App-header"
-          >
+>
             <img
-              alt="logo"
-              className="App-logo"
-              src="IMAGE_MOCK"
+                        alt="logo"
+                        className="App-logo"
+                        src="IMAGE_MOCK"
             />
              
             <h1
-              className="App-title"
+                        className="App-title"
             >
-              Welcome to mission impossible
+                        Welcome to mission impossible
             </h1>
-          </header>,
+</header>,
           <Missions
             missions={undefined}
-          />,
+/>,
         ],
         "className": "App",
       },
@@ -146,13 +146,13 @@ ShallowWrapper {
                 alt="logo"
                 className="App-logo"
                 src="IMAGE_MOCK"
-              />,
+/>,
               " ",
               <h1
                 className="App-title"
-              >
+>
                 Welcome to mission impossible
-              </h1>,
+</h1>,
             ],
             "className": "App-header",
           },
