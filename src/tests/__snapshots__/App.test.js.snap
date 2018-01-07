@@ -4,7 +4,9 @@ exports[`App should match snapshot 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <App />,
+  Symbol(enzyme.__unrendered__): <App
+    missions={Array []}
+/>,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -34,7 +36,7 @@ ShallowWrapper {
           </h1>
 </header>,
         <Missions
-          missions={undefined}
+          missions={Array []}
 />,
       ],
       "className": "App",
@@ -97,7 +99,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "missions": undefined,
+          "missions": Array [],
         },
         "ref": null,
         "rendered": null,
@@ -129,7 +131,7 @@ ShallowWrapper {
             </h1>
 </header>,
           <Missions
-            missions={undefined}
+            missions={Array []}
 />,
         ],
         "className": "App",
@@ -192,7 +194,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "missions": undefined,
+            "missions": Array [],
           },
           "ref": null,
           "rendered": null,

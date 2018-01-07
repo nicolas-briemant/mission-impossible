@@ -5,5 +5,9 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import missions from './data/missions2';
 
-ReactDOM.render(<App missions={missions} />, document.getElementById('root'));
+const initialState = {
+  missions,
+};
+
+ReactDOM.render(<App {...initialState} />, document.getElementById('root'));
 registerServiceWorker();
