@@ -11,7 +11,7 @@ const App = props => {
         <img src={logo} className="App-logo" alt="logo" />
         <h1 className="App-title">Welcome to mission impossible</h1>
       </header>
-      <Missions datas={props.missions} />
+      <Missions mission={props.missions} />
     </div>
   );
 };

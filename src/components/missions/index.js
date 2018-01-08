@@ -1,50 +1,69 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
+import glamorous from 'glamorous';
+import { css } from 'glamor';
 
-const Missions = ({ datas }) => {
-  const cpyDatas = datas;
+const anim = css.keyframes({
+  '0%': { borderRadius: '0px' },
+  '50%': { borderRadius: '50px' },
+  '100%': { borderRadius: '0px' },
+});
 
-  cpyDatas.propTypes = {
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    clientId: PropTypes.string.isRequired,
-    partnerId: PropTypes.string.isRequired,
-    managerId: PropTypes.string.isRequired,
-    addenda: PropTypes.arrayOf(
-      PropTypes.shape({
-        workerId: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
-  };
+const MyUlCont = glamorous.ul({
+  border: 'solid 1px black',
+});
 
+const Mylist = glamorous.div({
+  display: 'flex',
+  flexDirection: 'column',
+  animation: `${anim} 1s infinite`,
+  ':hover': {
+    color: '#fff',
+  },
+  ':active': {
+    color: 'white',
+    position: 'relative',
+  },
+});
+
+const Missions = ({ mission }) => {
   return (
-    <div>
-      {datas.map(data => (
-        <ul key={data.id}>
-          <li>id: {data.id} </li>
-          <li>name: {data.name} </li>
-          <li>clientId: {data.clientId} </li>
-          <li>partnerId: {data.partnerId}</li>
-          <li>managerId: {data.managerId}</li>
-          <p>addenda longueur = {data.addenda.length}</p>
-          {data.addenda.map(worker => (
+    <glamorous.Div textalign="left">
+      {mission.map(({ id, name, clientId, partnerId, managerId, addenda }) => (
+        <MyUlCont key={id} textAlign="left">
+          <Mylist>id: {id} </Mylist>
+          <Mylist>name: {name} </Mylist>
+          <Mylist>clientId: {clientId} </Mylist>
+          <Mylist>partnerId: {partnerId}</Mylist>
+          <Mylist>managerId: {managerId}</Mylist>
+          <Mylist>addenda longueur = {addenda.length}</Mylist>
+          {addenda.map(({ workerId }) => (
             <ul key={uniqid()}>
-              <li>{worker.workerId}</li>
+              <Mylist>workerId: {workerId}</Mylist>
             </ul>
           ))}
-        </ul>
+        </MyUlCont>
       ))}
-    </div>
+    </glamorous.Div>
   );
 };
 
 Missions.propTypes = {
-  datas: PropTypes.arrayOf(
+  mission: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
+      name: PropTypes.string.isRequired,
+      clientId: PropTypes.string.isRequired,
+      partnerId: PropTypes.string,
+      managerId: PropTypes.string.isRequired,
+      addenda: PropTypes.arrayOf(
+        PropTypes.shape({
+          workerId: PropTypes.string.isRequired,
+        }),
+      ),
+    }).isRequired,
+  ),
 };
 
 export default Missions;
