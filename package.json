@@ -2,13 +2,6 @@
   "name": "mission-impossible",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "faker": "^4.1.0",
-    "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-scripts": "1.0.17"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -19,6 +12,17 @@
     "bundle:analyse": "webpack-bundle-analyzer ./stats.json ./build --report --mode=static",
     "lint:eslint": "eslint --ignore-pattern '!.eslintrc.js'",
     "lint:staged": "lint-staged"
+  },
+  "dependencies": {
+    "@blueprintjs/core": "^1.35.0",
+    "faker": "^4.1.0",
+    "glamor": "^2.20.40",
+    "glamorous": "^4.11.2",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.0.17"
   },
   "devDependencies": {
     "babel-plugin-ramda": "^1.4.3",

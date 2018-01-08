@@ -1,12 +1,23 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Card, Classes, Colors } from '@blueprintjs/core';
+import cx from 'classnames';
+import glamorous, { H5 } from 'glamorous';
+
+//--------------------------------------------------------------------------------------------------
+const StyledCard = glamorous(Card)({ margin: 10, width: 300 });
+const StyledCardHeader = glamorous(H5)({ color: Colors.BLUE1 });
 
 const Mission = ({name, clientId, partnerId, managerId, addenda}) => (
-  <div>
-    <h2>{name}</h2>
-    <em>{[clientId, partnerId, managerId].join(' - ')}</em>
-    <div>addenda: (#{addenda.length}) {addenda.map((a) => a.workerId).join(' - ')}</div>
-  </div>
+  <StyledCard className={cx(Classes.INTERACTIVE, Classes.ELEVATION_2)}>
+    <StyledCardHeader>{name}</StyledCardHeader>
+    <Fragment>
+      {[clientId, partnerId, managerId].map((id, i) => <div key={`${id}-${i}`}><em>{id}</em></div>)}
+    </Fragment>
+    <div>
+      addenda: (#{addenda.length}) {addenda.map((a) => a.workerId).join(' - ')}
+    </div>
+  </StyledCard>
 );
 
 Mission.propTypes = {
@@ -21,6 +32,7 @@ Mission.propTypes = {
   ).isRequired,
 };
 
+//--------------------------------------------------------------------------------------------------
 const Missions = ({ missions }) => (
   <Fragment>
     {missions.map((mission) => <Mission key={mission._id} {...mission} />)}
