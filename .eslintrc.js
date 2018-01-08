@@ -65,4 +65,4 @@ module.exports = {
     'react/self-closing-comp': 0,
     'require-yield': 0,
   },
-}
+};
