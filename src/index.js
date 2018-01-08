@@ -5,9 +5,9 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import missions from './data/missions2';
 
-const datas = {
+const data = {
   missions,
 };
 
-ReactDOM.render(<App {...datas} />, document.getElementById('root'));
+ReactDOM.render(<App {...data} />, document.getElementById('root'));
 registerServiceWorker();
