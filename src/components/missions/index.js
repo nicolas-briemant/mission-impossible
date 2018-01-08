@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 
 const Mission = ({ name, clientId, partnerId, managerId, addenda }) => {
   return (
-    <div>
+    <li>
       <h3>Name: {name}</h3>
       <p>
         clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
       </p>
-      <ul>
+      <p>
         Workers ({addenda.length}): {addenda.map(worker => worker.workerId)}
-      </ul>
-    </div>
+      </p>
+    </li>
   );
 };
 
