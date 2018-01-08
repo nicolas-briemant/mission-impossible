@@ -1,6 +1,13 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import glamorous from 'glamorous';
 import uniqid from 'uniqid';
+
+const ListItem = glamorous.li({
+  ':before': {
+    content: '"->"',
+  },
+});
 
 const Worker = ({ workerId }) => <li>Id: {workerId}</li>;
 
@@ -13,9 +20,9 @@ const Mission = ({ name, clientId, partnerId, managerId, addenda }) => (
     <li>
       <b>{name}</b>
     </li>
-    <li>
+    <ListItem>
       clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
-    </li>
+    </ListItem>
     <ul>{addenda.map(worker => <Worker key={uniqid()} {...worker} />)}</ul>
   </Fragment>
 );
