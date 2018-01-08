@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
-import glamorous from 'glamorous';
+import glamorous, { Div } from 'glamorous';
 import { css } from 'glamor';
 
 const anim = css.keyframes({
@@ -29,7 +29,7 @@ const Mylist = glamorous.div({
 
 const Missions = ({ mission }) => {
   return (
-    <glamorous.Div textalign="left">
+    <Div textalign="left">
       {mission.map(({ id, name, clientId, partnerId, managerId, addenda }) => (
         <MyUlCont key={id} textAlign="left">
           <Mylist>id: {id} </Mylist>
@@ -45,7 +45,7 @@ const Missions = ({ mission }) => {
           ))}
         </MyUlCont>
       ))}
-    </glamorous.Div>
+    </Div>
   );
 };
 
