@@ -4,7 +4,9 @@ exports[`App should match snapshot 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <App />,
+  Symbol(enzyme.__unrendered__): <App
+    missions={Array []}
+/>,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -33,15 +35,9 @@ ShallowWrapper {
                     Welcome to mission impossible
           </h1>
 </header>,
-        <p
-          className="App-intro"
->
-          To get started, edit 
-          <code>
-                    src/App.js
-          </code>
-           and save to reload.
-</p>,
+        <Missions
+          missions={Array []}
+/>,
       ],
       "className": "App",
     },
@@ -101,34 +97,13 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
+        "nodeType": "function",
         "props": Object {
-          "children": Array [
-            "To get started, edit ",
-            <code>
-              src/App.js
-</code>,
-            " and save to reload.",
-          ],
-          "className": "App-intro",
+          "missions": Array [],
         },
         "ref": null,
-        "rendered": Array [
-          "To get started, edit ",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "src/App.js",
-            },
-            "ref": null,
-            "rendered": "src/App.js",
-            "type": "code",
-          },
-          " and save to reload.",
-        ],
-        "type": "p",
+        "rendered": null,
+        "type": [Function],
       },
     ],
     "type": "div",
@@ -155,15 +130,9 @@ ShallowWrapper {
                         Welcome to mission impossible
             </h1>
 </header>,
-          <p
-            className="App-intro"
->
-            To get started, edit 
-            <code>
-                        src/App.js
-            </code>
-             and save to reload.
-</p>,
+          <Missions
+            missions={Array []}
+/>,
         ],
         "className": "App",
       },
@@ -223,34 +192,13 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
+          "nodeType": "function",
           "props": Object {
-            "children": Array [
-              "To get started, edit ",
-              <code>
-                src/App.js
-</code>,
-              " and save to reload.",
-            ],
-            "className": "App-intro",
+            "missions": Array [],
           },
           "ref": null,
-          "rendered": Array [
-            "To get started, edit ",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "src/App.js",
-              },
-              "ref": null,
-              "rendered": "src/App.js",
-              "type": "code",
-            },
-            " and save to reload.",
-          ],
-          "type": "p",
+          "rendered": null,
+          "type": [Function],
         },
       ],
       "type": "div",
