@@ -27,7 +27,7 @@ const LogoItemMenu = glamorous.span({
 const Header = () => (
   <HeaderFull>
     <HeaderLeft>
-      <a href="#">
+      <a>
         <Logo alt="Logo" src={logo} />
       </a>
     </HeaderLeft>
