@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import uniqid from 'uniqid';
-// import * as Blueprint from '@blueprintjs/core';
+import { Card } from '@blueprintjs/core';
 import 'normalize.css/normalize.css';
 import '@blueprintjs/core/dist/blueprint.css';
 
@@ -12,12 +12,13 @@ Worker.propTypes = {
   workerId: PropTypes.string,
 };
 
-const CellMission = glamorous.div({
+const CellMission = glamorous(Card)({
   width: 300,
+  margin: 10,
 });
 
 const Mission = ({ name, clientId, partnerId, managerId, addenda }) => (
-  <CellMission>
+  <CellMission interactive="true" elevation={Card.ELEVATION_TWO}>
     <b>{name}</b>
     <p>
       clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
