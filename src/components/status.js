@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import cx from 'classnames';
 
 const StyledStatus = glamorous.span({
   fontWeight: 'bold',
@@ -11,7 +12,14 @@ const StyledStatus = glamorous.span({
 });
 
 export const Status = ({ number }) => {
-  return <StyledStatus> {number} Missions</StyledStatus>;
+  const isEmpty = number <= 0;
+
+  return (
+    <StyledStatus>
+      {' '}
+      <code className={cx({ red: isEmpty, green: !isEmpty })}>{number} Missions</code>
+    </StyledStatus>
+  );
 };
 
 Status.propTypes = {

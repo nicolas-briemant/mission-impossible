@@ -1,10 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import '@blueprintjs/core/dist/blueprint.css';
-import Missions from './components/missions/index';
+
+import PropTypes from 'prop-types';
 import { Header, HeaderLeft, HeaderRight } from './components/header';
 import { Menu } from './components/menu';
 import { Title } from './components/title';
+import Missions from './components/missions/index';
+import './App.css';
 
 const App = ({ missions }) => (
   <div>
@@ -16,7 +18,6 @@ const App = ({ missions }) => (
         <Menu />
       </HeaderRight>
     </Header>
-
     <Missions missions={missions} />
   </div>
 );

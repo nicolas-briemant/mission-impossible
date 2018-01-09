@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { Status } from '../status';
 
-const Mission = ({ name, clientId, partnerId, managerId, addenda }) => {
+const Mission = ({ id, name, clientId, partnerId, managerId, addenda }) => {
   return (
     <StyledMission>
+      <h2> Mission {id}</h2>
       <h3>{name}</h3>
       <p>
         {clientId}, {partnerId}, {managerId}
@@ -30,9 +31,12 @@ const StyledMission = glamorous.div({
   paddingLeft: '20px',
   color: '#000000',
   width: '20%',
+  alignContent: 'center',
+  paddingTop: '20',
 });
 
 Mission.propTypes = {
+  id: PropTypes.number,
   name: PropTypes.string.isRequired,
   clientId: PropTypes.string,
   partnerId: PropTypes.string,
