@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import uniqid from 'uniqid';
-import { Card } from '@blueprintjs/core';
+import { Card, Slider } from '@blueprintjs/core';
 import 'normalize.css/normalize.css';
 import '@blueprintjs/core/dist/blueprint.css';
 
@@ -43,7 +43,9 @@ const Container = glamorous.div({
   display: 'flex',
 });
 
-const FilterMissions = glamorous.aside({});
+const FilterMissions = glamorous.aside({
+  marginTop: '20',
+});
 
 const ListMissions = glamorous.div({
   display: 'flex',
@@ -57,7 +59,7 @@ const Missions = ({ missions }) => (
   <Container>
     <FilterMissions>
       <b>Nombre de Missions: {missions.length}</b>
-      <input className="pt-input pt-round" type="text" />
+      <Slider max={100} labelStepSize={25} />
     </FilterMissions>
     <ListMissions>{missions.map(mission => <Mission key={mission.id} {...mission} />)}</ListMissions>
   </Container>
