@@ -5405,12 +5405,24 @@ ShallowWrapper {
                     />
           </HeaderMiddle>
           <HeaderRight>
-                    <ul>
-                              Missions
-                    </ul>
-                    <ul>
-                              Peoples
-                    </ul>
+                    <glamorous(ul)>
+                              <glamorous(li)>
+                                        <glamorous(span)
+                                                  className="pt-icon-list"
+                                        />
+                                        <p>
+                                                  Missions
+                                        </p>
+                              </glamorous(li)>
+                              <glamorous(li)>
+                                        <glamorous(span)
+                                                  className="pt-icon-people"
+                                        />
+                                        <p>
+                                                  Peoples
+                                        </p>
+                              </glamorous(li)>
+                    </glamorous(ul)>
           </HeaderRight>
 </Header>,
         <Missions
@@ -10811,12 +10823,24 @@ ShallowWrapper {
               />
 </HeaderMiddle>,
             <HeaderRight>
-              <ul>
-                            Missions
-              </ul>
-              <ul>
-                            Peoples
-              </ul>
+              <glamorous(ul)>
+                            <glamorous(li)>
+                                          <glamorous(span)
+                                                        className="pt-icon-list"
+                                          />
+                                          <p>
+                                                        Missions
+                                          </p>
+                            </glamorous(li)>
+                            <glamorous(li)>
+                                          <glamorous(span)
+                                                        className="pt-icon-people"
+                                          />
+                                          <p>
+                                                        Peoples
+                                          </p>
+                            </glamorous(li)>
+              </glamorous(ul)>
 </HeaderRight>,
           ],
         },
@@ -10878,40 +10902,137 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
-              "children": Array [
-                <ul>
-                  Missions
-</ul>,
-                <ul>
-                  Peoples
-</ul>,
-              ],
+              "children": <glamorous(ul)>
+                <glamorous(li)>
+                                <glamorous(span)
+                                                className="pt-icon-list"
+                                />
+                                <p>
+                                                Missions
+                                </p>
+                </glamorous(li)>
+                <glamorous(li)>
+                                <glamorous(span)
+                                                className="pt-icon-people"
+                                />
+                                <p>
+                                                Peoples
+                                </p>
+                </glamorous(li)>
+</glamorous(ul)>,
             },
             "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "Missions",
-                },
-                "ref": null,
-                "rendered": "Missions",
-                "type": "ul",
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": Array [
+                  <glamorous(li)>
+                    <glamorous(span)
+                                        className="pt-icon-list"
+                    />
+                    <p>
+                                        Missions
+                    </p>
+</glamorous(li)>,
+                  <glamorous(li)>
+                    <glamorous(span)
+                                        className="pt-icon-people"
+                    />
+                    <p>
+                                        Peoples
+                    </p>
+</glamorous(li)>,
+                ],
               },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "Peoples",
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": Array [
+                      <glamorous(span)
+                        className="pt-icon-list"
+/>,
+                      <p>
+                        Missions
+</p>,
+                    ],
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "className": "pt-icon-list",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": [Function],
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "Missions",
+                      },
+                      "ref": null,
+                      "rendered": "Missions",
+                      "type": "p",
+                    },
+                  ],
+                  "type": [Function],
                 },
-                "ref": null,
-                "rendered": "Peoples",
-                "type": "ul",
-              },
-            ],
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": Array [
+                      <glamorous(span)
+                        className="pt-icon-people"
+/>,
+                      <p>
+                        Peoples
+</p>,
+                    ],
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "className": "pt-icon-people",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": [Function],
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "Peoples",
+                      },
+                      "ref": null,
+                      "rendered": "Peoples",
+                      "type": "p",
+                    },
+                  ],
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
             "type": [Function],
           },
         ],
@@ -16321,12 +16442,24 @@ ShallowWrapper {
                         />
             </HeaderMiddle>
             <HeaderRight>
-                        <ul>
-                                    Missions
-                        </ul>
-                        <ul>
-                                    Peoples
-                        </ul>
+                        <glamorous(ul)>
+                                    <glamorous(li)>
+                                                <glamorous(span)
+                                                            className="pt-icon-list"
+                                                />
+                                                <p>
+                                                            Missions
+                                                </p>
+                                    </glamorous(li)>
+                                    <glamorous(li)>
+                                                <glamorous(span)
+                                                            className="pt-icon-people"
+                                                />
+                                                <p>
+                                                            Peoples
+                                                </p>
+                                    </glamorous(li)>
+                        </glamorous(ul)>
             </HeaderRight>
 </Header>,
           <Missions
@@ -21727,12 +21860,24 @@ ShallowWrapper {
                 />
 </HeaderMiddle>,
               <HeaderRight>
-                <ul>
-                                Missions
-                </ul>
-                <ul>
-                                Peoples
-                </ul>
+                <glamorous(ul)>
+                                <glamorous(li)>
+                                                <glamorous(span)
+                                                                className="pt-icon-list"
+                                                />
+                                                <p>
+                                                                Missions
+                                                </p>
+                                </glamorous(li)>
+                                <glamorous(li)>
+                                                <glamorous(span)
+                                                                className="pt-icon-people"
+                                                />
+                                                <p>
+                                                                Peoples
+                                                </p>
+                                </glamorous(li)>
+                </glamorous(ul)>
 </HeaderRight>,
             ],
           },
@@ -21794,40 +21939,137 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
-                "children": Array [
-                  <ul>
-                    Missions
-</ul>,
-                  <ul>
-                    Peoples
-</ul>,
-                ],
+                "children": <glamorous(ul)>
+                  <glamorous(li)>
+                                    <glamorous(span)
+                                                      className="pt-icon-list"
+                                    />
+                                    <p>
+                                                      Missions
+                                    </p>
+                  </glamorous(li)>
+                  <glamorous(li)>
+                                    <glamorous(span)
+                                                      className="pt-icon-people"
+                                    />
+                                    <p>
+                                                      Peoples
+                                    </p>
+                  </glamorous(li)>
+</glamorous(ul)>,
               },
               "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "Missions",
-                  },
-                  "ref": null,
-                  "rendered": "Missions",
-                  "type": "ul",
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": Array [
+                    <glamorous(li)>
+                      <glamorous(span)
+                                            className="pt-icon-list"
+                      />
+                      <p>
+                                            Missions
+                      </p>
+</glamorous(li)>,
+                    <glamorous(li)>
+                      <glamorous(span)
+                                            className="pt-icon-people"
+                      />
+                      <p>
+                                            Peoples
+                      </p>
+</glamorous(li)>,
+                  ],
                 },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "Peoples",
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "children": Array [
+                        <glamorous(span)
+                          className="pt-icon-list"
+/>,
+                        <p>
+                          Missions
+</p>,
+                      ],
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "className": "pt-icon-list",
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": [Function],
+                      },
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "Missions",
+                        },
+                        "ref": null,
+                        "rendered": "Missions",
+                        "type": "p",
+                      },
+                    ],
+                    "type": [Function],
                   },
-                  "ref": null,
-                  "rendered": "Peoples",
-                  "type": "ul",
-                },
-              ],
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "children": Array [
+                        <glamorous(span)
+                          className="pt-icon-people"
+/>,
+                        <p>
+                          Peoples
+</p>,
+                      ],
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "className": "pt-icon-people",
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": [Function],
+                      },
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "Peoples",
+                        },
+                        "ref": null,
+                        "rendered": "Peoples",
+                        "type": "p",
+                      },
+                    ],
+                    "type": [Function],
+                  },
+                ],
+                "type": [Function],
+              },
               "type": [Function],
             },
           ],

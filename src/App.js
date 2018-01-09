@@ -10,6 +10,23 @@ const Logo = glamorous.img({
   width: 75,
 });
 
+const Menu = glamorous.ul({
+  display: 'flex',
+  flexDirection: 'row',
+  marginRight: 10,
+});
+
+const ItemMenu = glamorous.li({
+  display: 'flex',
+  flexDirection: 'row',
+  listStyleType: 'none',
+  margin: 20,
+});
+
+const LogoItemMenu = glamorous.span({
+  marginRight: 10,
+});
+
 const App = ({ missions }) => (
   <div className="App">
     <Header>
@@ -20,8 +37,16 @@ const App = ({ missions }) => (
         <Logo alt="Logo" src={logo} />
       </HeaderMiddle>
       <HeaderRight>
-        <ul>Missions</ul>
-        <ul>Peoples</ul>
+        <Menu>
+          <ItemMenu>
+            <LogoItemMenu className="pt-icon-list" />
+            <p>Missions</p>
+          </ItemMenu>
+          <ItemMenu>
+            <LogoItemMenu className="pt-icon-people" />
+            <p>Peoples</p>
+          </ItemMenu>
+        </Menu>
       </HeaderRight>
     </Header>
     <Missions missions={missions} />

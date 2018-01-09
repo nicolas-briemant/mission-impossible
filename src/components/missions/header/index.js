@@ -27,11 +27,6 @@ HeaderRight.propTypes = {
   children: PropTypes.node,
 };
 
-const Menu = glamorous.div({
-  display: 'flex',
-  marginRight: '10',
-});
-
 export const Header = ({ children }) => {
   const headerLeft = () => React.Children.toArray(children).find(({ type }) => type === HeaderLeft);
   const headerMiddle = () => React.Children.toArray(children).find(({ type }) => type === HeaderMiddle);
@@ -41,11 +36,11 @@ export const Header = ({ children }) => {
     <StyledHeader>
       <div>{headerLeft()}</div>
       <div>{headerMiddle()}</div>
-      <Menu>{headerRight()}</Menu>
+      <div>{headerRight()}</div>
     </StyledHeader>
   );
 };
 
 Header.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.node,
 };

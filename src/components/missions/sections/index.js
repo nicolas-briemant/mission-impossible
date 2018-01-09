@@ -43,9 +43,7 @@ const Container = glamorous.div({
   display: 'flex',
 });
 
-const FilterMissions = glamorous.aside({
-  widthMin: 100,
-});
+const FilterMissions = glamorous.aside({});
 
 const ListMissions = glamorous.div({
   display: 'flex',
@@ -59,7 +57,7 @@ const Missions = ({ missions }) => (
   <Container>
     <FilterMissions>
       <b>Nombre de Missions: {missions.length}</b>
-      <input className="pt-input .pt-round" type="text" />
+      <input className="pt-input pt-round" type="text" />
     </FilterMissions>
     <ListMissions>{missions.map(mission => <Mission key={mission.id} {...mission} />)}</ListMissions>
   </Container>
