@@ -31,6 +31,18 @@ export const Header = ({ children }) => {
   );
 };
 
+HeaderLeft.propTypes = {
+  children: PropTypes.node,
+};
+
+HeaderRight.propTypes = {
+  children: PropTypes.node,
+};
+
+HeaderCenter.propTypes = {
+  children: PropTypes.node,
+};
+
 Header.propTypes = {
   children: PropTypes.node,
 };

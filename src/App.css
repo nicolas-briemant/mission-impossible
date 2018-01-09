@@ -14,7 +14,7 @@
   color: white;
 }
 
-.imgheader{
+.imgheader {
   vertical-align: middle;
   margin-right: 35px;
   height: 100px;
@@ -23,15 +23,25 @@
 
 .App-title {
   font-size: 1.5em;
-  color: white;
-  display: inline-block;
 }
 
 .App-intro {
   font-size: large;
 }
 
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
