@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { Card, Classes, Colors } from '@blueprintjs/core';
 import cx from 'classnames';
 import glamorous, { H5 } from 'glamorous';
+import { Header, HeaderLeft } from '../app';
+import Status from './status';
 
 //--------------------------------------------------------------------------------------------------
-const StyledCard = glamorous(Card)({ margin: 10, width: 300 });
+const StyledCard = glamorous(Card)({ margin: '10px 0', width: 300 });
 const StyledCardHeader = glamorous(H5)({ color: Colors.BLUE1 });
 
 const Mission = ({name, clientId, partnerId, managerId, addenda}) => (
@@ -33,10 +35,27 @@ Mission.propTypes = {
 };
 
 //--------------------------------------------------------------------------------------------------
+const StyledContainer = glamorous.div({
+  padding: 20,
+});
+
+const StyledMissions = glamorous.div({
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'space-between',
+});
+
 const Missions = ({ missions }) => (
-  <Fragment>
-    {missions.map((mission) => <Mission key={mission._id} {...mission} />)}
-  </Fragment>
+  <StyledContainer>
+    <Header>
+      <HeaderLeft>
+        <Status count={missions.length} />
+      </HeaderLeft>
+    </Header>
+    <StyledMissions>
+      {missions.map((mission) => <Mission key={mission.id} {...mission} />)}
+    </StyledMissions>
+  </StyledContainer>
 );
 
 Missions.propTypes = {

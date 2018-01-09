@@ -14,8 +14,13 @@ describe('App', () => {
     ReactDOM.render(<App {...initialState} />, div)
   })
 
+  it('should match snapshot (blank)', () => {
+    const wrapper = shallow(<App missions={[]} />)
+    expect(wrapper).toMatchSnapshot()
+  })
+
   it('should match snapshot', () => {
-    const wrapper = shallow(<App />)
+    const wrapper = shallow(<App {...initialState} />)
     expect(wrapper).toMatchSnapshot()
   })
 })
