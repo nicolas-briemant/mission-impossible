@@ -12,17 +12,21 @@ const MyDivCont = glamorous.div({
   alignItem: 'left',
   width: '100%',
 });
-// {cx([Classes.DANGER]: isZero)}
+
 const SearchBar = ({ name, count }) => {
-  const isPlural = count ? 's' : '';
-  const isZero = count !== 0 ? 'green' : 'red';
+  const isEmpty = count <= 0;
+  const hasS = !isEmpty;
+  // const cls = cx(isEmpty ? 'red' : 'green');
+  const cls = cx({
+    red: isEmpty,
+    green: !isEmpty,
+    // [`${hasS ? 'toto' : ''}`]: true,
+  });
+
   return (
     <MyDivCont>
-      <code>
-        {`${name}`}
-        {cx({ [isPlural]: true })}:
-      </code>{' '}
-      <code className={cx({ [isZero]: true })}>{`${count}`}</code>
+      <code>{`${name}${hasS ? 's' : ''}:`}</code>
+      <code className={cls}>{`${count}`}</code>
     </MyDivCont>
   );
 };
@@ -33,4 +37,3 @@ SearchBar.propTypes = {
 };
 
 export default SearchBar;
-// Erreur search-bar
