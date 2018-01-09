@@ -19,7 +19,6 @@ const anim = css.keyframes({
 const HeaderLogoImg = glamorous.img({
   height: '77px',
   width: 'auto',
-  backgroundColor: 'red',
   animation: `${anim} 5s infinite linear`,
 });
 

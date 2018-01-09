@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import cx from 'classnames';
 
 const MyDivCont = glamorous.div({
   position: 'relative',
@@ -11,12 +12,17 @@ const MyDivCont = glamorous.div({
   alignItem: 'left',
   width: '100%',
 });
-
+// {cx([Classes.DANGER]: isZero)}
 const SearchBar = ({ name, count }) => {
-  const s = count ? 's' : '';
+  const isPlural = count ? 's' : '';
+  const isZero = count !== 0 ? 'green' : 'red';
   return (
     <MyDivCont>
-      <code>{`${name}${s}:`}</code> <code className={`${count !== 0 ? 'green' : 'red'}`}>{`${count}`}</code>
+      <code>
+        {`${name}`}
+        {cx({ [isPlural]: true })}:
+      </code>{' '}
+      <code className={cx({ [isZero]: true })}>{`${count}`}</code>
     </MyDivCont>
   );
 };
