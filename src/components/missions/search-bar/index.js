@@ -27,3 +27,4 @@ SearchBar.propTypes = {
 };
 
 export default SearchBar;
+// Erreur search-bar

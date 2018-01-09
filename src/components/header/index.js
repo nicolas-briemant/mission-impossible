@@ -5,13 +5,13 @@ import glamorous from 'glamorous';
 export const HeaderLeft = ({ children }) => <Fragment>{children}</Fragment>;
 
 HeaderLeft.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node,
 };
 
 export const HeaderRight = ({ children }) => <Fragment>{children}</Fragment>;
 
 HeaderRight.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node,
 };
 
 const HeaderContain = glamorous.div({
