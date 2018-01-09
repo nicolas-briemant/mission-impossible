@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import '@blueprintjs/core/dist/blueprint.css';
 import Missions from './components/missions/index';
 import { Header, HeaderLeft, HeaderRight } from './components/header';
-import { Menus } from './components/menu';
+import { Menu } from './components/menu';
 import { Title } from './components/title';
 
 const App = ({ missions }) => (
@@ -13,7 +13,7 @@ const App = ({ missions }) => (
         <Title />
       </HeaderLeft>
       <HeaderRight>
-        <Menus />
+        <Menu />
       </HeaderRight>
     </Header>
 

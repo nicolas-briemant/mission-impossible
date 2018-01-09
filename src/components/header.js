@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import glamorous from 'glamorous';
-import '@blueprintjs/core/dist/blueprint.css';
 import PropTypes from 'prop-types';
 
 export const HeaderLeft = ({ children }) => <Fragment>{children}</Fragment>;

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import { Status } from '../status';
 
 const Mission = ({ name, clientId, partnerId, managerId, addenda }) => {
   return (
@@ -48,13 +49,14 @@ const StyledMissions = glamorous.div({
   flexDirection: 'row',
   justifyContent: 'space-between',
   flexWrap: 'wrap',
-  backgroundColor: '#ccebff',
+  backgroundColor: 'white',
 });
 
 const Missions = ({ missions }) => (
-  <StyledMissions>
-    <div>{missions.length} Missions</div> {missions.map(mission => <Mission key={mission.id} {...mission} />)}
-  </StyledMissions>
+  <div>
+    <Status number={missions.length} />
+    <StyledMissions>{missions.map(mission => <Mission key={mission.id} {...mission} />)}</StyledMissions>
+  </div>
 );
 
 Missions.propTypes = {

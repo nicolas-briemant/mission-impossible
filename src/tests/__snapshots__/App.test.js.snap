@@ -23,7 +23,7 @@ ShallowWrapper {
                     <Title />
           </HeaderLeft>
           <HeaderRight>
-                    <Menus />
+                    <Menu />
           </HeaderRight>
 </Header>,
         <Missions
@@ -43,7 +43,7 @@ ShallowWrapper {
               <Title />
 </HeaderLeft>,
             <HeaderRight>
-              <Menus />
+              <Menu />
 </HeaderRight>,
           ],
         },
@@ -73,7 +73,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
-              "children": <Menus />,
+              "children": <Menu />,
             },
             "ref": null,
             "rendered": Object {
@@ -116,7 +116,7 @@ ShallowWrapper {
                         <Title />
             </HeaderLeft>
             <HeaderRight>
-                        <Menus />
+                        <Menu />
             </HeaderRight>
 </Header>,
           <Missions
@@ -136,7 +136,7 @@ ShallowWrapper {
                 <Title />
 </HeaderLeft>,
               <HeaderRight>
-                <Menus />
+                <Menu />
 </HeaderRight>,
             ],
           },
@@ -166,7 +166,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
-                "children": <Menus />,
+                "children": <Menu />,
               },
               "ref": null,
               "rendered": Object {

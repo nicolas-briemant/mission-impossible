@@ -1,8 +1,7 @@
 import React from 'react';
 import { Navbar, Button, NavbarGroup } from '@blueprintjs/core';
-import '@blueprintjs/core/dist/blueprint.css';
 
-export const Menus = () => {
+export const Menu = () => {
   return (
     <Navbar>
       <NavbarGroup align="right">
