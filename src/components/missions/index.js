@@ -1,51 +1,67 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
-import glamorous, { Div } from 'glamorous';
-import { css } from 'glamor';
+import { Classes } from '@blueprintjs/core';
+import cx from 'classnames';
+import glamorous from 'glamorous';
+import SearchBar from './search-bar';
 
-const anim = css.keyframes({
-  '0%': { borderRadius: '0px' },
-  '50%': { borderRadius: '50px' },
-  '100%': { borderRadius: '0px' },
+const MyDivCont = glamorous.div({
+  display: 'flex',
+  flexWrap: 'wrap',
 });
 
 const MyUlCont = glamorous.ul({
+  width: '311px',
+  margin: '10px',
   border: 'solid 1px black',
+  padding: '0px',
 });
 
 const Mylist = glamorous.div({
-  display: 'flex',
-  flexDirection: 'column',
-  animation: `${anim} 1s infinite`,
   ':hover': {
-    color: '#fff',
+    fontWeight: 'bold',
   },
   ':active': {
-    color: 'white',
+    color: 'red',
     position: 'relative',
   },
 });
 
 const Missions = ({ mission }) => {
+  const count = mission.length;
+  if (count <= 0) {
+    return (
+      <MyDivCont>
+        <SearchBar name="nombre de mission" count={count} />
+        <div>
+          <p> No mission </p>
+        </div>
+      </MyDivCont>
+    );
+  }
+
   return (
-    <Div textalign="left">
-      {mission.map(({ id, name, clientId, partnerId, managerId, addenda }) => (
-        <MyUlCont key={id} textAlign="left">
-          <Mylist>id: {id} </Mylist>
-          <Mylist>name: {name} </Mylist>
-          <Mylist>clientId: {clientId} </Mylist>
-          <Mylist>partnerId: {partnerId}</Mylist>
-          <Mylist>managerId: {managerId}</Mylist>
-          <Mylist>addenda longueur = {addenda.length}</Mylist>
-          {addenda.map(({ workerId }) => (
-            <ul key={uniqid()}>
-              <Mylist>workerId: {workerId}</Mylist>
-            </ul>
-          ))}
-        </MyUlCont>
-      ))}
-    </Div>
+    <div>
+      <SearchBar name="nombre de mission" count={count} />
+      <MyDivCont className={cx(Classes.ELEVATION_2)}>
+        {mission.map(({ id, name, clientId, partnerId, managerId, addenda }) => (
+          <MyUlCont className={cx(Classes.INTERACTIVE, Classes.ELEVATION_2)} key={id} textAlign="left">
+            <Mylist>id: {id} </Mylist>
+            <Mylist>name: {name} </Mylist>
+            <Mylist>clientId: {clientId} </Mylist>
+            <Mylist>partnerId: {partnerId}</Mylist>
+            <Mylist>managerId: {managerId}</Mylist>
+            <Mylist>addenda longueur = {addenda.length}</Mylist>
+            {addenda.map(({ workerId }) => (
+              <div key={uniqid()}>
+                <Mylist>workerId: {workerId}</Mylist>
+              </div>
+            ))}
+          </MyUlCont>
+        ))}
+      </MyDivCont>
+    </div>
   );
 };
 
