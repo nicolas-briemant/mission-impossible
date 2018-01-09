@@ -5390,21 +5390,29 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <header
-          className="App-header"
->
-          <img
-                    alt="logo"
-                    className="App-logo"
-                    src="IMAGE_MOCK"
-          />
-           
-          <h1
-                    className="App-title"
-          >
-                    Welcome to mission impossible Thomas
-          </h1>
-</header>,
+        <Header>
+          <HeaderLeft>
+                    <h1
+                              className="App-title"
+                    >
+                              Welcome to mission impossible
+                    </h1>
+          </HeaderLeft>
+          <HeaderMiddle>
+                    <glamorous(img)
+                              alt="Logo"
+                              src="IMAGE_MOCK"
+                    />
+          </HeaderMiddle>
+          <HeaderRight>
+                    <ul>
+                              Missions
+                    </ul>
+                    <ul>
+                              Peoples
+                    </ul>
+          </HeaderRight>
+</Header>,
         <Missions
           missions={
                     Array [
@@ -10786,53 +10794,128 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
+        "nodeType": "function",
         "props": Object {
           "children": Array [
-            <img
-              alt="logo"
-              className="App-logo"
-              src="IMAGE_MOCK"
-/>,
-            " ",
-            <h1
-              className="App-title"
->
-              Welcome to mission impossible Thomas
-</h1>,
+            <HeaderLeft>
+              <h1
+                            className="App-title"
+              >
+                            Welcome to mission impossible
+              </h1>
+</HeaderLeft>,
+            <HeaderMiddle>
+              <glamorous(img)
+                            alt="Logo"
+                            src="IMAGE_MOCK"
+              />
+</HeaderMiddle>,
+            <HeaderRight>
+              <ul>
+                            Missions
+              </ul>
+              <ul>
+                            Peoples
+              </ul>
+</HeaderRight>,
           ],
-          "className": "App-header",
         },
         "ref": null,
         "rendered": Array [
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "host",
+            "nodeType": "function",
             "props": Object {
-              "alt": "logo",
-              "className": "App-logo",
-              "src": "IMAGE_MOCK",
+              "children": <h1
+                className="App-title"
+>
+                Welcome to mission impossible
+</h1>,
             },
             "ref": null,
-            "rendered": null,
-            "type": "img",
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Welcome to mission impossible",
+                "className": "App-title",
+              },
+              "ref": null,
+              "rendered": "Welcome to mission impossible",
+              "type": "h1",
+            },
+            "type": [Function],
           },
-          " ",
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "host",
+            "nodeType": "function",
             "props": Object {
-              "children": "Welcome to mission impossible Thomas",
-              "className": "App-title",
+              "children": <glamorous(img)
+                alt="Logo"
+                src="IMAGE_MOCK"
+/>,
             },
             "ref": null,
-            "rendered": "Welcome to mission impossible Thomas",
-            "type": "h1",
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "alt": "Logo",
+                "src": "IMAGE_MOCK",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": Array [
+                <ul>
+                  Missions
+</ul>,
+                <ul>
+                  Peoples
+</ul>,
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Missions",
+                },
+                "ref": null,
+                "rendered": "Missions",
+                "type": "ul",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Peoples",
+                },
+                "ref": null,
+                "rendered": "Peoples",
+                "type": "ul",
+              },
+            ],
+            "type": [Function],
           },
         ],
-        "type": "header",
+        "type": [Function],
       },
       Object {
         "instance": null,
@@ -16223,21 +16306,29 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <header
-            className="App-header"
->
-            <img
-                        alt="logo"
-                        className="App-logo"
-                        src="IMAGE_MOCK"
-            />
-             
-            <h1
-                        className="App-title"
-            >
-                        Welcome to mission impossible Thomas
-            </h1>
-</header>,
+          <Header>
+            <HeaderLeft>
+                        <h1
+                                    className="App-title"
+                        >
+                                    Welcome to mission impossible
+                        </h1>
+            </HeaderLeft>
+            <HeaderMiddle>
+                        <glamorous(img)
+                                    alt="Logo"
+                                    src="IMAGE_MOCK"
+                        />
+            </HeaderMiddle>
+            <HeaderRight>
+                        <ul>
+                                    Missions
+                        </ul>
+                        <ul>
+                                    Peoples
+                        </ul>
+            </HeaderRight>
+</Header>,
           <Missions
             missions={
                         Array [
@@ -21619,53 +21710,128 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
+          "nodeType": "function",
           "props": Object {
             "children": Array [
-              <img
-                alt="logo"
-                className="App-logo"
-                src="IMAGE_MOCK"
-/>,
-              " ",
-              <h1
-                className="App-title"
->
-                Welcome to mission impossible Thomas
-</h1>,
+              <HeaderLeft>
+                <h1
+                                className="App-title"
+                >
+                                Welcome to mission impossible
+                </h1>
+</HeaderLeft>,
+              <HeaderMiddle>
+                <glamorous(img)
+                                alt="Logo"
+                                src="IMAGE_MOCK"
+                />
+</HeaderMiddle>,
+              <HeaderRight>
+                <ul>
+                                Missions
+                </ul>
+                <ul>
+                                Peoples
+                </ul>
+</HeaderRight>,
             ],
-            "className": "App-header",
           },
           "ref": null,
           "rendered": Array [
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "host",
+              "nodeType": "function",
               "props": Object {
-                "alt": "logo",
-                "className": "App-logo",
-                "src": "IMAGE_MOCK",
+                "children": <h1
+                  className="App-title"
+>
+                  Welcome to mission impossible
+</h1>,
               },
               "ref": null,
-              "rendered": null,
-              "type": "img",
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Welcome to mission impossible",
+                  "className": "App-title",
+                },
+                "ref": null,
+                "rendered": "Welcome to mission impossible",
+                "type": "h1",
+              },
+              "type": [Function],
             },
-            " ",
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "host",
+              "nodeType": "function",
               "props": Object {
-                "children": "Welcome to mission impossible Thomas",
-                "className": "App-title",
+                "children": <glamorous(img)
+                  alt="Logo"
+                  src="IMAGE_MOCK"
+/>,
               },
               "ref": null,
-              "rendered": "Welcome to mission impossible Thomas",
-              "type": "h1",
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "alt": "Logo",
+                  "src": "IMAGE_MOCK",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "children": Array [
+                  <ul>
+                    Missions
+</ul>,
+                  <ul>
+                    Peoples
+</ul>,
+                ],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Missions",
+                  },
+                  "ref": null,
+                  "rendered": "Missions",
+                  "type": "ul",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Peoples",
+                  },
+                  "ref": null,
+                  "rendered": "Peoples",
+                  "type": "ul",
+                },
+              ],
+              "type": [Function],
             },
           ],
-          "type": "header",
+          "type": [Function],
         },
         Object {
           "instance": null,

@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import uniqid from 'uniqid';
-import * as Blueprint from '@blueprintjs/core';
+// import * as Blueprint from '@blueprintjs/core';
+import 'normalize.css/normalize.css';
+import '@blueprintjs/core/dist/blueprint.css';
 
 const Worker = ({ workerId }) => <li>Id: {workerId}</li>;
 
@@ -41,7 +43,7 @@ const Container = glamorous.div({
 });
 
 const FilterMissions = glamorous.aside({
-  width: 100,
+  widthMin: 100,
 });
 
 const ListMissions = glamorous.div({
@@ -57,7 +59,6 @@ const Missions = ({ missions }) => (
     <FilterMissions>
       <b>Nombre de Missions: {missions.length}</b>
       <input className="pt-input .pt-round" type="text" />
-      <Blueprint.Icon iconName="cross" />
     </FilterMissions>
     <ListMissions>{missions.map(mission => <Mission key={mission.id} {...mission} />)}</ListMissions>
   </Container>

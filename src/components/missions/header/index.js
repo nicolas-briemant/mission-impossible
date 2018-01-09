@@ -12,19 +12,19 @@ const StyledHeader = glamorous.div({
 export const HeaderLeft = ({ children }) => <Fragment>{children}</Fragment>;
 
 HeaderLeft.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.node,
 };
 
 export const HeaderMiddle = ({ children }) => <Fragment>{children}</Fragment>;
 
 HeaderMiddle.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.node,
 };
 
 export const HeaderRight = ({ children }) => <Fragment>{children}</Fragment>;
 
 HeaderRight.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.node,
 };
 
 const Menu = glamorous.div({
