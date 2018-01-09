@@ -51,7 +51,6 @@ const ListMissions = glamorous.div({
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'space-between',
-  // border: 'solid',
   margin: 10,
 });
 

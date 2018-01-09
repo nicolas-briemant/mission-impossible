@@ -1,46 +1,52 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import glamorous from 'glamorous';
-import PropTypes from 'prop-types';
-import '../../../App.css';
+import { HeaderFull, HeaderLeft, HeaderMiddle, HeaderRight } from './header';
+import logo from '../../../data/logo.png';
 
-const StyledHeader = glamorous.div({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
+const Logo = glamorous.img({
+  width: 75,
 });
 
-export const HeaderLeft = ({ children }) => <Fragment>{children}</Fragment>;
+const Menu = glamorous.ul({
+  display: 'flex',
+  flexDirection: 'row',
+  marginRight: 10,
+});
 
-HeaderLeft.propTypes = {
-  children: PropTypes.node,
-};
+const ItemMenu = glamorous.li({
+  display: 'flex',
+  flexDirection: 'row',
+  listStyleType: 'none',
+  margin: 20,
+});
 
-export const HeaderMiddle = ({ children }) => <Fragment>{children}</Fragment>;
+const LogoItemMenu = glamorous.span({
+  marginRight: 10,
+});
 
-HeaderMiddle.propTypes = {
-  children: PropTypes.node,
-};
+const Header = () => (
+  <HeaderFull>
+    <HeaderLeft>
+      <a href="#">
+        <Logo alt="Logo" src={logo} />
+      </a>
+    </HeaderLeft>
+    <HeaderMiddle>
+      <h1 className="App-title">Missions List</h1>
+    </HeaderMiddle>
+    <HeaderRight>
+      <Menu>
+        <ItemMenu>
+          <LogoItemMenu className="pt-icon-list" />
+          <p>Missions</p>
+        </ItemMenu>
+        <ItemMenu>
+          <LogoItemMenu className="pt-icon-people" />
+          <p>Peoples</p>
+        </ItemMenu>
+      </Menu>
+    </HeaderRight>
+  </HeaderFull>
+);
 
-export const HeaderRight = ({ children }) => <Fragment>{children}</Fragment>;
-
-HeaderRight.propTypes = {
-  children: PropTypes.node,
-};
-
-export const Header = ({ children }) => {
-  const headerLeft = () => React.Children.toArray(children).find(({ type }) => type === HeaderLeft);
-  const headerMiddle = () => React.Children.toArray(children).find(({ type }) => type === HeaderMiddle);
-  const headerRight = () => React.Children.toArray(children).find(({ type }) => type === HeaderRight);
-
-  return (
-    <StyledHeader>
-      <div>{headerLeft()}</div>
-      <div>{headerMiddle()}</div>
-      <div>{headerRight()}</div>
-    </StyledHeader>
-  );
-};
-
-Header.propTypes = {
-  children: PropTypes.node,
-};
+export default Header;
