@@ -1,7 +1,10 @@
 import React from 'react';
 import glamorous from 'glamorous';
+import cx from 'classnames';
+import PropTypes from 'prop-types';
 import { HeaderFull, HeaderLeft, HeaderMiddle, HeaderRight } from './header';
 import logo from '../../../data/logo.png';
+import '../../../App.css';
 
 const Logo = glamorous.img({
   width: 75,
@@ -24,7 +27,14 @@ const LogoItemMenu = glamorous.span({
   marginRight: 10,
 });
 
-const Header = () => (
+const isAff = ({ missions }) => {
+  if (missions.length) {
+    return { notDisplay: true };
+  }
+  return { notDisplay: false };
+};
+
+const Header = ({ missions }) => (
   <HeaderFull>
     <HeaderLeft>
       <a>
@@ -33,6 +43,7 @@ const Header = () => (
     </HeaderLeft>
     <HeaderMiddle>
       <h1 className="App-title">Missions List</h1>
+      <p className={cx(isAff({ missions }))}>No Mission</p>
     </HeaderMiddle>
     <HeaderRight>
       <Menu>
@@ -48,5 +59,9 @@ const Header = () => (
     </HeaderRight>
   </HeaderFull>
 );
+
+Header.propTypes = {
+  missions: PropTypes.array,
+};
 
 export default Header;

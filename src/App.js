@@ -6,7 +6,7 @@ import Missions from './components/missions/sections';
 
 const App = ({ missions }) => (
   <div className="App">
-    <Header />
+    <Header missions={missions} />
     <Missions missions={missions} />
   </div>
 );
