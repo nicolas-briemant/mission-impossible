@@ -1,19 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import glamorous from 'glamorous';
 
 const Mission = ({ name, clientId, partnerId, managerId, addenda }) => {
   return (
-    <li>
-      <h3>Name: {name}</h3>
+    <StyledMission>
+      <h3>{name}</h3>
       <p>
-        clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
+        {clientId}, {partnerId}, {managerId}
       </p>
       <p>
         Workers ({addenda.length}): {addenda.map(worker => worker.workerId)}
       </p>
-    </li>
+    </StyledMission>
   );
 };
+
+const StyledMission = glamorous.div({
+  marginTop: '20px',
+  background: '#ccebff',
+  borderRight: '4px solid black',
+  borderLeft: '4px solid black',
+  borderBottom: '4px solid black',
+  borderTop: '4px solid black',
+  marginRight: '20px',
+  marginLeft: '20px',
+  paddingRight: '20px',
+  paddingLeft: '20px',
+  color: '#000000',
+  width: '20%',
+});
 
 Mission.propTypes = {
   name: PropTypes.string.isRequired,
@@ -27,7 +43,19 @@ Mission.propTypes = {
   ).isRequired,
 };
 
-const Missions = ({ missions }) => <ul>{missions.map(mission => <Mission key={mission.id} {...mission} />)}</ul>;
+const StyledMissions = glamorous.div({
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  flexWrap: 'wrap',
+  backgroundColor: '#ccebff',
+});
+
+const Missions = ({ missions }) => (
+  <StyledMissions>
+    <div>{missions.length} Missions</div> {missions.map(mission => <Mission key={mission.id} {...mission} />)}
+  </StyledMissions>
+);
 
 Missions.propTypes = {
   missions: PropTypes.array,
