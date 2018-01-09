@@ -1,20 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import logo from './logo.svg';
 import './App.css';
 import Missions from './components/missions';
+import { Header, HeaderLeft, HeaderRight, HeaderCenter } from './components/header'
+import { Title, Logo, Menu } from './components/app/'
 
 const App = ({ missions }) => (
   <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" /> <h1 className="App-title">Welcome to mission impossible</h1>
-    </header>
+  	<Header>
+  		<HeaderLeft>
+  			<Logo />
+  		</HeaderLeft>
+  		<HeaderCenter>
+  			<Title />
+  		</HeaderCenter>
+  		<HeaderRight>
+  			<Menu />
+  		</HeaderRight>
+    </Header>
     <Missions missions={missions} />
   </div>
 );
 
 App.propTypes = {
-  missions: PropTypes.array,
+  missions: PropTypes.array
 };
 
 export default App;

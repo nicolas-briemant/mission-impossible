@@ -14,8 +14,17 @@
   color: white;
 }
 
+.imgheader{
+  vertical-align: middle;
+  margin-right: 35px;
+  height: 100px;
+  width: 100px;
+}
+
 .App-title {
   font-size: 1.5em;
+  color: white;
+  display: inline-block;
 }
 
 .App-intro {
