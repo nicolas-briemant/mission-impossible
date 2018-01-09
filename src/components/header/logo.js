@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { css } from 'glamor';
 
+const HeaderContainLogoAndTitle = glamorous.div({
+  display: 'flex',
+  alignItems: 'center',
+});
+
 const anim = css.keyframes({
   '0%': { transform: 'rotateY(0deg)' },
   '25%': { transform: 'rotateY(90deg)' },
@@ -14,28 +19,27 @@ const anim = css.keyframes({
 const HeaderLogoImg = glamorous.img({
   height: '77px',
   width: 'auto',
+  backgroundColor: 'red',
   animation: `${anim} 5s infinite linear`,
 });
 
 const HeaderContainTitle = glamorous.div({
   position: 'relative',
+  justifyContent: 'center',
 });
 
 const HeaderTitle = glamorous.h1({
-  position: 'absolute',
   fontSize: '20px',
-  top: '-38px',
-  right: '-187px',
 });
 
 const Logo = ({ src, alt, title }) => {
   return (
-    <div>
+    <HeaderContainLogoAndTitle>
       <HeaderLogoImg src={src} alt={alt} />
       <HeaderContainTitle>
         <HeaderTitle>{title}</HeaderTitle>
       </HeaderContainTitle>
-    </div>
+    </HeaderContainLogoAndTitle>
   );
 };
 
