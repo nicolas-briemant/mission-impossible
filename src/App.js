@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import logo from './logo.svg';
+
 import './App.css';
 import Missions from './components/missions';
 import { Header, HeaderLeft, HeaderRight } from './components/header';
