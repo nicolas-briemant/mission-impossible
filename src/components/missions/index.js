@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
+import { Classes } from '@blueprintjs/core';
+import cx from 'classnames';
 import glamorous from 'glamorous';
 import SearchBar from './search_bar';
 
@@ -42,9 +44,9 @@ const Missions = ({ mission }) => {
   return (
     <div>
       <SearchBar name="nombre de mission" count={count} />
-      <MyDivCont>
+      <MyDivCont className={cx(Classes.ELEVATION_2)}>
         {mission.map(({ id, name, clientId, partnerId, managerId, addenda }) => (
-          <MyUlCont key={id} textAlign="left">
+          <MyUlCont className={cx(Classes.ELEVATION_2)} key={id} textAlign="left">
             <Mylist>id: {id} </Mylist>
             <Mylist>name: {name} </Mylist>
             <Mylist>clientId: {clientId} </Mylist>

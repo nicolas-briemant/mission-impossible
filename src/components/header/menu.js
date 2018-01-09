@@ -1,6 +1,7 @@
 import React from 'react';
 import glamorous from 'glamorous';
-import { Menu, MenuItem, MenuDivider } from '@blueprintjs/core';
+import cx from 'classnames';
+import { Menu, MenuItem, MenuDivider, Classes } from '@blueprintjs/core';
 
 const HeaderContainMenu = glamorous.div({
   display: 'flex',
@@ -11,8 +12,8 @@ const HeaderMenu = () => {
   return (
     <HeaderContainMenu>
       <Menu>
-        <MenuItem iconName="link" text="Mission" />
-        <MenuItem iconName="link" text="Soon" />
+        <MenuItem className={cx(Classes.ACTIVE, Classes.BUTTON)} iconName="link" text="Mission" />
+        <MenuItem className={cx(Classes.DISABLE)} iconName="link" text="Soon" />
         <MenuDivider />
       </Menu>
     </HeaderContainMenu>
