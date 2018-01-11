@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
-import { Classes } from '@blueprintjs/core';
+import { Classes, Button } from '@blueprintjs/core';
 import cx from 'classnames';
 import glamorous from 'glamorous';
 import SearchBar from './search-bar';
@@ -28,7 +28,7 @@ const Mylist = glamorous.div({
   },
 });
 
-const Missions = ({ mission }) => {
+const Missions = ({ mission, removeMission }) => {
   const count = mission.length;
   if (count <= 0) {
     return (
@@ -58,6 +58,7 @@ const Missions = ({ mission }) => {
                 <Mylist>workerId: {workerId}</Mylist>
               </div>
             ))}
+            <Button iconName="trash" text="remove" onClick={() => removeMission(id)} />
           </MyUlCont>
         ))}
       </MyDivCont>
@@ -80,6 +81,7 @@ Missions.propTypes = {
       ),
     }).isRequired,
   ),
+  removeMission: PropTypes.func,
 };
 
 export default Missions;
