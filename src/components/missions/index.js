@@ -7,19 +7,32 @@ import { Header, HeaderLeft } from '../app';
 import Status from './status';
 
 //--------------------------------------------------------------------------------------------------
-const StyledCard = glamorous(Card)({ margin: '10px 0', width: 300 });
+const StyledCard = glamorous(Card)({
+  margin: '10px 0',
+  width: 300,
+  display: 'flex',
+  justifyContent: 'space-between',
+});
 const StyledCardHeader = glamorous(H5)({ color: Colors.BLUE1 });
 
 const Mission = ({id, name, clientId, partnerId, managerId, addenda, removeMission }) => (
   <StyledCard className={cx(Classes.INTERACTIVE, Classes.ELEVATION_2)}>
-    <StyledCardHeader>{name}</StyledCardHeader>
-    <Fragment>
-      {[clientId, partnerId, managerId].map((id, i) => <div key={`${id}-${i}`}><em>{id}</em></div>)}
-    </Fragment>
     <div>
-      addenda: (#{addenda.length}) {addenda.map((a) => a.workerId).join(' - ')}
+      <Button
+        iconName="trash"
+        className={cx(Classes.INTENT_DANGER)}
+        onClick={() => removeMission(id)}
+      />
     </div>
-    <Button iconName="trash" text="remove" onClick={e => removeMission(id)} />
+    <div>
+      <StyledCardHeader>{name}</StyledCardHeader>
+      <Fragment>
+        {[clientId, partnerId, managerId].map((id, i) => <div key={`${id}-${i}`}><em>{id}</em></div>)}
+      </Fragment>
+      <div>
+        addenda: (#{addenda.length}) {addenda.map((a) => a.workerId).join(' - ')}
+      </div>
+    </div>
   </StyledCard>
 );
 

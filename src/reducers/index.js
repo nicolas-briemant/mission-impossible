@@ -1,14 +1,14 @@
 import { REMOVE_MISSION } from '../actions';
-import missions from '../data/missions2';
 
 export default (state, action = {}) => {
+  console.log(action)
   switch(action.type) {
     //case REMOVE_MISSION: return [...state.missions]; // return a copy, action.payload.missionId
     case REMOVE_MISSION:
-      console.log(action)
-      return state.missions.length === 1
-        ? {...state, missions}
-        : {...state, missions: [missions[0]]};
+      const index = state.missions.findIndex((mission) => mission.id === action.payload.missionId);
+      const missions = [...state.missions];
+      missions.splice(index, 1);
+      return { ...state, missions };
     default: return state;
   }
 };
