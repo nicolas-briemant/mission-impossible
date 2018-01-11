@@ -12,18 +12,27 @@ const StyledCard = glamorous(Card)({
   width: 300,
   display: 'flex',
   justifyContent: 'space-between',
-});
+}, ({ isSelected }) => ({
+  backgroundColor: isSelected ? 'lightcoral' : 'white',
+}));
+const StyledCardActions = glamorous.div({ display: 'flex', flexDirection: 'column' });
 const StyledCardHeader = glamorous(H5)({ color: Colors.BLUE1 });
 
-const Mission = ({id, name, clientId, partnerId, managerId, addenda, removeMission }) => (
-  <StyledCard className={cx(Classes.INTERACTIVE, Classes.ELEVATION_2)}>
-    <div>
+const Mission = ({ id, name, clientId, partnerId, managerId, addenda, isSelected, actions }) => (
+  <StyledCard isSelected={isSelected} className={cx(Classes.INTERACTIVE, Classes.ELEVATION_2)}>
+    <StyledCardActions>
+      <Button
+        iconName="bookmark"
+        className={cx(Classes.INTENT_PRIMARY)}
+        onClick={() => actions.selectMission(id)}
+        disabled={isSelected}
+      />
       <Button
         iconName="trash"
         className={cx(Classes.INTENT_DANGER)}
-        onClick={() => removeMission(id)}
+        onClick={() => actions.removeMission(id)}
       />
-    </div>
+    </StyledCardActions>
     <div>
       <StyledCardHeader>{name}</StyledCardHeader>
       <Fragment>
@@ -47,7 +56,8 @@ Mission.propTypes = {
       workerId: PropTypes.string.isRequired,
     })
   ).isRequired,
-  removeMission: PropTypes.func.isRequired,
+  actions: PropTypes.objectOf(PropTypes.func).isRequired,
+  isSelected: PropTypes.bool,
 };
 
 //--------------------------------------------------------------------------------------------------
@@ -61,7 +71,7 @@ const StyledMissions = glamorous.div({
   justifyContent: 'space-between',
 });
 
-const Missions = ({ missions, removeMission }) => (
+const Missions = ({ missions, actions }) => (
   <StyledContainer>
     <Header>
       <HeaderLeft>
@@ -70,7 +80,7 @@ const Missions = ({ missions, removeMission }) => (
     </Header>
     <StyledMissions>
       {missions.map((mission) => (
-        <Mission key={mission.id} {...mission} removeMission={removeMission} />
+        <Mission key={mission.id} {...mission} actions={actions} />
       ))}
     </StyledMissions>
   </StyledContainer>
@@ -82,7 +92,7 @@ Missions.propTypes = {
       _id: PropTypes.number,
     })
   ).isRequired,
-  removeMission: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
 };
 
 export default Missions;

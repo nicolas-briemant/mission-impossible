@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Header, HeaderLeft, HeaderRight, Title, Menu } from './components/app';
 import Missions from './components/missions';
-import { removeMission as removeMissionAction } from './actions';
+import * as actions from './actions';
 
 class App extends Component {
   componentWillMount() {
@@ -14,7 +14,8 @@ class App extends Component {
     const { store } = this.props;
     const { dispatch, getState } = store;
     const { missions } = getState();
-    const removeMission = (missionId) => dispatch(removeMissionAction(missionId));
+    const removeMission = (missionId) => dispatch(actions.removeMission(missionId));
+    const selectMission = (missionId) => dispatch(actions.selectMission(missionId));
 
     return (
       <div>
@@ -26,7 +27,10 @@ class App extends Component {
             <Title />
           </HeaderLeft>
         </Header>
-        <Missions missions={missions} removeMission={removeMission} />
+        <Missions
+          missions={missions}
+          actions={{removeMission, selectMission}}
+        />
       </div>
     );
   }
