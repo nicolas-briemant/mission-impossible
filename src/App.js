@@ -1,14 +1,23 @@
 import React from 'react';
+import '@blueprintjs/core/dist/blueprint.css';
+
 import PropTypes from 'prop-types';
-import logo from './logo.svg';
-import './App.css';
+import { Header, HeaderLeft, HeaderRight } from './components/header';
+import { Menu } from './components/menu';
+import { Title } from './components/title';
 import Missions from './components/missions/index';
+import './App.css';
 
 const App = ({ missions }) => (
-  <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" /> <h1 className="App-title">Welcome to mission impossible</h1>
-    </header>
+  <div>
+    <Header>
+      <HeaderLeft>
+        <Title />
+      </HeaderLeft>
+      <HeaderRight>
+        <Menu />
+      </HeaderRight>
+    </Header>
     <Missions missions={missions} />
   </div>
 );
