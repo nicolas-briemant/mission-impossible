@@ -16,7 +16,7 @@ class App extends Component {
     const { missions } = getState();
     const removeMission = (missionId) => dispatch(actions.removeMission(missionId));
     const removeMissions = () => dispatch(actions.removeMissions());
-    const selectMission = (missionId) => dispatch(actions.selectMission(missionId));
+    const toggleMission = (missionId) => dispatch(actions.toggleMission(missionId));
 
     return (
       <div>
@@ -32,7 +32,7 @@ class App extends Component {
           missions={missions}
           removeMissions={removeMissions}
           removeMission={removeMission}
-          selectMission={selectMission}
+          toggleMission={toggleMission}
         />
       </div>
     );

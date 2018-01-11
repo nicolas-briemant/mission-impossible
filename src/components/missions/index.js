@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Classes, Colors, Button } from '@blueprintjs/core';
+import { Card, Classes, Colors, Button, Switch } from '@blueprintjs/core';
 import cx from 'classnames';
 import glamorous, { H5 } from 'glamorous';
 import { Header, HeaderLeft, HeaderRight } from '../app';
@@ -19,15 +19,13 @@ const StyledCardActions = glamorous.div({ display: 'flex', flexDirection: 'colum
 const StyledCardHeader = glamorous(H5)({ color: Colors.BLUE1 });
 
 const Mission = ({
-  id, name, clientId, partnerId, managerId, addenda, isSelected, selectMission, removeMission
+  id, name, clientId, partnerId, managerId, addenda, isSelected, toggleMission, removeMission
 }) => (
   <StyledCard isSelected={isSelected} className={cx(Classes.INTERACTIVE, Classes.ELEVATION_2)}>
     <StyledCardActions>
-      <Button
-        iconName="bookmark"
-        className={cx(Classes.INTENT_PRIMARY)}
-        onClick={() => selectMission(id)}
-        disabled={isSelected}
+      <Switch
+        checked={isSelected}
+        onChange={() => toggleMission(id)}
       />
       <Button
         iconName="trash"
@@ -58,7 +56,7 @@ Mission.propTypes = {
       workerId: PropTypes.string.isRequired,
     })
   ).isRequired,
-  selectMission: PropTypes.func.isRequired,
+  toggleMission: PropTypes.func.isRequired,
   removeMission: PropTypes.func.isRequired,
   isSelected: PropTypes.bool,
 };
@@ -74,7 +72,7 @@ const StyledMissions = glamorous.div({
   justifyContent: 'space-between',
 });
 
-const Missions = ({ missions, removeMissions, selectMission, removeMission }) => {
+const Missions = ({ missions, removeMissions, toggleMission, removeMission }) => {
   const selectedMissions = missions.filter((mission) => mission.isSelected);
   const hasSelection = selectedMissions.length > 0;
 
@@ -102,7 +100,7 @@ const Missions = ({ missions, removeMissions, selectMission, removeMission }) =>
           <Mission
             key={mission.id}
             {...mission}
-            selectMission={selectMission}
+            toggleMission={toggleMission}
             removeMission={removeMission}
           />
         ))}
@@ -118,7 +116,7 @@ Missions.propTypes = {
     })
   ).isRequired,
   removeMissions: PropTypes.func.isRequired,
-  selectMission: PropTypes.func.isRequired,
+  toggleMission: PropTypes.func.isRequired,
   removeMission: PropTypes.func.isRequired,
 };
 
