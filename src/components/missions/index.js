@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import cx from 'classnames';
-import { Card, Menu, MenuItem } from '@blueprintjs/core';
+import { Card, Menu, MenuItem, Button } from '@blueprintjs/core';
 import 'normalize.css/normalize.css';
 import '@blueprintjs/core/dist/blueprint.css';
 
@@ -34,7 +34,7 @@ const MissionsContainer = glamorous.div({
   justifyContent: 'center',
 });
 
-const Mission = ({ name, clientId, partnerId, managerId, addenda }) => {
+const Mission = ({ id, name, clientId, partnerId, managerId, addenda, removeMission }) => {
   return (
     <StyleMission>
       <h3>{name}</h3>
@@ -44,11 +44,13 @@ const Mission = ({ name, clientId, partnerId, managerId, addenda }) => {
       <p>
         Workers ({addenda.length}): {addenda.map(w => w.workerId).join(' ')}
       </p>
+      <Button iconName="trash" text="remove" onClick={() => removeMission(id)} />
     </StyleMission>
   );
 };
 
 Mission.propTypes = {
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   clientId: PropTypes.string,
   partnerId: PropTypes.string,
@@ -58,9 +60,10 @@ Mission.propTypes = {
       workerId: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  removeMission: PropTypes.func.isRequired,
 };
 
-const Missions = ({ missions }) => {
+const Missions = ({ missions, removeMission }) => {
   const colorNbMissions = {
     red: false,
     green: true,
@@ -74,7 +77,9 @@ const Missions = ({ missions }) => {
           <MenuItem iconName="arrow-right" text="Filtre" />
         </Menu>
       </Toolbar>
-      <MissionsContainer>{missions.map(mission => <Mission key={mission.id} {...mission} />)}</MissionsContainer>
+      <MissionsContainer>
+        {missions.map(mission => <Mission key={mission.id} {...mission} removeMission={removeMission} />)}
+      </MissionsContainer>
     </MainContainer>
   );
 };
@@ -85,6 +90,7 @@ Missions.propTypes = {
       id: PropTypes.number,
     }),
   ).isRequired,
+  removeMission: PropTypes.func.isRequired,
 };
 
 export default Missions;
