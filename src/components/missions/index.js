@@ -75,7 +75,8 @@ const StyledMissions = glamorous.div({
 });
 
 const Missions = ({ missions, removeMissions, selectMission, removeMission }) => {
-  const hasSelection = missions.find((mission) => mission.isSelected);
+  const selectedMissions = missions.filter((mission) => mission.isSelected);
+  const hasSelection = selectedMissions.length > 0;
 
   return (
     <StyledContainer>
@@ -84,6 +85,7 @@ const Missions = ({ missions, removeMissions, selectMission, removeMission }) =>
           <Status count={missions.length} />
         </HeaderLeft>
         <HeaderRight>
+          <Status count={selectedMissions.length} />
           { hasSelection
               ? <Button
                   text="remove selected missions"
