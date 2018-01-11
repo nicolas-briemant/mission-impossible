@@ -65,6 +65,7 @@ const Missions = ({ missions }) => {
     red: false,
     green: true,
   };
+
   return (
     <MainContainer>
       <Toolbar>
