@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import uniqid from 'uniqid';
-import { Card, Slider } from '@blueprintjs/core';
+import { Card, Slider, Button } from '@blueprintjs/core';
 import 'normalize.css/normalize.css';
 import '@blueprintjs/core/dist/blueprint.css';
 
@@ -17,17 +17,19 @@ const CellMission = glamorous(Card)({
   margin: 10,
 });
 
-const Mission = ({ name, clientId, partnerId, managerId, addenda }) => (
+const Mission = ({ id, name, clientId, partnerId, managerId, addenda, removeMission }) => (
   <CellMission interactive="true" elevation={Card.ELEVATION_TWO}>
     <b>{name}</b>
     <p>
       clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
     </p>
     <ul>{addenda.map(worker => <Worker key={uniqid()} {...worker} />)}</ul>
+    <Button iconName="trash" text="remove" onClick={() => removeMission(id)} />
   </CellMission>
 );
 
 Mission.propTypes = {
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   clientId: PropTypes.string.isRequired,
   partnerId: PropTypes.string,
@@ -36,7 +38,8 @@ Mission.propTypes = {
     PropTypes.shape({
       workerId: PropTypes.string.isRequired,
     }),
-  ),
+  ).isRequired,
+  removeMission: PropTypes.func.isRequired,
 };
 
 const Container = glamorous.div({
@@ -54,18 +57,21 @@ const ListMissions = glamorous.div({
   margin: 10,
 });
 
-const Missions = ({ missions }) => (
+const Missions = ({ missions, removeMission }) => (
   <Container>
     <FilterMissions>
       <b>Nombre de Missions: {missions.length}</b>
       <Slider max={100} labelStepSize={25} />
     </FilterMissions>
-    <ListMissions>{missions.map(mission => <Mission key={mission.id} {...mission} />)}</ListMissions>
+    <ListMissions>
+      {missions.map(mission => <Mission key={mission.id} {...mission} removeMission={removeMission} />)}
+    </ListMissions>
   </Container>
 );
 
 Missions.propTypes = {
   missions: PropTypes.array,
+  removeMission: PropTypes.func.isRequired,
 };
 
 export default Missions;
