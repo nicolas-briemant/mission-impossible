@@ -15,6 +15,7 @@ class App extends Component {
     const { dispatch, getState } = store;
     const { missions } = getState();
     const removeMission = (missionId) => dispatch(actions.removeMission(missionId));
+    const removeMissions = () => dispatch(actions.removeMissions());
     const selectMission = (missionId) => dispatch(actions.selectMission(missionId));
 
     return (
@@ -29,7 +30,9 @@ class App extends Component {
         </Header>
         <Missions
           missions={missions}
-          actions={{removeMission, selectMission}}
+          removeMissions={removeMissions}
+          removeMission={removeMission}
+          selectMission={selectMission}
         />
       </div>
     );

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, Classes, Colors, Button } from '@blueprintjs/core';
 import cx from 'classnames';
 import glamorous, { H5 } from 'glamorous';
-import { Header, HeaderLeft } from '../app';
+import { Header, HeaderLeft, HeaderRight } from '../app';
 import Status from './status';
 
 //--------------------------------------------------------------------------------------------------
@@ -18,19 +18,21 @@ const StyledCard = glamorous(Card)({
 const StyledCardActions = glamorous.div({ display: 'flex', flexDirection: 'column' });
 const StyledCardHeader = glamorous(H5)({ color: Colors.BLUE1 });
 
-const Mission = ({ id, name, clientId, partnerId, managerId, addenda, isSelected, actions }) => (
+const Mission = ({
+  id, name, clientId, partnerId, managerId, addenda, isSelected, selectMission, removeMission
+}) => (
   <StyledCard isSelected={isSelected} className={cx(Classes.INTERACTIVE, Classes.ELEVATION_2)}>
     <StyledCardActions>
       <Button
         iconName="bookmark"
         className={cx(Classes.INTENT_PRIMARY)}
-        onClick={() => actions.selectMission(id)}
+        onClick={() => selectMission(id)}
         disabled={isSelected}
       />
       <Button
         iconName="trash"
         className={cx(Classes.INTENT_DANGER)}
-        onClick={() => actions.removeMission(id)}
+        onClick={() => removeMission(id)}
       />
     </StyledCardActions>
     <div>
@@ -56,7 +58,8 @@ Mission.propTypes = {
       workerId: PropTypes.string.isRequired,
     })
   ).isRequired,
-  actions: PropTypes.objectOf(PropTypes.func).isRequired,
+  selectMission: PropTypes.func.isRequired,
+  removeMission: PropTypes.func.isRequired,
   isSelected: PropTypes.bool,
 };
 
@@ -71,20 +74,40 @@ const StyledMissions = glamorous.div({
   justifyContent: 'space-between',
 });
 
-const Missions = ({ missions, actions }) => (
-  <StyledContainer>
-    <Header>
-      <HeaderLeft>
-        <Status count={missions.length} />
-      </HeaderLeft>
-    </Header>
-    <StyledMissions>
-      {missions.map((mission) => (
-        <Mission key={mission.id} {...mission} actions={actions} />
-      ))}
-    </StyledMissions>
-  </StyledContainer>
-);
+const Missions = ({ missions, removeMissions, selectMission, removeMission }) => {
+  const hasSelection = missions.find((mission) => mission.isSelected);
+
+  return (
+    <StyledContainer>
+      <Header>
+        <HeaderLeft>
+          <Status count={missions.length} />
+        </HeaderLeft>
+        <HeaderRight>
+          { hasSelection
+              ? <Button
+                  text="remove selected missions"
+                  iconName="trash"
+                  className={cx(Classes.INTENT_DANGER)}
+                  onClick={() => removeMissions()}
+                />
+              : null
+          }
+        </HeaderRight>
+      </Header>
+      <StyledMissions>
+        {missions.map((mission) => (
+          <Mission
+            key={mission.id}
+            {...mission}
+            selectMission={selectMission}
+            removeMission={removeMission}
+          />
+        ))}
+      </StyledMissions>
+    </StyledContainer>
+  );
+};
 
 Missions.propTypes = {
   missions: PropTypes.arrayOf(
@@ -92,7 +115,9 @@ Missions.propTypes = {
       _id: PropTypes.number,
     })
   ).isRequired,
-  actions: PropTypes.object.isRequired,
+  removeMissions: PropTypes.func.isRequired,
+  selectMission: PropTypes.func.isRequired,
+  removeMission: PropTypes.func.isRequired,
 };
 
 export default Missions;
