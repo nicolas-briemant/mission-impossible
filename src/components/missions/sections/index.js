@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import uniqid from 'uniqid';
-// import cx from 'classnames';
+import cx from 'classnames';
 import { Card, Slider, Button } from '@blueprintjs/core';
 import 'normalize.css/normalize.css';
 import '@blueprintjs/core/dist/blueprint.css';
@@ -18,8 +18,12 @@ const CellMission = glamorous(Card)({
   margin: 10,
 });
 
-const Mission = ({ id, name, clientId, partnerId, managerId, addenda, selectMission, removeMission }) => (
-  <CellMission interactive="true" elevation={Card.ELEVATION_TWO}>
+const Mission = ({ id, name, clientId, partnerId, managerId, addenda, isSelected, selectMission, removeMission }) => (
+  <CellMission
+    className={cx(isSelected ? { red: true } : { red: false })}
+    interactive="true"
+    elevation={Card.ELEVATION_TWO}
+  >
     <b>{name}</b>
     <p>
       clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
@@ -41,6 +45,7 @@ Mission.propTypes = {
       workerId: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  isSelected: PropTypes.bool,
   selectMission: PropTypes.func.isRequired,
   removeMission: PropTypes.func.isRequired,
 };
