@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import { css } from 'glamor';
 import cx from 'classnames';
 
 const MyDivCont = glamorous.div({
@@ -13,13 +14,21 @@ const MyDivCont = glamorous.div({
   width: '100%',
 });
 
+const red = css({
+  color: 'red',
+});
+
+const green = css({
+  color: 'green',
+});
+
 const SearchBar = ({ name, count }) => {
   const isEmpty = count <= 0;
   const hasS = !isEmpty;
   // const cls = cx(isEmpty ? 'red' : 'green');
   const cls = cx({
-    red: isEmpty,
-    green: !isEmpty,
+    [red]: isEmpty,
+    [green]: !isEmpty,
     // [`${hasS ? 'toto' : ''}`]: true,
   });
 

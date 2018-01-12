@@ -1,41 +1,43 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
 import Missions from './components/missions';
 import { Header, HeaderLeft, HeaderRight } from './components/header';
-import { removeMission as removeMissionAction } from './actions';
+import { removeMission as removeMissionAction, selectMission as selectMissionAction } from './actions';
 import Logo from './components/header/logo';
 import Menu from './components/header/menu';
 import logo from './img/007.png';
+import connect from './connect';
 
-class App extends Component {
-  componentWillMount() {
-    const { store } = this.props;
-    store.listen(() => this.forceUpdate());
-  }
-
-  render() {
-    const { store } = this.props;
-    const { dispatch, getState } = store;
-    const { missions } = getState();
-    const removeMission = missionId => dispatch(removeMissionAction(missionId));
-    return (
-      <div className="App">
-        <Header>
-          <HeaderLeft>
-            <Logo src={logo} alt="007" title="Missions Impossible" />
-          </HeaderLeft>
-          <HeaderRight>
-            <Menu />
-          </HeaderRight>
-        </Header>
-        <Missions mission={missions} removeMission={removeMission} />
-      </div>
-    );
-  }
-}
+const App = ({ missions, removeMission, selectMission, selectedMissions }) => (
+  <div className="App">
+    <Header>
+      <HeaderLeft>
+        <Logo src={logo} alt="007" title="Missions Impossible" />
+      </HeaderLeft>
+      <HeaderRight>
+        <Menu />
+      </HeaderRight>
+    </Header>
+    <Missions
+      missions={missions}
+      removeMission={removeMission}
+      selectMission={selectMission}
+      selectedMissions={selectedMissions}
+    />
+  </div>
+);
 
 App.propTypes = {
-  store: PropTypes.object.isRequired,
+  missions: PropTypes.array,
+  removeMission: PropTypes.func.isRequired,
+  selectMission: PropTypes.func.isRequired,
+  selectedMissions: PropTypes.object.isRequired,
 };
-export default App;
+
+const mapDisPatchToProps = dispatch => ({
+  removeMission: missionId => dispatch(removeMissionAction(missionId)),
+  selectMission: missionId => dispatch(selectMissionAction(missionId)),
+});
+
+export default connect(mapDisPatchToProps)(App);

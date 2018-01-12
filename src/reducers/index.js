@@ -1,11 +1,22 @@
-import { REMOVE_MISSION } from '../actions';
-import missions from '../data/missions2';
+import { REMOVE_MISSION, SELECT_MISSION } from '../actions';
+
+const findIndexMission = (missions, id) => missions.findIndex(mission => mission.id === id);
+
+const remove = (missions, id) => {
+  const idByIndex = findIndexMission(missions, id);
+  return missions.filter((mission, index) => idByIndex !== index);
+};
 
 export default (state, action = {}) => {
+  const { payload: { missionId } = {} } = action;
+  const toggle = state.selectedMissions[missionId];
   switch (action.type) {
     case REMOVE_MISSION:
-      // console.log(action);
-      return state.missions.length === 1 ? { ...state, missions } : { ...state, missions: [missions[0]] };
+      return { ...state, missions: remove(state.missions, missionId) };
+    case SELECT_MISSION:
+      if (state.selectedMissions[missionId])
+        return { ...state, selectedMissions: { ...state.selectedMissions, [missionId]: !toggle } };
+      return { ...state, selectedMissions: { ...state.selectedMissions, [missionId]: true } };
     default:
       return state;
   }

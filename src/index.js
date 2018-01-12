@@ -9,6 +9,8 @@ import { createStore } from './store';
 
 const initialState = {
   missions,
+  selectedMissions: {},
+  people: {},
 };
 
 const store = createStore(reducer, initialState);
