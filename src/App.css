@@ -17,8 +17,7 @@
 .imgheader {
   vertical-align: middle;
   margin-right: 35px;
-  height: 100px;
-  width: 100px;
+  width: 50px;
 }
 
 .App-title {
@@ -35,6 +34,10 @@
 
 .green {
   color: green;
+}
+
+.red_selected {
+  background: indianred !important;
 }
 
 @keyframes App-logo-spin {

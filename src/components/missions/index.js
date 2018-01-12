@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import cx from 'classnames';
-import { Card, Menu, MenuItem, Button } from '@blueprintjs/core';
+import { Card, Button } from '@blueprintjs/core';
 import 'normalize.css/normalize.css';
 import '@blueprintjs/core/dist/blueprint.css';
 
 const StyleMission = glamorous(Card)({
   width: '250px',
+  background: 'blue',
+  backgroundColor: 'blue',
 });
 
 const MainContainer = glamorous.div({
@@ -34,9 +36,9 @@ const MissionsContainer = glamorous.div({
   justifyContent: 'center',
 });
 
-const Mission = ({ id, name, clientId, partnerId, managerId, addenda, removeMission }) => {
+const Mission = ({ id, name, clientId, partnerId, managerId, addenda, selected, removeMission, selectedMission }) => {
   return (
-    <StyleMission>
+    <StyleMission className={cx({ red_selected: selected })}>
       <h3>{name}</h3>
       <p>
         clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
@@ -45,6 +47,7 @@ const Mission = ({ id, name, clientId, partnerId, managerId, addenda, removeMiss
         Workers ({addenda.length}): {addenda.map(w => w.workerId).join(' ')}
       </p>
       <Button iconName="trash" text="remove" onClick={() => removeMission(id)} />
+      <Button iconName="people" text="select" onClick={() => selectedMission(id)} />
     </StyleMission>
   );
 };
@@ -60,25 +63,39 @@ Mission.propTypes = {
       workerId: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  selected: PropTypes.bool,
   removeMission: PropTypes.func.isRequired,
+  selectedMission: PropTypes.func.isRequired,
 };
 
-const Missions = ({ missions, removeMission }) => {
+const Missions = ({ missions, removeMission, selectedMission, removeSelectedMission }) => {
   const colorNbMissions = {
     red: false,
     green: true,
   };
 
+  const isAnyoneIsSelected = missions.filter(e => e.selected === true);
   return (
     <MainContainer>
       <Toolbar>
-        <b className={cx((colorNbMissions: missions.length))}>Nombre de mission(s) : {missions.length}</b>
-        <Menu>
-          <MenuItem iconName="arrow-right" text="Filtre" />
-        </Menu>
+        <i className={cx((colorNbMissions: missions.length))}>Nombre de mission(s) : {missions.length}</i>
+        <div>
+          {isAnyoneIsSelected.length ? (
+            <button type="button" className="pt-button pt-intent-danger" onClick={() => removeSelectedMission()}>
+              Supprimer la selection : ({isAnyoneIsSelected.length})
+              <span className="pt-icon-standard pt-icon-cross pt-align-right" />
+            </button>
+          ) : null}
+          <button type="button" className="pt-button pt-intent-primary">
+            Filtre
+            <span className="pt-icon-standard pt-icon-arrow-right pt-align-right" />
+          </button>
+        </div>
       </Toolbar>
       <MissionsContainer>
-        {missions.map(mission => <Mission key={mission.id} {...mission} removeMission={removeMission} />)}
+        {missions.map(mission => (
+          <Mission key={mission.id} {...mission} removeMission={removeMission} selectedMission={selectedMission} />
+        ))}
       </MissionsContainer>
     </MainContainer>
   );
@@ -91,6 +108,8 @@ Missions.propTypes = {
     }),
   ).isRequired,
   removeMission: PropTypes.func.isRequired,
+  selectedMission: PropTypes.func.isRequired,
+  removeSelectedMission: PropTypes.func.isRequired,
 };
 
 export default Missions;

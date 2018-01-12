@@ -4,7 +4,7 @@ import './App.css';
 import Missions from './components/missions';
 import { Header, HeaderLeft, HeaderRight, HeaderCenter } from './components/header';
 import { Title, Logo, Menu } from './components/app/';
-import { removeMission as removeMissionAction } from './actions';
+import * as Actions from './actions';
 
 class App extends Component {
   componentWillMount() {
@@ -16,7 +16,10 @@ class App extends Component {
     const { store } = this.props;
     const { dispatch, getState } = store;
     const { missions } = getState();
-    const removeMission = missionId => dispatch(removeMissionAction(missionId));
+    const removeMission = missionId => dispatch(Actions.removeMission(missionId));
+    const selectedMission = missionId => dispatch(Actions.selectedMission(missionId));
+    const removeSelectedMission = () => dispatch(Actions.removeSelectedMission());
+    const actionsMissions = { removeMission, selectedMission, removeSelectedMission };
 
     return (
       <div className="App">
@@ -31,7 +34,7 @@ class App extends Component {
             <Menu />
           </HeaderRight>
         </Header>
-        <Missions missions={missions} removeMission={removeMission} />
+        <Missions missions={missions} {...actionsMissions} />
       </div>
     );
   }

@@ -8,7 +8,6 @@ const DivHeader = glamorous.header({
   background: '#1a2c51',
   display: 'flex',
   justifyContent: 'space-between',
-  margin: '2rem 2rem 0rem 2rem',
   alignItems: 'center',
   padding: '1rem',
 });

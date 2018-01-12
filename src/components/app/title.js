@@ -1,8 +1,8 @@
 import React from 'react';
 import glamorous from 'glamorous';
 
-const StyleTitle = glamorous.h1({
-	color: 'white'
-})
+const StyleTitle = glamorous.h3({
+  color: 'white',
+});
 
-export default () => <StyleTitle>Mission-Impossible</StyleTitle>
+export default () => <StyleTitle>Mission-Impossible</StyleTitle>;
