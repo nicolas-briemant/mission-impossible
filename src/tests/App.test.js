@@ -3,24 +3,19 @@ import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 import App from '../App';
 import missions from '../data/missions2';
+import reducer from '../reducers';
+import { createStore } from '../store';
 
 describe('App', () => {
-  const initialState = {
-    missions,
-  };
+  const store = createStore(reducer, { missions, people: [] });
 
   it('should render without crashing', () => {
     const div = document.createElement('div')
-    ReactDOM.render(<App {...initialState} />, div)
-  })
-
-  it('should match snapshot (blank)', () => {
-    const wrapper = shallow(<App missions={[]} />)
-    expect(wrapper).toMatchSnapshot()
+    ReactDOM.render(<App store={store} />, div)
   })
 
   it('should match snapshot', () => {
-    const wrapper = shallow(<App {...initialState} />)
+    const wrapper = shallow(<App store={store} />)
     expect(wrapper).toMatchSnapshot()
   })
 })

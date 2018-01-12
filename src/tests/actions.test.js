@@ -1,4 +1,4 @@
-import * as actions from '..';
+import * as actions from '../actions';
 
 describe('actions', () => {
   it('should create an action to remove a mission', () => {

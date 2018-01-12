@@ -1,6 +1,6 @@
 import deepFreeze from 'deep-freeze';
-import reducer from '..';
-import * as actions from '../../actions';
+import reducer from '../reducers';
+import * as actions from '../actions';
 
 const mission1 = {
   id: 10,
