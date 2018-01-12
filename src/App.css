@@ -12,3 +12,7 @@
 .notDisplay {
   display: none;
 }
+
+.selected {
+  color: red;
+}

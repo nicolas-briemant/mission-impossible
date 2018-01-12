@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './App.css';
 import Header from './components/missions/header';
 import Missions from './components/missions/sections';
-import { removeMission as removeMissionAction } from './actions';
+import * as create from './actions';
 
 class App extends Component {
   componentWillMount() {
@@ -15,12 +15,19 @@ class App extends Component {
     const { store } = this.props;
     const { dispatch, getState } = store;
     const { missions } = getState();
-    const removeMission = missionId => dispatch(removeMissionAction(missionId));
+    const selectMission = missionId => dispatch(create.selectMission(missionId));
+    const removeMission = missionId => dispatch(create.removeMission(missionId));
+    const removeSelectedMissions = () => dispatch(create.removeSelectedMissions());
+    const actions = {
+      selectMission,
+      removeMission,
+      removeSelectedMissions,
+    };
 
     return (
       <div className="App">
         <Header missions={missions} />
-        <Missions missions={missions} removeMission={removeMission} />
+        <Missions missions={missions} {...actions} />
       </div>
     );
   }

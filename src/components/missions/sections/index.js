@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import uniqid from 'uniqid';
+// import cx from 'classnames';
 import { Card, Slider, Button } from '@blueprintjs/core';
 import 'normalize.css/normalize.css';
 import '@blueprintjs/core/dist/blueprint.css';
@@ -17,13 +18,14 @@ const CellMission = glamorous(Card)({
   margin: 10,
 });
 
-const Mission = ({ id, name, clientId, partnerId, managerId, addenda, removeMission }) => (
+const Mission = ({ id, name, clientId, partnerId, managerId, addenda, selectMission, removeMission }) => (
   <CellMission interactive="true" elevation={Card.ELEVATION_TWO}>
     <b>{name}</b>
     <p>
       clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
     </p>
     <ul>{addenda.map(worker => <Worker key={uniqid()} {...worker} />)}</ul>
+    <Button iconName="select" text="select" onClick={() => selectMission(id)} />
     <Button iconName="trash" text="remove" onClick={() => removeMission(id)} />
   </CellMission>
 );
@@ -39,6 +41,7 @@ Mission.propTypes = {
       workerId: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  selectMission: PropTypes.func.isRequired,
   removeMission: PropTypes.func.isRequired,
 };
 
@@ -57,21 +60,26 @@ const ListMissions = glamorous.div({
   margin: 10,
 });
 
-const Missions = ({ missions, removeMission }) => (
+const Missions = ({ missions, selectMission, removeMission, removeSelectedMissions }) => (
   <Container>
     <FilterMissions>
       <b>Nombre de Missions: {missions.length}</b>
       <Slider max={100} labelStepSize={25} />
+      <Button iconName="trash" text="remove all" onClick={() => removeSelectedMissions()} />
     </FilterMissions>
     <ListMissions>
-      {missions.map(mission => <Mission key={mission.id} {...mission} removeMission={removeMission} />)}
+      {missions.map(mission => (
+        <Mission key={mission.id} {...mission} selectMission={selectMission} removeMission={removeMission} />
+      ))}
     </ListMissions>
   </Container>
 );
 
 Missions.propTypes = {
   missions: PropTypes.array,
+  selectMission: PropTypes.func.isRequired,
   removeMission: PropTypes.func.isRequired,
+  removeSelectedMissions: PropTypes.func.isRequired,
 };
 
 export default Missions;

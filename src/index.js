@@ -7,12 +7,12 @@ import missions from './data/missions2';
 import reducer from './reducers';
 import { createStore } from './store';
 
-export const initialState = {
+const initialState = {
   missions,
   people: [],
 };
 
-export const store = createStore(reducer, initialState);
+const store = createStore(reducer, initialState);
 
 ReactDOM.render(<App store={store} />, document.getElementById('root'));
 registerServiceWorker();
