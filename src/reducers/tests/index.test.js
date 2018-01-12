@@ -1,3 +1,4 @@
+import deepFreeze from 'deep-freeze';
 import reducer from '..';
 import * as actions from '../../actions';
 
@@ -41,12 +42,14 @@ const mission2 = {
 describe('reducer', () => {
   it('should return the initial state', () => {
     const initialState = { missions: [mission1, mission2], people: [] };
+    deepFreeze(initialState);
     expect(reducer(initialState)).toEqual(initialState);
   });
 
   it('should handle REMOVE_MISSION', () => {
     const initialState = { missions: [mission1, mission2], people: [] };
     const expectedState = { missions: [mission2], people: [] };
+    deepFreeze(initialState);
     expect(reducer(initialState, actions.removeMission(mission1.id))).toEqual(expectedState);
   });
 
@@ -54,6 +57,7 @@ describe('reducer', () => {
     const selectedMission2 = {...mission2, isSelected: true};
     const initialState = { missions: [mission1, selectedMission2], people: [] };
     const expectedState = { missions: [mission1], people: [] };
+    deepFreeze(initialState);
     expect(reducer(initialState, actions.removeMissions())).toEqual(expectedState);
   });
 
@@ -61,6 +65,7 @@ describe('reducer', () => {
     const initialState = { missions: [mission1, mission2], people: [] };
     const selectedMission2 = {...mission2, isSelected: true};
     const expectedState = { missions: [mission1, selectedMission2], people: [] };
+    deepFreeze(initialState);
     expect(reducer(initialState, actions.toggleMission(mission2.id))).toEqual(expectedState);
   });
 
@@ -69,6 +74,7 @@ describe('reducer', () => {
     const initialState = { missions: [mission1, selectedMission2], people: [] };
     const unselectedMission2 = {...mission2, isSelected: false};
     const expectedState = { missions: [mission1, unselectedMission2], people: [] };
+    deepFreeze(initialState);
     expect(reducer(initialState, actions.toggleMission(mission2.id))).toEqual(expectedState);
   });
 });
