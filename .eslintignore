@@ -4,3 +4,5 @@ node_modules
 stats.json
 server/middlewares/generated.*
 internals/scripts
+src/data
+src/registerServiceWorker.js

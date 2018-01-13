@@ -12,10 +12,10 @@ describe('App', () => {
   it('should render without crashing', () => {
     const div = document.createElement('div')
     ReactDOM.render(<App store={store} />, div)
-  })
+  });
 
   it('should match snapshot', () => {
-    const wrapper = shallow(<App store={store} />)
-    expect(wrapper).toMatchSnapshot()
-  })
+    const wrapper = shallow(<App store={store} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 })
