@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/redpelicans/mission-impossible.svg?branch=dev-nico)](https://travis-ci.org/redpelicans/mission-impossible)
 [![codecov](https://codecov.io/gh/redpelicans/mission-impossible/branch/dev-nico/graph/badge.svg)](https://codecov.io/gh/redpelicans/mission-impossible)
 
-![splash](./splash.png?raw=true "splash")
+![splash](./splash.jpg?raw=true "splash")
 
 ---
 
