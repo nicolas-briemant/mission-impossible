@@ -1,6 +1,7 @@
 module.exports = {
   verbose: true,
   coverageDirectory: 'coverage/',
+  collectCoverage: true,
   collectCoverageFrom: [
     'src/**/*.js',
     'server/**/*.js',

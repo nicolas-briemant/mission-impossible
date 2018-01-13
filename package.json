@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest src --env=jsdom",
+    "test": "jest src --env=jsdom --runInBand --forceExit",
     "eject": "react-scripts eject",
     "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "bundle:stats": "NODE_ENV=production webpack --config ./node_modules/react-scripts/config/webpack.config.prod.js --profile --json > stats.json",
