@@ -33,7 +33,7 @@ const Mission = ({
     <div>
       <StyledCardHeader>{name}</StyledCardHeader>
       <Fragment>
-        {[clientId, partnerId, managerId].map((id, i) => <div key={`${id}-${i}`}><em>{id}</em></div>)}
+        {[clientId, partnerId, managerId].map((rid, i) => <div key={`${rid}-${i}`}><em>{id}</em></div>)}
       </Fragment>
       <div>
         addenda: (#{addenda.length}) {addenda.map((a) => a.workerId).join(' - ')}

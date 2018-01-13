@@ -1,7 +1,8 @@
 # mission-impossible
 
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![Build Status](https://travis-ci.org/redpelicans/mission-impossible.svg?branch=dev)](https://travis-ci.org/redpelicans/mission-impossible)
+[![Build Status](https://travis-ci.org/redpelicans/mission-impossible.svg?branch=dev-nico)](https://travis-ci.org/redpelicans/mission-impossible)
+[![codecov](https://codecov.io/gh/redpelicans/mission-impossible/branch/dev-nico/graph/badge.svg)](https://codecov.io/gh/redpelicans/mission-impossible)
 
 > missions extension for peep2
 

@@ -5,3 +5,5 @@ after_script:
   - npm run-script test
 env:
   - NODE_ENV="travis"
+after_success:
+  - codecov

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default (mapDispatchToProps) => (Component) => {
   class ConnectedComponent extends React.Component {
@@ -16,6 +17,16 @@ export default (mapDispatchToProps) => (Component) => {
       return <Component {...props} />;
     }
   }
+
+  ConnectedComponent.propTypes = {
+    store: PropTypes.objectOf(
+      PropTypes.shape({
+        getState: PropTypes.func.isRequired,
+        dispatch: PropTypes.func.isRequired,
+        listen: PropTypes.func.isRequired,
+      })
+    ),
+  };
 
   return ConnectedComponent;
 };
