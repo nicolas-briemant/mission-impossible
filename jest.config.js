@@ -1,6 +1,12 @@
 module.exports = {
   verbose: true,
-  collectCoverageFrom: ['src/**/*.js', 'server/**/*.js', '!app/**/*.test.js'],
+  collectCoverageFrom: [
+    'src/**/*.js',
+    'server/**/*.js',
+    '!app/**/*.test.js',
+    '!src/data/**/*.js', // temp
+    '!src/registerServiceWorker.js',
+  ],
   coverageThreshold: {
     global: {
       statements: 70,

@@ -15,7 +15,7 @@ describe('App', () => {
   });
 
   it('should match snapshot', () => {
-    const wrapper = shallow(<App store={store} />)
-    expect(wrapper).toMatchSnapshot()
+    const wrapper = shallow(<App store={store} />);
+    expect(wrapper).toMatchSnapshot();
   });
 })
