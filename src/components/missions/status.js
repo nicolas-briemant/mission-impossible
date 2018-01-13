@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import { Colors } from '@blueprintjs/core';
+import logger from '../logger';
 
 const StyledCounter = glamorous.span(
   { fontWeight: 'bold' },
@@ -20,4 +21,4 @@ Status.propTypes = {
   count: PropTypes.number.isRequired,
 };
 
-export default Status;
+export default logger('Status')(Status);
