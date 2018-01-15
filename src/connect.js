@@ -12,21 +12,21 @@ import PropTypes from 'prop-types';
 export default mapDispatchToProps => Component => {
   class EnhancedComponent extends React.Component {
     componentWillMount() {
-      const { store } = this.props;
+      const { store } = this.context;
       store.listen(() => this.forceUpdate());
     }
 
     render() {
-      const { store } = this.props;
+      const { store } = this.context;
       const { dispatch, getState } = store;
-
       const props = { ...getState(), actions: mapDispatchToProps(dispatch) };
+
       return <Component {...props} />;
     }
   }
 
-  EnhancedComponent.propTypes = {
-    store: PropTypes.object,
+  EnhancedComponent.contextTypes = {
+    store: PropTypes.object.isRequired,
   };
 
   return EnhancedComponent;

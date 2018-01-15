@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
-// import css from 'glamor';
 import uniqid from 'uniqid';
 import cx from 'classnames';
-import { Card, Slider, Button } from '@blueprintjs/core';
+import { Slider, Button } from '@blueprintjs/core';
 import 'normalize.css/normalize.css';
 import '@blueprintjs/core/dist/blueprint.css';
+// import Logger from '../../logger';
 
 const Worker = ({ workerId }) => <li>Id: {workerId}</li>;
 
@@ -14,30 +14,51 @@ Worker.propTypes = {
   workerId: PropTypes.string,
 };
 
-const CellMission = glamorous(Card)({
+const CellMission = glamorous.div({
   width: 300,
   margin: 10,
 });
+// }, ({ isSelected, isHovered }) => ({
+//   backgroundColor: isHovered ? 'red': (isSelected ? 'lightcoral' : 'white'),
+// color: isHovered ? 'green' : 'black',
 
-// const red = css({
-//   color: 'red',
-// })
+// }));
 
-const Mission = ({ id, name, clientId, partnerId, managerId, addenda, isSelected, selectMission, removeMission }) => (
-  <CellMission
-    className={cx(isSelected ? { red: true } : { red: false })}
-    interactive="true"
-    elevation={Card.ELEVATION_TWO}
-  >
-    <b>{name}</b>
-    <p>
-      clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
-    </p>
-    <ul>{addenda.map(worker => <Worker key={uniqid()} {...worker} />)}</ul>
-    <Button iconName="select" text="select" onClick={() => selectMission(id)} />
-    <Button iconName="trash" text="remove" onClick={() => removeMission(id)} />
-  </CellMission>
-);
+class Mission extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isHovered: false };
+    this.boundUpdateIsHovered = this.updateIsHovered.bind(this);
+  }
+
+  updateIsHovered() {
+    this.setState({ isHovered: !this.state.isHovered });
+  }
+
+  render() {
+    const { id, name, clientId, partnerId, managerId, addenda, isSelected, selectMission, removeMission } = this.props;
+
+    return (
+      <CellMission
+        isSelected={isSelected}
+        isHovered={this.state.isHovered}
+        className={cx(isSelected ? { red: true } : { red: false })}
+        // interactive="true"
+        // elevation={Card.ELEVATION_TWO}
+        onMouseEnter={() => this.updateIsHovered()}
+        onMouseLeave={() => this.updateIsHovered()}
+      >
+        <b>{name}</b>
+        <p>
+          clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
+        </p>
+        <ul>{addenda.map(worker => <Worker key={uniqid()} {...worker} />)}</ul>
+        <Button iconName="select" text="select" onClick={() => selectMission(id)} />
+        <Button iconName="trash" text="remove" onClick={() => removeMission(id)} />
+      </CellMission>
+    );
+  }
+}
 
 Mission.propTypes = {
   id: PropTypes.number.isRequired,
@@ -92,4 +113,5 @@ Missions.propTypes = {
   removeSelectedMissions: PropTypes.func.isRequired,
 };
 
+// export default Logger('Missions')(Missions);
 export default Missions;
