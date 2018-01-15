@@ -5,7 +5,7 @@ import * as actions from './actions';
 import connect from './connect';
 
 const App = (props) => (
-  <div>
+  <div className="pt-dark">
     <Header isFixed>
       <HeaderRight>
         <Menu />

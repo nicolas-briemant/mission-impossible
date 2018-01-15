@@ -15,12 +15,11 @@ const Toolbar = ({ missions, removeMissions }) => {
         <Status count={missions.length} />
       </HeaderLeft>
       <HeaderRight>
-        <Status count={selectedMissions.length} />
         { hasSelection
             ? <Button
-                text="remove selected missions"
+                text={`remove selected missions (#${selectedMissions.length})`}
                 iconName="trash"
-                className={cx(Classes.INTENT_DANGER)}
+                className={cx(Classes.INTENT_DANGER, Classes.MINIMAL)}
                 onClick={() => removeMissions()}
               />
             : null

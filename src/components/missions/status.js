@@ -1,20 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
-import { Colors } from '@blueprintjs/core';
+import cx from 'classnames';
+import { Classes, Tag } from '@blueprintjs/core';
 import logger from '../logger';
-
-const StyledCounter = glamorous.span(
-  { fontWeight: 'bold' },
-  ({ isEmpty }) => ({ color: isEmpty ? Colors.RED1 : Colors.BLUE1 })
-);
 
 const Status = ({ count }) => {
   const isEmpty = count <= 0;
 
-  if (isEmpty) return <StyledCounter isEmpty={isEmpty}>No mission</StyledCounter>;
+  if (isEmpty) return <Tag className={cx(Classes.INTENT_DANGER, Classes.MINIMAL)}> No mission</Tag>;
 
-  return <StyledCounter isEmpty={isEmpty}>#{count} missions</StyledCounter>;
+  return <Tag className={cx(Classes.MINIMAL)}>#{count} missions</Tag>;
 };
 
 Status.propTypes = {

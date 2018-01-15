@@ -1,20 +1,32 @@
 import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
-import { Classes, Colors, Button, Switch } from '@blueprintjs/core';
+import { Classes, Button } from '@blueprintjs/core';
 import cx from 'classnames';
-import glamorous, { H5 } from 'glamorous';
+import glamorous from 'glamorous';
 
 const StyledMission = glamorous.div({
   margin: '10px 0',
-  width: 300,
+  width: 250,
+  position: 'relative',
+});
+
+const StyledActions = glamorous.div({
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
   display: 'flex',
+  flexDirection: 'column',
+});
+
+const StyledContent = glamorous.div({
+  display: 'flex',
+  flexDirection: 'column',
   justifyContent: 'space-between',
-}, ({ isSelected, isHovered }) => ({
-  backgroundColor: isSelected ? 'lightcoral' : 'white',
-  color: isHovered ? 'red' : 'black',
-}));
-const StyledCardActions = glamorous.div({ display: 'flex', flexDirection: 'column' });
-const StyledCardHeader = glamorous(H5)({ color: Colors.BLUE1 });
+  alignItems: 'center',
+  '& h5': {
+    textAlign: 'center',
+  }
+});
 
 class Mission extends Component {
   constructor(props) {
@@ -23,7 +35,7 @@ class Mission extends Component {
     this.boundUpdateIsHovered = this.updateIsHovered.bind(this);
   }
 
-  updateIsHovered() {
+  updateIsHovered = () => {
     this.setState({ isHovered: !this.state.isHovered });
   }
 
@@ -31,35 +43,38 @@ class Mission extends Component {
     const {
       id, name, clientId, partnerId, managerId, addenda, isSelected, toggleMission, removeMission
     } = this.props;
+    const relationships = [clientId, partnerId, managerId];
 
     return (
       <StyledMission
-        isSelected={isSelected}
-        isHovered={this.state.isHovered}
-        onMouseEnter={() => this.boundUpdateIsHovered()}
-        onMouseLeave={() => this.boundUpdateIsHovered()}
-        className={cx(Classes.CARD, Classes.INTERACTIVE, Classes.ELEVATION_2)}
+        onMouseEnter={this.boundUpdateIsHovered}
+        onMouseLeave={this.boundUpdateIsHovered}
+        className={cx({[Classes.INTENT_SUCCESS]: isSelected}, Classes.CALLOUT)}
       >
-        <StyledCardActions>
-          <Switch
-            checked={isSelected}
-            onChange={() => toggleMission(id)}
-          />
-          <Button
-            iconName="trash"
-            className={cx(Classes.INTENT_DANGER)}
-            onClick={() => removeMission(id)}
-          />
-        </StyledCardActions>
-        <div>
-          <StyledCardHeader>{name}</StyledCardHeader>
+        <StyledContent>
+          <h5>{name}</h5>
           <Fragment>
-            {[clientId, partnerId, managerId].map((rid, i) => <div key={`${rid}-${i}`}><em>{rid}</em></div>)}
+            { relationships.map((rid, i) => <code key={`${rid}-${i}`}>{rid}</code>)}
           </Fragment>
-          <div>
-            addenda: (#{addenda.length}) {addenda.map((a) => a.workerId).join(' - ')}
-          </div>
-        </div>
+          <div>(#{addenda.length} addenda)</div>
+          <code>{addenda.map((a) => a.workerId).join(' - ')}</code>
+        </StyledContent>
+        { this.state.isHovered
+          ? <StyledActions>
+              <Button
+                iconName={isSelected ? 'star' : 'star-empty'}
+                className={cx({[Classes.INTENT_SUCCESS]: isSelected}, Classes.MINIMAL)}
+                active={isSelected}
+                onClick={() => toggleMission(id)}
+              />
+              <Button
+                iconName="trash"
+                className={cx(Classes.INTENT_DANGER, Classes.MINIMAL)}
+                onClick={() => removeMission(id)}
+              />
+            </StyledActions>
+          : null
+        }
       </StyledMission>
     );
   }
