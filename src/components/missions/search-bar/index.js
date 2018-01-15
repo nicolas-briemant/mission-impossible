@@ -1,18 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import Fragment from 'render-fragment';
 import { css } from 'glamor';
 import cx from 'classnames';
-
-const MyDivCont = glamorous.div({
-  position: 'relative',
-  marginTop: '20px',
-  marginBottom: '20px',
-  padding: '0px',
-  display: 'flex',
-  alignItem: 'left',
-  width: '100%',
-});
+import HocSearchBar from './hoc-search-bar';
 
 const red = css({
   color: 'red',
@@ -33,10 +24,10 @@ const SearchBar = ({ name, count }) => {
   });
 
   return (
-    <MyDivCont>
+    <Fragment>
       <code>{`${name}${hasS ? 's' : ''}:`}</code>
       <code className={cls}>{`${count}`}</code>
-    </MyDivCont>
+    </Fragment>
   );
 };
 
@@ -45,4 +36,4 @@ SearchBar.propTypes = {
   count: PropTypes.number.isRequired,
 };
 
-export default SearchBar;
+export default HocSearchBar('HocSearchBar')(SearchBar);
