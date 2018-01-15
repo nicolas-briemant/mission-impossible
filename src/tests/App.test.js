@@ -5,16 +5,25 @@ import App from '../App';
 import { createStore } from '../store';
 import reducer from '../reducers/index';
 import missions from '../data/missions2';
-
+import Provider from '../provider';
 describe('App', () => {
   const store = createStore(reducer, { missions, people: [] });
   it('should render without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<App store={store} />, div);
+    ReactDOM.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      div,
+    );
   });
 
   it('should match snapshot', () => {
-    const wrapper = shallow(<App store={store} />);
+    const wrapper = shallow(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });
