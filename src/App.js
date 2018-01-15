@@ -1,40 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
 import Header from './components/missions/header';
 import Missions from './components/missions/sections';
 import * as create from './actions';
+import connect from './connect';
 
-class App extends Component {
-  componentWillMount() {
-    const { store } = this.props;
-    store.listen(() => this.forceUpdate());
-  }
-
-  render() {
-    const { store } = this.props;
-    const { dispatch, getState } = store;
-    const { missions } = getState();
-    const selectMission = missionId => dispatch(create.selectMission(missionId));
-    const removeMission = missionId => dispatch(create.removeMission(missionId));
-    const removeSelectedMissions = () => dispatch(create.removeSelectedMissions());
-    const actions = {
-      selectMission,
-      removeMission,
-      removeSelectedMissions,
-    };
-
-    return (
-      <div className="App">
-        <Header missions={missions} />
-        <Missions missions={missions} {...actions} />
-      </div>
-    );
-  }
-}
+const App = ({ missions, actions }) => (
+  <div className="App">
+    <Header missions={missions} />
+    <Missions missions={missions} {...actions} />
+  </div>
+);
 
 App.propTypes = {
-  store: PropTypes.object,
+  missions: PropTypes.array,
+  actions: PropTypes.object,
 };
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  selectMission: missionId => dispatch(create.selectMission(missionId)),
+  removeMission: missionId => dispatch(create.removeMission(missionId)),
+  removeSelectedMissions: () => dispatch(create.removeSelectedMissions()),
+});
+
+export default connect(mapDispatchToProps)(App);

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+// import css from 'glamor';
 import uniqid from 'uniqid';
 import cx from 'classnames';
 import { Card, Slider, Button } from '@blueprintjs/core';
@@ -17,6 +18,10 @@ const CellMission = glamorous(Card)({
   width: 300,
   margin: 10,
 });
+
+// const red = css({
+//   color: 'red',
+// })
 
 const Mission = ({ id, name, clientId, partnerId, managerId, addenda, isSelected, selectMission, removeMission }) => (
   <CellMission
