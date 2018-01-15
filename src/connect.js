@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 export default mapDisPatchToProps => Component => {
   class ConnectedComponent extends React.Component {
     componentWillMount() {
-      const { store } = this.props;
+      const { store } = this.context;
       store.listen(() => this.forceUpdate());
     }
 
     render() {
-      const { store } = this.props;
+      const { store } = this.context;
       const { dispatch, getState } = store;
       const props = { ...getState(), ...mapDisPatchToProps(dispatch) };
 
@@ -17,8 +17,8 @@ export default mapDisPatchToProps => Component => {
     }
   }
 
-  ConnectedComponent.propTypes = {
-    store: PropTypes.object,
+  ConnectedComponent.contextTypes = {
+    store: PropTypes.object.isRequired,
   };
   return ConnectedComponent;
 };

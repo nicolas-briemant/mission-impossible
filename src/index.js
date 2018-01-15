@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import missions from './data/missions2';
 import reducer from './reducers';
+import Provider from './provider';
 import { createStore } from './store';
 
 const initialState = {
@@ -14,4 +15,9 @@ const initialState = {
 
 const store = createStore(reducer, initialState);
 
-ReactDOM.render(<App store={store} />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
+);
