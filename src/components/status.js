@@ -1,27 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import { Button } from '@blueprintjs/core';
 import cx from 'classnames';
+import logger from './logger';
 
 const StyledStatus = glamorous.span({
   fontWeight: 'bold',
-  borderRight: '4px solid black',
-  borderLeft: '4px solid black',
-  borderTop: '4px solid black',
-  borderBottom: '4px solid black',
+  ' .green': { color: 'green' },
+  ' .red': { color: 'red' },
 });
 
-export const Status = ({ number }) => {
+const Status = ({ number, removeMissions }) => {
   const isEmpty = number <= 0;
 
   return (
     <StyledStatus>
       {' '}
-      <code className={cx({ red: isEmpty, green: !isEmpty })}>{number} Missions</code>
+      <code className={cx({ red: isEmpty, green: !isEmpty })}>{number} Missions</code>{' '}
+      <Button iconName="trash" text="Remove Missions" onClick={() => removeMissions()} />
     </StyledStatus>
   );
 };
 
 Status.propTypes = {
   number: PropTypes.number.isRequired,
+  removeMissions: PropTypes.func.isRequired,
 };
+
+export default logger('Status')(Status);

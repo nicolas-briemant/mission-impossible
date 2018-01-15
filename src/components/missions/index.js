@@ -1,22 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
-import { Status } from '../status';
-
-const Mission = ({ id, name, clientId, partnerId, managerId, addenda }) => {
-  return (
-    <StyledMission>
-      <h2> Mission {id}</h2>
-      <h3>{name}</h3>
-      <p>
-        {clientId}, {partnerId}, {managerId}
-      </p>
-      <p>
-        Workers ({addenda.length}): {addenda.map(worker => worker.workerId)}
-      </p>
-    </StyledMission>
-  );
-};
+import cx from 'classnames';
+import { Button } from '@blueprintjs/core';
+import Status from '../status';
+import logger from '../logger';
 
 const StyledMission = glamorous.div({
   marginTop: '20px',
@@ -35,8 +23,46 @@ const StyledMission = glamorous.div({
   paddingTop: '20',
 });
 
+class Mission extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isHovered: false };
+    this.updateIsHovered = this.updateIsHovered.bind(this);
+  }
+  updateIsHovered() {
+    this.setState({ isHovered: !this.state.isHovered });
+  }
+
+  render() {
+    const { id, name, clientId, partnerId, managerId, addenda, removeMission, toggleMission, isSelected } = this.props;
+    return (
+      <StyledMission
+        className={cx({ selected: isSelected })}
+        onMouseEnter={() => this.updateIsHovered()}
+        onMouseLeave={() => this.updateIsHovered()}
+      >
+        <h2> Mission {id}</h2>
+        <h3>{name}</h3>
+        <p>
+          {clientId}, {partnerId}, {managerId}
+        </p>
+        <p>
+          Workers ({addenda.length}): {addenda.map(worker => worker.workerId)}
+        </p>
+        {this.state.isHovered ? (
+          <Fragment>
+            <Button iconName="select" text="select" onClick={() => toggleMission(id)} />
+            <Button iconName="trash" text="remove" onClick={() => removeMission(id)} />
+          </Fragment>
+        ) : null}
+      </StyledMission>
+    );
+  }
+}
+
 Mission.propTypes = {
   id: PropTypes.number,
+  isSelected: PropTypes.bool,
   name: PropTypes.string.isRequired,
   clientId: PropTypes.string,
   partnerId: PropTypes.string,
@@ -46,6 +72,8 @@ Mission.propTypes = {
       workerId: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  removeMission: PropTypes.func.isRequired,
+  toggleMission: PropTypes.func.isRequired,
 };
 
 const StyledMissions = glamorous.div({
@@ -53,18 +81,25 @@ const StyledMissions = glamorous.div({
   flexDirection: 'row',
   justifyContent: 'space-between',
   flexWrap: 'wrap',
-  backgroundColor: 'white',
+  //backgroundColor: 'white',
 });
 
-const Missions = ({ missions }) => (
-  <div>
-    <Status number={missions.length} />
-    <StyledMissions>{missions.map(mission => <Mission key={mission.id} {...mission} />)}</StyledMissions>
-  </div>
+const Missions = ({ missions, removeMission, toggleMission, removeMissions }) => (
+  <Fragment>
+    <Status number={missions.length} removeMissions={removeMissions} />
+    <StyledMissions>
+      {missions.map(mission => (
+        <Mission key={mission.id} {...mission} removeMission={removeMission} toggleMission={toggleMission} />
+      ))}
+    </StyledMissions>
+  </Fragment>
 );
 
 Missions.propTypes = {
   missions: PropTypes.array,
+  removeMissions: PropTypes.func.isRequired,
+  removeMission: PropTypes.func.isRequired,
+  toggleMission: PropTypes.func.isRequired,
 };
 
-export default Missions;
+export default logger('Missions')(Missions);

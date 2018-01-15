@@ -31,10 +31,14 @@
   }
 }
 
-.red {
+/*.red {
   color: red;
 }
 
 .green {
   color: green;
+}*/
+
+.selected {
+  background-color: red;
 }
