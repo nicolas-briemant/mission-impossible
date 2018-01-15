@@ -53,7 +53,7 @@ class Mission extends Component {
         </p>
         <ul>{addenda.map(worker => <Worker key={uniqid()} {...worker} />)}</ul>
         {this.state.isHovered ? (
-          <div isHovered={this.state.isHovered}>
+          <div>
             <Button iconName="select" text="select" onClick={() => selectMission(id)} />
             <Button iconName="trash" text="remove" onClick={() => removeMission(id)} />
           </div>
