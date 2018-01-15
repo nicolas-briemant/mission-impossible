@@ -1,47 +1,45 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
 import Missions from './components/missions';
 import { Header, HeaderLeft, HeaderRight, HeaderCenter } from './components/header';
 import { Title, Logo, Menu } from './components/app/';
-import * as Actions from './actions';
+import * as actions from './actions';
+import connect from './connect';
 
-class App extends Component {
-  componentWillMount() {
-    const { store } = this.props;
-    store.listen(() => this.forceUpdate());
-  }
+const App = ({ missions, removeMission, toggleMission, removeMissions }) => (
+  <div>
+    <Header>
+      <HeaderLeft>
+        <Logo />
+      </HeaderLeft>
+      <HeaderCenter>
+        <Title />
+      </HeaderCenter>
+      <HeaderRight>
+        <Menu />
+      </HeaderRight>
+    </Header>
+    <Missions
+      missions={missions}
+      removeMission={removeMission}
+      toggleMission={toggleMission}
+      removeMissions={removeMissions}
+    />
+  </div>
+);
 
-  render() {
-    const { store } = this.props;
-    const { dispatch, getState } = store;
-    const { missions } = getState();
-    const removeMission = missionId => dispatch(Actions.removeMission(missionId));
-    const selectedMission = missionId => dispatch(Actions.selectedMission(missionId));
-    const removeSelectedMission = () => dispatch(Actions.removeSelectedMission());
-    const actionsMissions = { removeMission, selectedMission, removeSelectedMission };
-
-    return (
-      <div className="App">
-        <Header>
-          <HeaderLeft>
-            <Logo />
-          </HeaderLeft>
-          <HeaderCenter>
-            <Title />
-          </HeaderCenter>
-          <HeaderRight>
-            <Menu />
-          </HeaderRight>
-        </Header>
-        <Missions missions={missions} {...actionsMissions} />
-      </div>
-    );
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  removeMission: missionId => dispatch(actions.removeMission(missionId)),
+  toggleMission: missionId => dispatch(actions.toggleMission(missionId)),
+  removeMissions: () => dispatch(actions.removeMissions()),
+});
 
 App.propTypes = {
-  store: PropTypes.object,
+  missions: PropTypes.array,
+  removeMission: PropTypes.func.isRequired,
+  toggleMission: PropTypes.func.isRequired,
+  removeMissions: PropTypes.func.isRequired,
 };
 
-export default App;
+export default connect(mapDispatchToProps)(App);

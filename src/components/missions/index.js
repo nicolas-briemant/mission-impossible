@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import cx from 'classnames';
-import { Card, Button } from '@blueprintjs/core';
+import { Button } from '@blueprintjs/core';
 import 'normalize.css/normalize.css';
 import '@blueprintjs/core/dist/blueprint.css';
+import logger from '../logger';
 
-const StyleMission = glamorous(Card)({
-  width: '250px',
-  background: 'blue',
-  backgroundColor: 'blue',
-});
+const StyleMission = glamorous.div(
+  {
+    width: '300px',
+    padding: '20px',
+    textAlign: 'center',
+    border: '1px solid #c8c8c8',
+  },
+  ({ isSelected }) => ({
+    backgroundColor: isSelected ? 'indianred' : 'white',
+  }),
+);
 
 const MainContainer = glamorous.div({
   margin: '2rem',
@@ -36,21 +43,43 @@ const MissionsContainer = glamorous.div({
   justifyContent: 'center',
 });
 
-const Mission = ({ id, name, clientId, partnerId, managerId, addenda, selected, removeMission, selectedMission }) => {
-  return (
-    <StyleMission className={cx({ red_selected: selected })}>
-      <h3>{name}</h3>
-      <p>
-        clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
-      </p>
-      <p>
-        Workers ({addenda.length}): {addenda.map(w => w.workerId).join(' ')}
-      </p>
-      <Button iconName="trash" text="remove" onClick={() => removeMission(id)} />
-      <Button iconName="people" text="select" onClick={() => selectedMission(id)} />
-    </StyleMission>
-  );
-};
+class Mission extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isHovered: false };
+    this.boundUpdateIsHovered = this.updateIsHovered.bind(this);
+  }
+
+  updateIsHovered() {
+    this.setState({ isHovered: !this.state.isHovered });
+  }
+
+  render() {
+    const { id, name, clientId, partnerId, managerId, addenda, isSelected, removeMission, toggleMission } = this.props;
+    return (
+      <StyleMission
+        isHovered={this.state.isHovered}
+        isSelected={isSelected}
+        onMouseEnter={() => this.boundUpdateIsHovered()}
+        onMouseLeave={() => this.boundUpdateIsHovered()}
+      >
+        <h3>{name}</h3>
+        <p>
+          clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
+        </p>
+        <p>
+          Workers ({addenda.length}): {addenda.map(w => w.workerId).join(' ')}
+        </p>
+        {this.state.isHovered ? (
+          <div>
+            <Button iconName="trash" text="Supprimer" onClick={() => removeMission(id)} />
+            <Button iconName="add" text="Sélectionner" onClick={() => toggleMission(id)} />
+          </div>
+        ) : null}
+      </StyleMission>
+    );
+  }
+}
 
 Mission.propTypes = {
   id: PropTypes.number.isRequired,
@@ -63,25 +92,25 @@ Mission.propTypes = {
       workerId: PropTypes.string.isRequired,
     }),
   ).isRequired,
-  selected: PropTypes.bool,
+  isSelected: PropTypes.bool,
   removeMission: PropTypes.func.isRequired,
-  selectedMission: PropTypes.func.isRequired,
+  toggleMission: PropTypes.func.isRequired,
 };
 
-const Missions = ({ missions, removeMission, selectedMission, removeSelectedMission }) => {
+const Missions = ({ missions, removeMission, toggleMission, removeMissions }) => {
   const colorNbMissions = {
     red: false,
     green: true,
   };
 
-  const isAnyoneIsSelected = missions.filter(e => e.selected === true);
+  const isAnyoneIsSelected = missions.filter(e => e.isSelected === true);
   return (
     <MainContainer>
       <Toolbar>
         <i className={cx((colorNbMissions: missions.length))}>Nombre de mission(s) : {missions.length}</i>
         <div>
           {isAnyoneIsSelected.length ? (
-            <button type="button" className="pt-button pt-intent-danger" onClick={() => removeSelectedMission()}>
+            <button type="button" className="pt-button pt-intent-danger" onClick={() => removeMissions()}>
               Supprimer la selection : ({isAnyoneIsSelected.length})
               <span className="pt-icon-standard pt-icon-cross pt-align-right" />
             </button>
@@ -94,7 +123,7 @@ const Missions = ({ missions, removeMission, selectedMission, removeSelectedMiss
       </Toolbar>
       <MissionsContainer>
         {missions.map(mission => (
-          <Mission key={mission.id} {...mission} removeMission={removeMission} selectedMission={selectedMission} />
+          <Mission key={mission.id} {...mission} removeMission={removeMission} toggleMission={toggleMission} />
         ))}
       </MissionsContainer>
     </MainContainer>
@@ -108,8 +137,8 @@ Missions.propTypes = {
     }),
   ).isRequired,
   removeMission: PropTypes.func.isRequired,
-  selectedMission: PropTypes.func.isRequired,
-  removeSelectedMission: PropTypes.func.isRequired,
+  toggleMission: PropTypes.func.isRequired,
+  removeMissions: PropTypes.func.isRequired,
 };
 
-export default Missions;
+export default logger('Missions')(Missions);

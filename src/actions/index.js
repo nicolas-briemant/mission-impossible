@@ -1,12 +1,7 @@
 export const REMOVE_MISSION = 'REMOVE_MISSION';
-export const SELECTED_MISSION = 'SELECTED_MISSION';
-export const REMOVE_SELECTED_MISSION = 'REMOVE_SELECTED_MISSION';
+export const TOGGLE_MISSION = 'TOGGLE_MISSION';
+export const REMOVE_MISSIONS = 'REMOVE_MISSIONS';
 
-// action
-// export const removeMission = { type: REMOVE_MISSION, payload: { missionId } };
-
-// action creator
 export const removeMission = missionId => ({ type: REMOVE_MISSION, payload: { missionId } });
-export const selectedMission = missionId => ({ type: SELECTED_MISSION, payload: { missionId } });
-export const removeSelectedMission = () => ({ type: REMOVE_SELECTED_MISSION });
-// removeMission(3)
+export const toggleMission = missionId => ({ type: TOGGLE_MISSION, payload: { missionId } });
+export const removeMissions = () => ({ type: REMOVE_MISSIONS });

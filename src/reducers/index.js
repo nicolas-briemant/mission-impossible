@@ -1,33 +1,27 @@
-import { REMOVE_MISSION, SELECTED_MISSION, REMOVE_SELECTED_MISSION } from '../actions';
+import { REMOVE_MISSION, TOGGLE_MISSION, REMOVE_MISSIONS } from '../actions';
 
-const removeMissionFromObject = (object, id) => {
-  object.map((e, i) => {
-    if (e.id === id) return object.splice(i, 1);
-    return null;
-  });
-  return object;
+const removeMissionFromArray = (missions, id) => {
+  return missions.filter(mission => mission.id !== id);
 };
 
-const selectedMissionFromObject = (object, id) => {
-  object.map(e => {
-    if (e.id === id) return e.selected ? delete e.selected : (e.selected = true);
-    return null;
+const toggleMissionFromArray = (missions, id) => {
+  return missions.map(mission => {
+    return mission.id === id ? { ...mission, isSelected: !mission.isSelected } : mission;
   });
-  return object;
 };
 
-const removeSelectedMissionFromObject = object => {
-  return object.filter(e => e.selected !== true);
+const removeMissionsFromArray = missions => {
+  return missions.filter(e => e.isSelected !== true);
 };
 
 export default (state, action = {}) => {
   switch (action.type) {
     case REMOVE_MISSION:
-      return { missions: [...removeMissionFromObject(state.missions, action.payload.missionId)] };
-    case SELECTED_MISSION:
-      return { missions: [...selectedMissionFromObject(state.missions, action.payload.missionId)] };
-    case REMOVE_SELECTED_MISSION:
-      return { missions: [...removeSelectedMissionFromObject(state.missions)] };
+      return { ...state, missions: [...removeMissionFromArray(state.missions, action.payload.missionId)] };
+    case TOGGLE_MISSION:
+      return { ...state, missions: [...toggleMissionFromArray(state.missions, action.payload.missionId)] };
+    case REMOVE_MISSIONS:
+      return { ...state, missions: removeMissionsFromArray(state.missions) };
     default:
       return state;
   }
