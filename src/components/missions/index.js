@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Fragment from 'render-fragment';
 import uniqid from 'uniqid';
-import { Classes, Button } from '@blueprintjs/core';
-import cx from 'classnames';
+import { Button } from '@blueprintjs/core';
 import glamorous from 'glamorous';
 import SearchBar from './search-bar';
 // import logger from '../logger';
@@ -13,12 +12,18 @@ const MyDivCont = glamorous.div({
   flexWrap: 'wrap',
 });
 
-const MyUlCont = glamorous.ul({
-  width: '311px',
-  margin: '10px',
-  border: 'solid 1px black',
-  padding: '0px',
-});
+const MyUlCont = glamorous.ul(
+  {
+    width: '311px',
+    margin: '10px',
+    border: 'solid 1px black',
+    padding: '0px',
+  },
+  ({ isSelected }) => ({
+    backgroundColor: isSelected ? 'lightcoral' : 'white',
+    // backgroundColor: isSelected ? 'lightcoral' : 'white')
+  }),
+);
 
 const Mylist = glamorous.div({
   display: 'flex',
@@ -58,38 +63,64 @@ const Missions = ({ missions, removeMission, selectMission, selectedMissions }) 
   );
 };
 
-const Mission = ({ mission, removeMission, selectMission, selectedMissions, count }) => {
-  const { id, name, clientId, partnerId, managerId, addenda } = mission;
-  if (count <= 0) {
-    return (
-      <MyDivCont>
-        <p> No mission </p>
-      </MyDivCont>
-    );
+class Mission extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isHovered: false,
+    };
+    this.boundUpdateIsHovered = this.updateIsHovered.bind(this);
   }
 
-  return (
-    <Fragment>
-      <MyUlCont className={cx(Classes.INTERACTIVE, { [Classes.ELEVATION_4]: selectedMissions[id] })}>
-        <Mylist>id: {id} </Mylist>
-        <Mylist>name: {name} </Mylist>
-        <Mylist>clientId: {clientId} </Mylist>
-        <Mylist>partnerId: {partnerId}</Mylist>
-        <Mylist>managerId: {managerId}</Mylist>
-        <Mylist>addenda longueur = {addenda.length}</Mylist>
-        {addenda.map(({ workerId }) => (
-          <div key={uniqid()}>
-            <Mylist>workerId: {workerId}</Mylist>
-          </div>
-        ))}
-        <AlignCenter>
-          <Button className="" iconName="trash" text="remove" onClick={() => removeMission(id)} />
-          <Button className="" iconName="add" text="select" onClick={() => selectMission(id)} />
-        </AlignCenter>
-      </MyUlCont>
-    </Fragment>
-  );
-};
+  updateIsHovered = () => {
+    this.setState({
+      isHovered: !this.state.isHovered,
+    });
+  };
+
+  render() {
+    const { mission, removeMission, selectMission, selectedMissions, count } = this.props;
+    const { id, name, clientId, partnerId, managerId, addenda } = mission;
+
+    if (count <= 0) {
+      const noMission = (
+        <MyDivCont>
+          <p> No mission </p>
+        </MyDivCont>
+      );
+      return noMission;
+    }
+
+    return (
+      <Fragment>
+        <MyUlCont
+          isHovered={this.state.isHovered}
+          isSelected={selectedMissions[mission.id]}
+          onMouseEnter={this.updateIsHovered}
+          onMouseLeave={this.updateIsHovered}
+        >
+          <Mylist>id: {id} </Mylist>
+          <Mylist>name: {name} </Mylist>
+          <Mylist>clientId: {clientId} </Mylist>
+          <Mylist>partnerId: {partnerId}</Mylist>
+          <Mylist>managerId: {managerId}</Mylist>
+          <Mylist>addenda longueur = {addenda.length}</Mylist>
+          {addenda.map(({ workerId }) => (
+            <div key={uniqid()}>
+              <Mylist>workerId: {workerId}</Mylist>
+            </div>
+          ))}
+          {this.state.isHovered ? (
+            <AlignCenter>
+              <Button iconName="trash" text="remove" onClick={() => removeMission(id)} />
+              <Button iconName="add" text="select" onClick={() => selectMission(id)} />
+            </AlignCenter>
+          ) : null}
+        </MyUlCont>
+      </Fragment>
+    );
+  }
+}
 
 Missions.propTypes = {
   missions: PropTypes.arrayOf(
