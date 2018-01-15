@@ -14,17 +14,15 @@ Worker.propTypes = {
   workerId: PropTypes.string,
 };
 
-const CellMission = glamorous.div({
-  width: 300,
-  margin: 10,
-  // }, ({ isSelected, isHovered }) => ({
-  // backgroundColor: isHovered ? 'lightcoral' : 'white',
-  // color: isSelected ? 'red' : 'black',
-});
-
-const DisplayButton = glamorous.div({}, ({ isHovered }) => ({
-  display: isHovered ? 'block' : 'none',
-}));
+const CellMission = glamorous.div(
+  {
+    width: 300,
+    margin: 10,
+  },
+  ({ isSelected }) => ({
+    backgroundColor: isSelected ? 'red' : 'white',
+  }),
+);
 
 class Mission extends Component {
   constructor(props) {
@@ -42,14 +40,10 @@ class Mission extends Component {
 
     return (
       <CellMission
+        isSelected={isSelected}
         onMouseEnter={() => this.updateIsHovered()}
         onMouseLeave={() => this.updateIsHovered()}
-        className={cx(
-          Classes.CARD,
-          Classes.INTERACTIVE,
-          Classes.ELEVATIONS_2,
-          isSelected ? { red: true } : { red: false },
-        )}
+        className={cx(Classes.CARD, Classes.INTERACTIVE, Classes.ELEVATIONS_2)}
         // interactive="true"
         // elevation={Card.ELEVATION_TWO}
       >
@@ -58,10 +52,12 @@ class Mission extends Component {
           clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
         </p>
         <ul>{addenda.map(worker => <Worker key={uniqid()} {...worker} />)}</ul>
-        <DisplayButton isHovered={this.state.isHovered}>
-          <Button iconName="select" text="select" onClick={() => selectMission(id)} />
-          <Button iconName="trash" text="remove" onClick={() => removeMission(id)} />
-        </DisplayButton>
+        {this.state.isHovered ? (
+          <div isHovered={this.state.isHovered}>
+            <Button iconName="select" text="select" onClick={() => selectMission(id)} />
+            <Button iconName="trash" text="remove" onClick={() => removeMission(id)} />
+          </div>
+        ) : null}
       </CellMission>
     );
   }

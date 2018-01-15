@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './App.css';
 import Header from './components/missions/header';
 import Missions from './components/missions/sections';
-import * as create from './actions';
+import * as createAction from './actions';
 import connect from './connect';
 
 const App = ({ missions, actions }) => (
@@ -19,9 +19,9 @@ App.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  selectMission: missionId => dispatch(create.selectMission(missionId)),
-  removeMission: missionId => dispatch(create.removeMission(missionId)),
-  removeSelectedMissions: () => dispatch(create.removeSelectedMissions()),
+  selectMission: missionId => dispatch(createAction.selectMission(missionId)),
+  removeMission: missionId => dispatch(createAction.removeMission(missionId)),
+  removeSelectedMissions: () => dispatch(createAction.removeSelectedMissions()),
 });
 
 export default connect(mapDispatchToProps)(App);

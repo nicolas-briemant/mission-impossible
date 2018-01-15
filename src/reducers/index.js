@@ -6,11 +6,8 @@ const select = (missions, id) => {
   });
 };
 
-const findIndexMission = (missions, id) => missions.findIndex(mission => mission.id === id);
-
 const remove = (missions, id) => {
-  const idByIndex = findIndexMission(missions, id);
-  return missions.filter((mission, index) => idByIndex !== index);
+  return missions.filter(mission => mission.id !== id);
 };
 
 const removeSelected = missions => {
