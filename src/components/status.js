@@ -2,22 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import cx from 'classnames';
+import logger from './logger';
 
 const StyledStatus = glamorous.span({
   fontWeight: 'bold',
-  borderRight: '4px solid black',
-  borderLeft: '4px solid black',
-  borderTop: '4px solid black',
-  borderBottom: '4px solid black',
+  ' .green': { color: 'green' },
+  ' .red': { color: 'red' },
 });
 
-export const Status = ({ number }) => {
+const Status = ({ number }) => {
   const isEmpty = number <= 0;
 
   return (
     <StyledStatus>
       {' '}
-      <code className={cx({ red: isEmpty, green: !isEmpty })}>{number} Missions</code>
+      <code className={cx({ red: isEmpty, green: !isEmpty })}>{number} Missions</code>{' '}
     </StyledStatus>
   );
 };
@@ -25,3 +24,5 @@ export const Status = ({ number }) => {
 Status.propTypes = {
   number: PropTypes.number.isRequired,
 };
+
+export default logger('Status')(Status);
