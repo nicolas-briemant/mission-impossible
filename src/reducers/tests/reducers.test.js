@@ -75,22 +75,18 @@ describe('src | reducers', () => {
     });
   });
 
-  describe('reducers REMOVEMISSION', () => {
-    test('should remove mission2', () => {
-      const initialState = { missions: [mission1, mission2, mission3], selectedMissions: {}, people: {} };
-      const expected = { missions: [mission1, mission3], selectedMissions: {}, people: {} };
-      deepFreeze(initialState);
-      expect(reducers(initialState, actions.removeMission(mission2.id))).toEqual(expected);
-    });
+  test('should remove mission2', () => {
+    const initialState = { missions: [mission1, mission2, mission3], selectedMissions: {}, people: {} };
+    const expected = { missions: [mission1, mission3], selectedMissions: {}, people: {} };
+    deepFreeze(initialState);
+    expect(reducers(initialState, actions.removeMission(mission2.id))).toEqual(expected);
   });
 
-  describe('reducers REMOVEMISSION', () => {
-    test('should remove mission3', () => {
-      const initialState = { missions: [mission1, mission2, mission3], selectedMissions: {}, people: {} };
-      const expected = { missions: [mission1, mission2], selectedMissions: {}, people: {} };
-      deepFreeze(initialState);
-      expect(reducers(initialState, actions.removeMission(mission3.id))).toEqual(expected);
-    });
+  test('should remove mission3', () => {
+    const initialState = { missions: [mission1, mission2, mission3], selectedMissions: {}, people: {} };
+    const expected = { missions: [mission1, mission2], selectedMissions: {}, people: {} };
+    deepFreeze(initialState);
+    expect(reducers(initialState, actions.removeMission(mission3.id))).toEqual(expected);
   });
 
   describe('reducers SELECTMISSION', () => {
@@ -100,19 +96,15 @@ describe('src | reducers', () => {
       deepFreeze(initialState);
       expect(reducers(initialState, actions.selectMission(mission3.id))).toEqual(expected);
     });
-  });
 
-  describe('reducers SELECTMISSION', () => {
-    test('should select mission1 and mission2', () => {
+    test('should select when mission 2 is select', () => {
       const initialState = { missions: [mission1, mission2, mission3], selectedMissions: { 1: true }, people: {} };
       const expected = { missions: [mission1, mission2, mission3], selectedMissions: { 1: true, 2: true }, people: {} };
       deepFreeze(initialState);
       expect(reducers(initialState, actions.selectMission(mission2.id))).toEqual(expected);
     });
-  });
 
-  describe('reducers SELECTMISSION', () => {
-    test('should select mission1, mission2, mission3', () => {
+    test('should select when mission 3 is select', () => {
       const initialState = {
         missions: [mission1, mission2, mission3],
         selectedMissions: { 1: true, 2: true },
@@ -126,19 +118,15 @@ describe('src | reducers', () => {
       deepFreeze(initialState);
       expect(reducers(initialState, actions.selectMission(mission3.id))).toEqual(expected);
     });
-  });
 
-  describe('reducers SELECTMISSION', () => {
     test('should unselect mission3', () => {
       const initialState = { missions: [mission1, mission2, mission3], selectedMissions: { 3: true }, people: {} };
       const expected = { missions: [mission1, mission2, mission3], selectedMissions: { 3: false }, people: {} };
       deepFreeze(initialState);
       expect(reducers(initialState, actions.selectMission(mission3.id))).toEqual(expected);
     });
-  });
 
-  describe('reducers SELECTMISSION', () => {
-    test('should unselect mission1 and mission2', () => {
+    test('should unselect mission2 but mission1 rest', () => {
       const initialState = {
         missions: [mission1, mission2, mission3],
         selectedMissions: { 1: true, 2: true },
@@ -152,10 +140,8 @@ describe('src | reducers', () => {
       deepFreeze(initialState);
       expect(reducers(initialState, actions.selectMission(mission2.id))).toEqual(expected);
     });
-  });
 
-  describe('reducers SELECTMISSION', () => {
-    test('should unselect mission1, mission2, mission3', () => {
+    test('should unselect mission3 but mission1 and mission2 rest', () => {
       const initialState = {
         missions: [mission1, mission2, mission3],
         selectedMissions: { 1: true, 2: false, 3: true },
