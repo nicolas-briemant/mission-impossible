@@ -9,6 +9,7 @@ const StyledMissions = glamorous.div({
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'space-between',
+  padding: '0 15px',
 });
 
 const Missions = ({ missions, removeMissions, toggleMission, removeMission }) => (
