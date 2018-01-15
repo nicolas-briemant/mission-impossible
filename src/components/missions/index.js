@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import cx from 'classnames';
-import { Card, Menu, MenuItem } from '@blueprintjs/core';
+import { Button } from '@blueprintjs/core';
 import 'normalize.css/normalize.css';
 import '@blueprintjs/core/dist/blueprint.css';
+import logger from '../logger';
 
-const StyleMission = glamorous(Card)({
-  width: '250px',
-});
+const StyleMission = glamorous.div(
+  {
+    width: '300px',
+    padding: '20px',
+    textAlign: 'center',
+    border: '1px solid #c8c8c8',
+  },
+  ({ isSelected }) => ({
+    backgroundColor: isSelected ? 'indianred' : 'white',
+  }),
+);
 
 const MainContainer = glamorous.div({
   margin: '2rem',
@@ -34,21 +43,46 @@ const MissionsContainer = glamorous.div({
   justifyContent: 'center',
 });
 
-const Mission = ({ name, clientId, partnerId, managerId, addenda }) => {
-  return (
-    <StyleMission>
-      <h3>{name}</h3>
-      <p>
-        clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
-      </p>
-      <p>
-        Workers ({addenda.length}): {addenda.map(w => w.workerId).join(' ')}
-      </p>
-    </StyleMission>
-  );
-};
+class Mission extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isHovered: false };
+    this.boundUpdateIsHovered = this.updateIsHovered.bind(this);
+  }
+
+  updateIsHovered() {
+    this.setState({ isHovered: !this.state.isHovered });
+  }
+
+  render() {
+    const { id, name, clientId, partnerId, managerId, addenda, isSelected, removeMission, toggleMission } = this.props;
+    return (
+      <StyleMission
+        isHovered={this.state.isHovered}
+        isSelected={isSelected}
+        onMouseEnter={() => this.boundUpdateIsHovered()}
+        onMouseLeave={() => this.boundUpdateIsHovered()}
+      >
+        <h3>{name}</h3>
+        <p>
+          clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
+        </p>
+        <p>
+          Workers ({addenda.length}): {addenda.map(w => w.workerId).join(' ')}
+        </p>
+        {this.state.isHovered ? (
+          <div>
+            <Button iconName="trash" text="Supprimer" onClick={() => removeMission(id)} />
+            <Button iconName="add" text="Sélectionner" onClick={() => toggleMission(id)} />
+          </div>
+        ) : null}
+      </StyleMission>
+    );
+  }
+}
 
 Mission.propTypes = {
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   clientId: PropTypes.string,
   partnerId: PropTypes.string,
@@ -58,23 +92,40 @@ Mission.propTypes = {
       workerId: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  isSelected: PropTypes.bool,
+  removeMission: PropTypes.func.isRequired,
+  toggleMission: PropTypes.func.isRequired,
 };
 
-const Missions = ({ missions }) => {
+const Missions = ({ missions, removeMission, toggleMission, removeMissions }) => {
   const colorNbMissions = {
     red: false,
     green: true,
   };
 
+  const isAnyoneIsSelected = missions.filter(e => e.isSelected === true);
   return (
     <MainContainer>
       <Toolbar>
-        <b className={cx((colorNbMissions: missions.length))}>Nombre de mission(s) : {missions.length}</b>
-        <Menu>
-          <MenuItem iconName="arrow-right" text="Filtre" />
-        </Menu>
+        <i className={cx((colorNbMissions: missions.length))}>Nombre de mission(s) : {missions.length}</i>
+        <div>
+          {isAnyoneIsSelected.length ? (
+            <button type="button" className="pt-button pt-intent-danger" onClick={() => removeMissions()}>
+              Supprimer la selection : ({isAnyoneIsSelected.length})
+              <span className="pt-icon-standard pt-icon-cross pt-align-right" />
+            </button>
+          ) : null}
+          <button type="button" className="pt-button pt-intent-primary">
+            Filtre
+            <span className="pt-icon-standard pt-icon-arrow-right pt-align-right" />
+          </button>
+        </div>
       </Toolbar>
-      <MissionsContainer>{missions.map(mission => <Mission key={mission.id} {...mission} />)}</MissionsContainer>
+      <MissionsContainer>
+        {missions.map(mission => (
+          <Mission key={mission.id} {...mission} removeMission={removeMission} toggleMission={toggleMission} />
+        ))}
+      </MissionsContainer>
     </MainContainer>
   );
 };
@@ -85,6 +136,9 @@ Missions.propTypes = {
       id: PropTypes.number,
     }),
   ).isRequired,
+  removeMission: PropTypes.func.isRequired,
+  toggleMission: PropTypes.func.isRequired,
+  removeMissions: PropTypes.func.isRequired,
 };
 
-export default Missions;
+export default logger('Missions')(Missions);
