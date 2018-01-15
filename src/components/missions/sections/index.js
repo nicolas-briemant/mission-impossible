@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import uniqid from 'uniqid';
 import cx from 'classnames';
-import { Slider, Button } from '@blueprintjs/core';
+import { Classes, Slider, Button } from '@blueprintjs/core';
 import 'normalize.css/normalize.css';
 import '@blueprintjs/core/dist/blueprint.css';
-// import Logger from '../../logger';
+import logger from '../../logger';
 
 const Worker = ({ workerId }) => <li>Id: {workerId}</li>;
 
@@ -17,12 +17,14 @@ Worker.propTypes = {
 const CellMission = glamorous.div({
   width: 300,
   margin: 10,
+  // }, ({ isSelected, isHovered }) => ({
+  // backgroundColor: isHovered ? 'lightcoral' : 'white',
+  // color: isSelected ? 'red' : 'black',
 });
-// }, ({ isSelected, isHovered }) => ({
-//   backgroundColor: isHovered ? 'red': (isSelected ? 'lightcoral' : 'white'),
-// color: isHovered ? 'green' : 'black',
 
-// }));
+const DisplayButton = glamorous.div({}, ({ isHovered }) => ({
+  display: isHovered ? 'block' : 'none',
+}));
 
 class Mission extends Component {
   constructor(props) {
@@ -40,21 +42,26 @@ class Mission extends Component {
 
     return (
       <CellMission
-        isSelected={isSelected}
-        isHovered={this.state.isHovered}
-        className={cx(isSelected ? { red: true } : { red: false })}
-        // interactive="true"
-        // elevation={Card.ELEVATION_TWO}
         onMouseEnter={() => this.updateIsHovered()}
         onMouseLeave={() => this.updateIsHovered()}
+        className={cx(
+          Classes.CARD,
+          Classes.INTERACTIVE,
+          Classes.ELEVATIONS_2,
+          isSelected ? { red: true } : { red: false },
+        )}
+        // interactive="true"
+        // elevation={Card.ELEVATION_TWO}
       >
         <b>{name}</b>
         <p>
           clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
         </p>
         <ul>{addenda.map(worker => <Worker key={uniqid()} {...worker} />)}</ul>
-        <Button iconName="select" text="select" onClick={() => selectMission(id)} />
-        <Button iconName="trash" text="remove" onClick={() => removeMission(id)} />
+        <DisplayButton isHovered={this.state.isHovered}>
+          <Button iconName="select" text="select" onClick={() => selectMission(id)} />
+          <Button iconName="trash" text="remove" onClick={() => removeMission(id)} />
+        </DisplayButton>
       </CellMission>
     );
   }
@@ -91,6 +98,8 @@ const ListMissions = glamorous.div({
   margin: 10,
 });
 
+const LoggedMission = logger('mission')(Mission);
+
 const Missions = ({ missions, selectMission, removeMission, removeSelectedMissions }) => (
   <Container>
     <FilterMissions>
@@ -100,7 +109,7 @@ const Missions = ({ missions, selectMission, removeMission, removeSelectedMissio
     </FilterMissions>
     <ListMissions>
       {missions.map(mission => (
-        <Mission key={mission.id} {...mission} selectMission={selectMission} removeMission={removeMission} />
+        <LoggedMission key={mission.id} {...mission} selectMission={selectMission} removeMission={removeMission} />
       ))}
     </ListMissions>
   </Container>

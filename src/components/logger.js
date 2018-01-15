@@ -1,15 +1,21 @@
-// import React from 'react';
-// /* jshint ignore:start*/
-// export default id => Component => {
-//   class Logger extends React.Component {
-//     //bypass eslint
-//
-//     render() {
-//       console.log('render:', id);
-//       return <Component {...this.props} />;
-//     }
-//   }
-//
-//   return Logger;
-// };
-// /* jshint ignore:end */
+/* eslint-disable */
+
+import React from 'react';
+import PropTypes from 'prop-types';
+
+export default id => Component => {
+  class Logger extends React.Component {
+    render() {
+      console.log('render:', id, this.props.id);
+      return <Component {...this.props} />;
+    }
+  }
+
+  Logger.propTypes = {
+    id: PropTypes.number.isRequired,
+  };
+
+  return Logger;
+};
+
+/* eslint-enable */
