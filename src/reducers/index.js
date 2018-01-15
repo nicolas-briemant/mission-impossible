@@ -17,9 +17,9 @@ const removeMissionsFromArray = missions => {
 export default (state, action = {}) => {
   switch (action.type) {
     case REMOVE_MISSION:
-      return { ...state, missions: [...removeMissionFromArray(state.missions, action.payload.missionId)] };
+      return { ...state, missions: removeMissionFromArray(state.missions, action.payload.missionId) };
     case TOGGLE_MISSION:
-      return { ...state, missions: [...toggleMissionFromArray(state.missions, action.payload.missionId)] };
+      return { ...state, missions: toggleMissionFromArray(state.missions, action.payload.missionId) };
     case REMOVE_MISSIONS:
       return { ...state, missions: removeMissionsFromArray(state.missions) };
     default:
