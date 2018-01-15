@@ -4,6 +4,7 @@ import glamorous from 'glamorous';
 import cx from 'classnames';
 import { Button } from '@blueprintjs/core';
 import Status from '../status';
+import ToolBar from '../toolbar';
 import logger from '../logger';
 
 const StyledMission = glamorous.div({
@@ -21,6 +22,7 @@ const StyledMission = glamorous.div({
   width: '20%',
   alignContent: 'center',
   paddingTop: '20',
+  '.selected': { backgroundColor: 'red' },
 });
 
 class Mission extends React.Component {
@@ -86,7 +88,8 @@ const StyledMissions = glamorous.div({
 
 const Missions = ({ missions, removeMission, toggleMission, removeMissions }) => (
   <Fragment>
-    <Status number={missions.length} removeMissions={removeMissions} />
+    <ToolBar removeMissions={removeMissions} />
+    <Status number={missions.length} />
     <StyledMissions>
       {missions.map(mission => (
         <Mission key={mission.id} {...mission} removeMission={removeMission} toggleMission={toggleMission} />
