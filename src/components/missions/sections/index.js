@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import { connect } from 'react-redux';
 import uniqid from 'uniqid';
 import cx from 'classnames';
 import { Classes, Slider, Button } from '@blueprintjs/core';
 import 'normalize.css/normalize.css';
 import '@blueprintjs/core/dist/blueprint.css';
 import logger from '../../logger';
+import { selectMission, removeMission, removeSelectedMissions } from '../../../actions';
 
 const Worker = ({ workerId }) => <li>Id: {workerId}</li>;
 
@@ -20,7 +22,7 @@ const CellMission = glamorous.div(
     margin: 10,
   },
   ({ isSelected }) => ({
-    backgroundColor: isSelected ? 'red' : 'white',
+    color: isSelected ? 'red' : 'black',
   }),
 );
 
@@ -36,7 +38,7 @@ class Mission extends Component {
   }
 
   render() {
-    const { id, name, clientId, partnerId, managerId, addenda, isSelected, selectMission, removeMission } = this.props;
+    const { id, name, clientId, partnerId, managerId, addenda, isSelected } = this.props;
 
     return (
       <CellMission
@@ -96,7 +98,7 @@ const ListMissions = glamorous.div({
 
 const LoggedMission = logger('mission')(Mission);
 
-const Missions = ({ missions, selectMission, removeMission, removeSelectedMissions }) => (
+const Missions = ({ missions }) => (
   <Container>
     <FilterMissions>
       <b>Nombre de Missions: {missions.length}</b>
@@ -113,10 +115,9 @@ const Missions = ({ missions, selectMission, removeMission, removeSelectedMissio
 
 Missions.propTypes = {
   missions: PropTypes.array,
-  selectMission: PropTypes.func.isRequired,
-  removeMission: PropTypes.func.isRequired,
-  removeSelectedMissions: PropTypes.func.isRequired,
 };
 
-// export default Logger('Missions')(Missions);
-export default Missions;
+const mapStateToProps = state => state;
+const MapDispatchToProps = { selectMission, removeMission, removeSelectedMissions };
+
+export default connect(mapStateToProps, MapDispatchToProps)(logger('Missions')(Missions));
