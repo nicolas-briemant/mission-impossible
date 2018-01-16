@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
-import glamorous from 'glamorous';
 import PropTypes from 'prop-types';
-import '../../../App.css';
+import { css } from 'glamor';
+import { Navbar, NavbarGroup } from '@blueprintjs/core';
+import 'normalize.css/normalize.css';
 
-const StyledHeader = glamorous.div({
+const Flexbox = css({
   display: 'flex',
-  justifyContent: 'space-between',
   alignItems: 'center',
 });
 
@@ -15,32 +15,30 @@ HeaderLeft.propTypes = {
   children: PropTypes.node,
 };
 
-export const HeaderMiddle = ({ children }) => <Fragment>{children}</Fragment>;
-
-HeaderMiddle.propTypes = {
-  children: PropTypes.node,
-};
-
 export const HeaderRight = ({ children }) => <Fragment>{children}</Fragment>;
 
 HeaderRight.propTypes = {
   children: PropTypes.node,
 };
 
-export const HeaderFull = ({ children }) => {
+export const Header = ({ children }) => {
   const headerLeft = () => React.Children.toArray(children).find(({ type }) => type === HeaderLeft);
-  const headerMiddle = () => React.Children.toArray(children).find(({ type }) => type === HeaderMiddle);
   const headerRight = () => React.Children.toArray(children).find(({ type }) => type === HeaderRight);
 
   return (
-    <StyledHeader>
-      <div>{headerLeft()}</div>
-      <div>{headerMiddle()}</div>
-      <div>{headerRight()}</div>
-    </StyledHeader>
+    <header>
+      <Navbar>
+        <NavbarGroup className={Flexbox} align="left">
+          {headerLeft()}
+        </NavbarGroup>
+        <NavbarGroup className={Flexbox} align="right">
+          {headerRight()}
+        </NavbarGroup>
+      </Navbar>
+    </header>
   );
 };
 
-HeaderFull.propTypes = {
+Header.propTypes = {
   children: PropTypes.node,
 };

@@ -1,53 +1,24 @@
 import React from 'react';
 import glamorous from 'glamorous';
-import { HeaderFull, HeaderLeft, HeaderMiddle, HeaderRight } from './header';
+import { ButtonGroup, Button } from '@blueprintjs/core';
+import { Header, HeaderLeft, HeaderRight } from './header';
 import logo from '../../../data/logo.png';
-import '../../../App.css';
 
 const Logo = glamorous.img({
   width: 75,
 });
 
-const Menu = glamorous.ul({
-  display: 'flex',
-  flexDirection: 'row',
-  marginRight: 10,
-});
-
-const ItemMenu = glamorous.li({
-  display: 'flex',
-  flexDirection: 'row',
-  listStyleType: 'none',
-  margin: 20,
-});
-
-const LogoItemMenu = glamorous.span({
-  marginRight: 10,
-});
-
-const Header = () => (
-  <HeaderFull>
+export default () => (
+  <Header>
     <HeaderLeft>
-      <a>
-        <Logo alt="Logo" src={logo} />
-      </a>
+      <Logo alt="Logo" src={logo} />
+      <h4>Titre du site</h4>
     </HeaderLeft>
-    <HeaderMiddle>
-      <h1 className="App-title">Missions List</h1>
-    </HeaderMiddle>
     <HeaderRight>
-      <Menu>
-        <ItemMenu>
-          <LogoItemMenu className="pt-icon-list" />
-          <p>Missions</p>
-        </ItemMenu>
-        <ItemMenu>
-          <LogoItemMenu className="pt-icon-people" />
-          <p>Peoples</p>
-        </ItemMenu>
-      </Menu>
+      <ButtonGroup minimal="true" large="true">
+        <Button iconName="pt-icon-align-justify">Missions</Button>
+        <Button iconName="people">Peoples</Button>
+      </ButtonGroup>
     </HeaderRight>
-  </HeaderFull>
+  </Header>
 );
-
-export default Header;
