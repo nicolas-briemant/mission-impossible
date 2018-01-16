@@ -21,7 +21,6 @@ const MyUlCont = glamorous.ul(
   },
   ({ isSelected }) => ({
     backgroundColor: isSelected ? 'lightcoral' : 'white',
-    // backgroundColor: isSelected ? 'lightcoral' : 'white')
   }),
 );
 
@@ -42,11 +41,16 @@ const AlignCenter = glamorous.div({
   justifyContent: 'center',
 });
 
-const Missions = ({ missions, removeMission, selectMission, selectedMissions }) => {
+const Missions = ({ missions, removeMission, removeSelectedMissions, selectMission, selectedMissions }) => {
   const count = missions.length;
   return (
     <div>
-      <SearchBar name="nombre de mission" count={count} />
+      <SearchBar
+        name="nombre de mission"
+        count={count}
+        removeSelectedMissions={removeSelectedMissions}
+        selectedMissions={selectedMissions}
+      />
       <MyDivCont>
         {missions.map(mission => (
           <Mission
@@ -139,6 +143,7 @@ Missions.propTypes = {
   ),
   removeMission: PropTypes.func.isRequired,
   selectMission: PropTypes.func.isRequired,
+  removeSelectedMissions: PropTypes.func.isRequired,
   selectedMissions: PropTypes.object.isRequired,
 };
 

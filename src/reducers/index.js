@@ -1,10 +1,14 @@
-import { REMOVE_MISSION, SELECT_MISSION } from '../actions';
+import { REMOVE_MISSION, SELECT_MISSION, REMOVE_SELECTED_MISSIONS } from '../actions';
 
 const findIndexMission = (missions, id) => missions.findIndex(mission => mission.id === id);
 
 const remove = (missions, id) => {
   const idByIndex = findIndexMission(missions, id);
   return missions.filter((mission, index) => idByIndex !== index);
+};
+
+const removeMissionsSelected = (missions, selectedMissions) => {
+  return missions.filter(mission => !selectedMissions[mission.id]);
 };
 
 export default (state, action = {}) => {
@@ -17,6 +21,12 @@ export default (state, action = {}) => {
       if (state.selectedMissions[missionId])
         return { ...state, selectedMissions: { ...state.selectedMissions, [missionId]: !toggle } };
       return { ...state, selectedMissions: { ...state.selectedMissions, [missionId]: true } };
+    case REMOVE_SELECTED_MISSIONS:
+      return {
+        ...state,
+        missions: removeMissionsSelected(state.missions, state.selectedMissions),
+        selectedMissions: {},
+      };
     default:
       return state;
   }
