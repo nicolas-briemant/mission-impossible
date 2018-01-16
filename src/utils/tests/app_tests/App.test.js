@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import App from '../App';
-import missions from '../data/missions2';
-import reducer from '../reducers';
+import App from '../../../App';
+import missions from '../../../data/missions2';
+import reducer from '../../../reducers';
 
 const initialState = {
   missions,

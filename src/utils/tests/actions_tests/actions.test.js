@@ -1,4 +1,4 @@
-import * as actions from '../index';
+import * as actions from '../../../actions';
 
 describe('actions', () => {
   test('should create selectMission', () => {
