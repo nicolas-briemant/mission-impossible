@@ -1,8 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Header, HeaderLeft, HeaderRight, Title, Menu } from './components/app';
 import Missions from './components/missions';
-import * as actions from './actions';
-import connect from './connect';
+import { removeMission, removeMissions, toggleMission } from './actions';
 
 const App = (props) => (
   <div className="pt-dark">
@@ -18,10 +18,7 @@ const App = (props) => (
   </div>
 );
 
-const mapDispatchToProps = (dispatch) => ({
-  removeMission: (missionId) => dispatch(actions.removeMission(missionId)),
-  removeMissions: () => dispatch(actions.removeMissions()),
-  toggleMission: (missionId) => dispatch(actions.toggleMission(missionId)),
-});
+const mapDispatchToProps = { removeMission, removeMissions, toggleMission };
+const mapStateToProps = (state) => state;
 
-export default connect(mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
