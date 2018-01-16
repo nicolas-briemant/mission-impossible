@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Fragment from 'render-fragment';
 import uniqid from 'uniqid';
 import { Button } from '@blueprintjs/core';
 import glamorous from 'glamorous';
