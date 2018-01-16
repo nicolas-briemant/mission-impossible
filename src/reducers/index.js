@@ -1,4 +1,4 @@
-import { SELECT_MISSION, REMOVE_MISSION, REMOVE_SELECTED_MISSIONS } from '../actions';
+import { SELECT_MISSION, REMOVE_MISSION, REMOVE_SELECTED_MISSIONS, BLOCK_ACTION } from '../actions';
 
 const select = (missions, id) => {
   return missions.map(mission => {
@@ -22,6 +22,8 @@ export default (state, action = {}) => {
       return { ...state, missions: remove(state.missions, action.payload.missionId) };
     case REMOVE_SELECTED_MISSIONS:
       return { ...state, missions: removeSelected(state.missions) };
+    case BLOCK_ACTION:
+      return { ...state, blockAction: action.payload.actionType };
     default:
       return state;
   }
