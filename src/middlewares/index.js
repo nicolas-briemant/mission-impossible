@@ -10,8 +10,8 @@ export const firewall = () => next => action => {
 
 export const logger = ({ getState }) => next => action => {
   console.group(action.type);
-  console.log('action:', action.type);
-  console.log('payload:', action.payload);
+  // console.log('action:', action.type);
+  // console.log('payload:', action.payload);
   console.log('prevState:', getState());
   const res = next(action);
   console.log('nextState:', getState());

@@ -13,4 +13,8 @@ describe('actions', () => {
     const expectedAction = { type: 'REMOVE_SELECTED_MISSIONS' };
     expect(actions.removeSelectedMissions()).toEqual(expectedAction);
   });
+  test('should create blockAction', () => {
+    const expectedAction = { type: 'BLOCK_ACTION', payload: { actionType: 'SELECT_MISSION' } };
+    expect(actions.blockAction('SELECT_MISSION')).toEqual(expectedAction);
+  });
 });

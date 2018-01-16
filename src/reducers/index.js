@@ -23,7 +23,7 @@ export default (state, action = {}) => {
     case REMOVE_SELECTED_MISSIONS:
       return { ...state, missions: removeSelected(state.missions) };
     case BLOCK_ACTION:
-      return { ...state, blockAction: action.payload.actionType };
+      return { ...state, blockedAction: action.payload.actionType };
     default:
       return state;
   }

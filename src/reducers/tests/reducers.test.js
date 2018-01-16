@@ -70,4 +70,9 @@ describe('reducer', () => {
     const expectedState = { missions: [], people: [] };
     expect(reducer(initialState, actions.removeSelectedMissions())).toEqual(expectedState);
   });
+  test('should block an action', () => {
+    const initialState = { blockedAction: undefined };
+    const expectedState = { blockedAction: 'SELECT_MISSION' };
+    expect(reducer(initialState, actions.blockAction('SELECT_MISSION'))).toEqual(expectedState);
+  });
 });

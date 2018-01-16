@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { HeaderFull as Header, HeaderLeft, HeaderRight } from '../header/header';
+import { Header, HeaderLeft, HeaderRight } from '../header/header';
 
 describe('app | component | header', () => {
   describe('render', () => {
