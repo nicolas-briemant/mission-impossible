@@ -4,7 +4,6 @@ import glamorous from 'glamorous';
 import { Button } from '@blueprintjs/core';
 import 'normalize.css/normalize.css';
 import '@blueprintjs/core/dist/blueprint.css';
-// import logger from '../../logger';
 import Mission from './mission';
 const ListMissions = glamorous.div({
   display: 'flex',
@@ -12,8 +11,6 @@ const ListMissions = glamorous.div({
   justifyContent: 'space-between',
   margin: 10,
 });
-
-// const LoggedMission = logger('mission')(Mission);
 
 const Missions = ({ missions, selectMission, removeMission, removeSelectedMissions }) => {
   const nbSelectedMissions = missions.filter(mission => mission.isSelected).length;
@@ -41,5 +38,5 @@ Missions.propTypes = {
   removeMission: PropTypes.func,
   removeSelectedMissions: PropTypes.func,
 };
-// export default connect(mapStateToProps, MapDispatchToProps)(logger('Missions')(Missions));
+
 export default Missions;
