@@ -1,4 +1,4 @@
-import { REMOVE_MISSION, SELECT_MISSION, REMOVE_SELECTED_MISSIONS } from '../actions';
+import { REMOVE_MISSION, SELECT_MISSION, REMOVE_SELECTED_MISSIONS, BLOCKED_ACTION } from '../actions';
 
 const findIndexMission = (missions, id) => missions.findIndex(mission => mission.id === id);
 
@@ -16,17 +16,20 @@ export default (state, action = {}) => {
   const toggle = state.selectedMissions[missionId];
   switch (action.type) {
     case REMOVE_MISSION:
-      return { ...state, missions: remove(state.missions, missionId) };
+      return { ...state, missions: remove(state.missions, missionId), alert: '' };
     case SELECT_MISSION:
       if (state.selectedMissions[missionId])
-        return { ...state, selectedMissions: { ...state.selectedMissions, [missionId]: !toggle } };
-      return { ...state, selectedMissions: { ...state.selectedMissions, [missionId]: true } };
+        return { ...state, selectedMissions: { ...state.selectedMissions, [missionId]: !toggle }, alert: '' };
+      return { ...state, selectedMissions: { ...state.selectedMissions, [missionId]: true }, alert: '' };
     case REMOVE_SELECTED_MISSIONS:
       return {
         ...state,
         missions: removeMissionsSelected(state.missions, state.selectedMissions),
         selectedMissions: {},
+        alert: '',
       };
+    case BLOCKED_ACTION:
+      return { ...state, alert: 'Access Denied' };
     default:
       return state;
   }

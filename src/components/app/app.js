@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import './app.css';
 import Missions from '../missions';
 import { Header, HeaderLeft, HeaderRight } from '../header';
-import { removeMission, selectMission, removeSelectedMissions } from '../../actions';
+import { removeMission, selectMission, removeSelectedMissions, blockedAction } from '../../actions';
 import Logo from '../header/logo';
-import Menu from '../header/menu';
+import HeaderMenu from '../header/menu';
 import logo from '../../img/007.png';
 
 const App = props => (
@@ -15,14 +15,14 @@ const App = props => (
         <Logo src={logo} alt="007" title="Missions Impossible" />
       </HeaderLeft>
       <HeaderRight>
-        <Menu />
+        <HeaderMenu {...props} />
       </HeaderRight>
     </Header>
     <Missions {...props} />
   </div>
 );
 
-const mapDisPatchToProps = { removeMission, selectMission, removeSelectedMissions };
+const mapDisPatchToProps = { removeMission, selectMission, removeSelectedMissions, blockedAction };
 
 const mapStateToProps = state => state;
 

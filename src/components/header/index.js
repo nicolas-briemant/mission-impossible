@@ -14,6 +14,12 @@ HeaderRight.propTypes = {
   children: PropTypes.node,
 };
 
+export const HeaderMiddle = ({ children }) => <Fragment>{children}</Fragment>;
+
+HeaderMiddle.propTypes = {
+  children: PropTypes.node,
+};
+
 const HeaderContain = glamorous.div({
   display: 'flex',
   justifyContent: 'space-between',
@@ -23,10 +29,12 @@ const HeaderContain = glamorous.div({
 
 export const Header = ({ children }) => {
   const headerLeft = () => React.Children.toArray(children).find(({ type }) => type === HeaderLeft);
+  const headerMiddle = () => React.Children.toArray(children).find(({ type }) => type === HeaderMiddle);
   const headerRight = () => React.Children.toArray(children).find(({ type }) => type === HeaderRight);
   return (
     <HeaderContain>
       <div>{headerLeft()}</div>
+      <div>{headerMiddle()}</div>
       <div>{headerRight()}</div>
     </HeaderContain>
   );

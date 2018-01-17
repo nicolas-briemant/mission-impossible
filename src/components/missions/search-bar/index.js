@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { css } from 'glamor';
 import cx from 'classnames';
 import HocSearchBar from './hoc-search-bar';
-import { Header, HeaderLeft, HeaderRight } from '../../header';
+import { Header, HeaderLeft, HeaderRight, HeaderMiddle } from '../../header';
 
 const red = css({
   color: 'red',
@@ -13,7 +13,7 @@ const green = css({
   color: 'green',
 });
 
-const SearchBar = ({ name, count, removeSelectedMissions, selectedMissions }) => {
+const SearchBar = ({ name, count, removeSelectedMissions, selectedMissions, alert }) => {
   const isEmpty = count <= 0;
   const hasS = !isEmpty;
   // const cls = cx(isEmpty ? 'red' : 'green');
@@ -29,6 +29,9 @@ const SearchBar = ({ name, count, removeSelectedMissions, selectedMissions }) =>
         <code>{`${name}${hasS ? 's' : ''}:`}</code>
         <code className={cls}>{`${count}`}</code>
       </HeaderLeft>
+      <HeaderMiddle>
+        <p className={red}>{`${alert}`}</p>
+      </HeaderMiddle>
       <HeaderRight>
         <button
           type="button"
@@ -47,6 +50,7 @@ SearchBar.propTypes = {
   count: PropTypes.number.isRequired,
   removeSelectedMissions: PropTypes.func.isRequired,
   selectedMissions: PropTypes.object.isRequired,
+  alert: PropTypes.object.isRequired,
 };
 
 export default HocSearchBar('HocSearchBar')(SearchBar);

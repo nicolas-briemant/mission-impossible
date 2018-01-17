@@ -40,7 +40,7 @@ const AlignCenter = glamorous.div({
   justifyContent: 'center',
 });
 
-const Missions = ({ missions, removeMission, removeSelectedMissions, selectMission, selectedMissions }) => {
+const Missions = ({ missions, removeMission, removeSelectedMissions, selectMission, selectedMissions, alert }) => {
   const count = missions.length;
   return (
     <div>
@@ -49,6 +49,7 @@ const Missions = ({ missions, removeMission, removeSelectedMissions, selectMissi
         count={count}
         removeSelectedMissions={removeSelectedMissions}
         selectedMissions={selectedMissions}
+        alert={alert}
       />
       <MyDivCont>
         {missions.map(mission => (
@@ -144,6 +145,7 @@ Missions.propTypes = {
   selectMission: PropTypes.func.isRequired,
   removeSelectedMissions: PropTypes.func.isRequired,
   selectedMissions: PropTypes.object.isRequired,
+  alert: PropTypes.object.isRequired,
 };
 
 Mission.propTypes = {

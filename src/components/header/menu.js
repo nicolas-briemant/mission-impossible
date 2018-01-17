@@ -1,6 +1,7 @@
 import React from 'react';
 import glamorous from 'glamorous';
 import cx from 'classnames';
+import PropTypes from 'prop-types';
 import { Menu, MenuItem, MenuDivider, Classes } from '@blueprintjs/core';
 
 const HeaderContainMenu = glamorous.div({
@@ -8,16 +9,25 @@ const HeaderContainMenu = glamorous.div({
   justifyContent: 'center',
 });
 
-const HeaderMenu = () => {
+const HeaderMenu = ({ blockedAction }) => {
   return (
     <HeaderContainMenu>
       <Menu>
-        <MenuItem className={cx(Classes.ACTIVE, Classes.BUTTON)} iconName="link" text="Mission" />
-        <MenuItem className={cx(Classes.DISABLE)} iconName="link" text="Soon" />
+        <MenuItem className={cx(Classes.BUTTON, Classes.ACTIVE)} iconName="link" text="Mission" />
+        <MenuItem
+          className={cx(Classes.BUTTON)}
+          iconName="link"
+          text="Shall Not Pass"
+          onClick={() => blockedAction()}
+        />
         <MenuDivider />
       </Menu>
     </HeaderContainMenu>
   );
+};
+
+HeaderMenu.propTypes = {
+  blockedAction: PropTypes.func.isRequired,
 };
 
 export default HeaderMenu;
