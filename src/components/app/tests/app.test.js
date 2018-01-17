@@ -1,19 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
-import App from '../App';
-import missions from '../data/missions2';
-import reducer from '../reducers';
-import { createStore } from '../store';
-import Provider from '../provider';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import App from '../app';
+import missions from '../../../data/missions2';
+import reducer from '../../../reducers';
+import { firewall, logger } from '../../../middlewares';
 
 const initialState = {
   missions,
   selectedMissions: {},
   people: {},
+  alert: '',
 };
 
-const store = createStore(reducer, initialState);
+const store = createStore(reducer, initialState, applyMiddleware(firewall, logger));
 
 describe('App', () => {
   it('should render without crashing', () => {

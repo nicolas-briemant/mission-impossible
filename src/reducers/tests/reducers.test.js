@@ -60,7 +60,7 @@ const mission3 = {
 describe('src | reducers', () => {
   describe('reducers default', () => {
     test('should nothing change', () => {
-      const initialState = { missions: [mission1, mission2], selectedMissions: {}, people: {} };
+      const initialState = { missions: [mission1, mission2], selectedMissions: {}, people: {}, alert: '' };
       deepFreeze(initialState);
       expect(reducers(initialState)).toEqual(initialState);
     });
@@ -68,22 +68,22 @@ describe('src | reducers', () => {
 
   describe('reducers REMOVEMISSION', () => {
     test('should remove mission1', () => {
-      const initialState = { missions: [mission1, mission2, mission3], selectedMissions: {}, people: {} };
-      const expected = { missions: [mission2, mission3], selectedMissions: {}, people: {} };
+      const initialState = { missions: [mission1, mission2, mission3], selectedMissions: {}, people: {}, alert: '' };
+      const expected = { missions: [mission2, mission3], selectedMissions: {}, people: {}, alert: '' };
       deepFreeze(initialState);
       expect(reducers(initialState, actions.removeMission(mission1.id))).toEqual(expected);
     });
 
     test('should remove mission2', () => {
-      const initialState = { missions: [mission1, mission2, mission3], selectedMissions: {}, people: {} };
-      const expected = { missions: [mission1, mission3], selectedMissions: {}, people: {} };
+      const initialState = { missions: [mission1, mission2, mission3], selectedMissions: {}, people: {}, alert: '' };
+      const expected = { missions: [mission1, mission3], selectedMissions: {}, people: {}, alert: '' };
       deepFreeze(initialState);
       expect(reducers(initialState, actions.removeMission(mission2.id))).toEqual(expected);
     });
 
     test('should remove mission3', () => {
-      const initialState = { missions: [mission1, mission2, mission3], selectedMissions: {}, people: {} };
-      const expected = { missions: [mission1, mission2], selectedMissions: {}, people: {} };
+      const initialState = { missions: [mission1, mission2, mission3], selectedMissions: {}, people: {}, alert: '' };
+      const expected = { missions: [mission1, mission2], selectedMissions: {}, people: {}, alert: '' };
       deepFreeze(initialState);
       expect(reducers(initialState, actions.removeMission(mission3.id))).toEqual(expected);
     });
@@ -91,15 +91,30 @@ describe('src | reducers', () => {
 
   describe('reducers SELECTMISSION', () => {
     test('should select mission3', () => {
-      const initialState = { missions: [mission1, mission2, mission3], selectedMissions: {}, people: {} };
-      const expected = { missions: [mission1, mission2, mission3], selectedMissions: { 3: true }, people: {} };
+      const initialState = { missions: [mission1, mission2, mission3], selectedMissions: {}, people: {}, alert: '' };
+      const expected = {
+        missions: [mission1, mission2, mission3],
+        selectedMissions: { 3: true },
+        people: {},
+        alert: '',
+      };
       deepFreeze(initialState);
       expect(reducers(initialState, actions.selectMission(mission3.id))).toEqual(expected);
     });
 
     test('should select when mission 2 is select', () => {
-      const initialState = { missions: [mission1, mission2, mission3], selectedMissions: { 1: true }, people: {} };
-      const expected = { missions: [mission1, mission2, mission3], selectedMissions: { 1: true, 2: true }, people: {} };
+      const initialState = {
+        missions: [mission1, mission2, mission3],
+        selectedMissions: { 1: true },
+        people: {},
+        alert: '',
+      };
+      const expected = {
+        missions: [mission1, mission2, mission3],
+        selectedMissions: { 1: true, 2: true },
+        people: {},
+        alert: '',
+      };
       deepFreeze(initialState);
       expect(reducers(initialState, actions.selectMission(mission2.id))).toEqual(expected);
     });
@@ -109,19 +124,31 @@ describe('src | reducers', () => {
         missions: [mission1, mission2, mission3],
         selectedMissions: { 1: true, 2: true },
         people: {},
+        alert: '',
       };
       const expected = {
         missions: [mission1, mission2, mission3],
         selectedMissions: { 1: true, 2: true, 3: true },
         people: {},
+        alert: '',
       };
       deepFreeze(initialState);
       expect(reducers(initialState, actions.selectMission(mission3.id))).toEqual(expected);
     });
 
     test('should unselect mission3', () => {
-      const initialState = { missions: [mission1, mission2, mission3], selectedMissions: { 3: true }, people: {} };
-      const expected = { missions: [mission1, mission2, mission3], selectedMissions: { 3: false }, people: {} };
+      const initialState = {
+        missions: [mission1, mission2, mission3],
+        selectedMissions: { 3: true },
+        people: {},
+        alert: '',
+      };
+      const expected = {
+        missions: [mission1, mission2, mission3],
+        selectedMissions: { 3: false },
+        people: {},
+        alert: '',
+      };
       deepFreeze(initialState);
       expect(reducers(initialState, actions.selectMission(mission3.id))).toEqual(expected);
     });
@@ -131,11 +158,13 @@ describe('src | reducers', () => {
         missions: [mission1, mission2, mission3],
         selectedMissions: { 1: true, 2: true },
         people: {},
+        alert: '',
       };
       const expected = {
         missions: [mission1, mission2, mission3],
         selectedMissions: { 1: true, 2: false },
         people: {},
+        alert: '',
       };
       deepFreeze(initialState);
       expect(reducers(initialState, actions.selectMission(mission2.id))).toEqual(expected);
@@ -146,11 +175,13 @@ describe('src | reducers', () => {
         missions: [mission1, mission2, mission3],
         selectedMissions: { 1: true, 2: false, 3: true },
         people: {},
+        alert: '',
       };
       const expected = {
         missions: [mission1, mission2, mission3],
         selectedMissions: { 1: true, 2: false, 3: false },
         people: {},
+        alert: '',
       };
       deepFreeze(initialState);
       expect(reducers(initialState, actions.selectMission(mission3.id))).toEqual(expected);
@@ -163,10 +194,30 @@ describe('src | reducers', () => {
         missions: [mission1, mission2, mission3],
         selectedMissions: { 2: true, 3: true },
         people: {},
+        alert: '',
       };
-      const expected = { missions: [mission1], selectedMissions: {}, people: {} };
+      const expected = { missions: [mission1], selectedMissions: {}, people: {}, alert: '' };
       deepFreeze(initialState);
       expect(reducers(initialState, actions.removeSelectedMissions(initialState.selectedMissions))).toEqual(expected);
+    });
+  });
+
+  describe('reducers BLOCKED_ACTION', () => {
+    test('should BLOCKED_ACTION by default', () => {
+      const initialState = {
+        missions: [mission1, mission2, mission3],
+        selectedMissions: { 2: true, 3: true },
+        people: {},
+        alert: '',
+      };
+      const expected = {
+        missions: [mission1, mission2, mission3],
+        selectedMissions: { 2: true, 3: true },
+        people: {},
+        alert: 'Access Denied',
+      };
+      deepFreeze(initialState);
+      expect(reducers(initialState, actions.blockedAction())).toEqual(expected);
     });
   });
 });

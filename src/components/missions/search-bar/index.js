@@ -50,7 +50,7 @@ SearchBar.propTypes = {
   count: PropTypes.number.isRequired,
   removeSelectedMissions: PropTypes.func.isRequired,
   selectedMissions: PropTypes.object.isRequired,
-  alert: PropTypes.object.isRequired,
+  alert: PropTypes.string.isRequired,
 };
 
 export default HocSearchBar('HocSearchBar')(SearchBar);

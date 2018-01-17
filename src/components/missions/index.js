@@ -56,7 +56,7 @@ Missions.propTypes = {
   selectMission: PropTypes.func.isRequired,
   removeSelectedMissions: PropTypes.func.isRequired,
   selectedMissions: PropTypes.object.isRequired,
-  alert: PropTypes.object.isRequired,
+  alert: PropTypes.string.isRequired,
 };
 
 export default Missions;
