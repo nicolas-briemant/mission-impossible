@@ -214,7 +214,7 @@ describe('src | reducers', () => {
         missions: [mission1, mission2, mission3],
         selectedMissions: { 2: true, 3: true },
         people: {},
-        alert: 'Access Denied',
+        alert: 'Access Denied ',
       };
       deepFreeze(initialState);
       expect(reducers(initialState, actions.blockedAction())).toEqual(expected);

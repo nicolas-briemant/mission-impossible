@@ -11,4 +11,4 @@ export const removeSelectedMissions = selectedMissions => ({
 });
 
 export const BLOCKED_ACTION = 'BLOCKED_ACTION';
-export const blockedAction = typeBlocked => ({ type: BLOCKED_ACTION, payload: { typeBlocked } });
+export const blockedAction = (typeBlocked = '') => ({ type: BLOCKED_ACTION, payload: { typeBlocked } });

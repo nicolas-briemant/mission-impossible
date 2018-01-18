@@ -97,7 +97,7 @@ Output `props` ('type', 'label', dueDate) must be parameters.
 ex:
 
 ```
-[ 
+[
   [ 'learning', 'learn JS libraries', date1 ],
   [ 'learn how to craft SPA', date2 ],
   [ 'coding', 'code first sample', date3 ],
