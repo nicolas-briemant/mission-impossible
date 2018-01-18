@@ -7,8 +7,8 @@ export const removeMissions = () => ({ type: REMOVE_MISSIONS });
 export const TOGGLE_MISSION = 'TOGGLE_MISSION';
 export const toggleMission = (missionId) => ({ type: TOGGLE_MISSION, payload: { missionId } });
 
-export const BLOCKED_ACTION = 'BLOCKED_ACTION';
-export const blockedAction = (actionType) => ({ type: BLOCKED_ACTION, payload: { actionType } });
+export const SHALL_NOT_PASS_LOG = 'SHALL_NOT_PASS_LOG';
+export const shallNotPassLog = (actionType) => ({ type: SHALL_NOT_PASS_LOG, payload: { actionType } });
 
-export const BIG_DRAGON = 'BIG_DRAGON';
-export const bigDragon = () => ({ type: BIG_DRAGON });
+export const BALROG = 'BALROG';
+export const balrog = () => ({ type: BALROG });

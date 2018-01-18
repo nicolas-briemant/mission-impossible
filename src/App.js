@@ -12,6 +12,7 @@ const App = (props) => (
       </HeaderRight>
       <HeaderLeft>
         <Title />
+        {props.shallNotPassLog ? <code>shallNotPassLog: {props.shallNotPassLog}</code> : null }
       </HeaderLeft>
     </Header>
     <Missions {...props} />

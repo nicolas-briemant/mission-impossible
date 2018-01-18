@@ -1,5 +1,6 @@
 import React from 'react';
 import glamorous from 'glamorous';
+import { Classes } from '@blueprintjs/core';
 
 const StyledTitle = glamorous.div({
   display: 'flex',
@@ -8,6 +9,6 @@ const StyledTitle = glamorous.div({
 
 export default () => (
   <StyledTitle>
-    <code>mission impossible</code>
+    <div className={Classes.NAVBAR_HEADING}>mission impossible</div>
   </StyledTitle>
 );

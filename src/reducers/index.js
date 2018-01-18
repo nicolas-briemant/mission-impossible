@@ -1,4 +1,4 @@
-import { REMOVE_MISSION, REMOVE_MISSIONS, TOGGLE_MISSION, BLOCKED_ACTION } from '../actions';
+import { REMOVE_MISSION, REMOVE_MISSIONS, TOGGLE_MISSION, SHALL_NOT_PASS_LOG } from '../actions';
 
 export default (state, action = {}) => {
   switch(action.type) {
@@ -23,8 +23,8 @@ export default (state, action = {}) => {
           )
         )
       };
-    case BLOCKED_ACTION:
-      return { ...state, blockedAction: action.payload.actionType };
+    case SHALL_NOT_PASS_LOG:
+      return { ...state, shallNotPassLog: action.payload.actionType };
     default:
       return state;
   }
