@@ -17,7 +17,7 @@ const initialState = {
 
 const store = createStore(reducer, initialState, applyMiddleware(firewall, logger));
 
-describe('App', () => {
+describe('app', () => {
   it('should render without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(
