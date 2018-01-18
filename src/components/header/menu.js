@@ -18,7 +18,7 @@ const HeaderMenu = ({ blockedAction }) => {
           className={cx(Classes.BUTTON)}
           iconName="link"
           text="Shall Not Pass"
-          onClick={() => blockedAction()}
+          onClick={() => blockedAction('Shall Not Pass')}
         />
         <MenuDivider />
       </Menu>

@@ -29,7 +29,7 @@ export default (state, action = {}) => {
         alert: '',
       };
     case BLOCKED_ACTION:
-      return { ...state, alert: 'Access Denied' };
+      return { ...state, alert: `Access Denied ${action.payload.typeBlocked}` };
     default:
       return state;
   }
