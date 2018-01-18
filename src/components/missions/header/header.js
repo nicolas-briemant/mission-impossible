@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'glamor';
+import glamorous from 'glamorous';
 import { Navbar, NavbarGroup } from '@blueprintjs/core';
 import 'normalize.css/normalize.css';
 
-const Flexbox = css({
+const MyNavbarGroup = glamorous(NavbarGroup)({
   display: 'flex',
   alignItems: 'center',
 });
@@ -28,12 +28,8 @@ export const Header = ({ children }) => {
   return (
     <header>
       <Navbar>
-        <NavbarGroup className={Flexbox} align="left">
-          {headerLeft()}
-        </NavbarGroup>
-        <NavbarGroup className={Flexbox} align="right">
-          {headerRight()}
-        </NavbarGroup>
+        <MyNavbarGroup align="left">{headerLeft()}</MyNavbarGroup>
+        <NavbarGroup align="right">{headerRight()}</NavbarGroup>
       </Navbar>
     </header>
   );
