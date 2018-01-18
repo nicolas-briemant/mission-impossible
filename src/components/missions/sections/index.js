@@ -12,12 +12,13 @@ const ListMissions = glamorous.div({
   margin: 10,
 });
 
-const Missions = ({ missions, selectMission, removeMission, removeSelectedMissions }) => {
+const Missions = ({ missions, selectMission, removeMission, removeSelectedMissions, blockedAction }) => {
   const nbSelectedMissions = missions.filter(mission => mission.isSelected).length;
 
   return (
     <section>
       <b>Nombre de Missions: {missions.length}</b>
+      {blockedAction ? <div>You are not allow to execute this action ({blockedAction})</div> : null}
       <Button
         iconName="trash"
         text={`Delete ${nbSelectedMissions} ${nbSelectedMissions > 1 ? 'missions' : 'mission'}`}
@@ -37,6 +38,7 @@ Missions.propTypes = {
   selectMission: PropTypes.func,
   removeMission: PropTypes.func,
   removeSelectedMissions: PropTypes.func,
+  blockedAction: PropTypes.string,
 };
 
 export default Missions;

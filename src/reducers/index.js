@@ -17,11 +17,11 @@ const removeSelected = missions => {
 export default (state, action = {}) => {
   switch (action.type) {
     case SELECT_MISSION:
-      return { ...state, missions: select(state.missions, action.payload.missionId) };
+      return { ...state, missions: select(state.missions, action.payload.missionId), blockedAction: undefined };
     case REMOVE_MISSION:
-      return { ...state, missions: remove(state.missions, action.payload.missionId) };
+      return { ...state, missions: remove(state.missions, action.payload.missionId), blockedAction: undefined };
     case REMOVE_SELECTED_MISSIONS:
-      return { ...state, missions: removeSelected(state.missions) };
+      return { ...state, missions: removeSelected(state.missions), blockedAction: undefined };
     case BLOCK_ACTION:
       return { ...state, blockedAction: action.payload.actionType };
     default:

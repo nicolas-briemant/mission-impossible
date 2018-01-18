@@ -14,13 +14,14 @@ export const logger = ({ getState }) => next => action => {
   // console.log('payload:', action.payload);
   if (action.type !== 'REMOVE_SELECTED_MISSIONS') {
     console.log('prevState:', getState().missions.filter(mission => mission.id === action.payload.missionId));
-    next(action);
+    const res = next(action);
     console.log('nextState:', getState().missions.filter(mission => mission.id === action.payload.missionId));
-  } else {
-    console.log(getState());
-    next(action);
-    console.log(getState());
+    return res;
   }
+  console.log(getState());
+  const res = next(action);
+  console.log(getState());
   console.groupEnd(action.type);
-  // return res;
+
+  return res;
 };
