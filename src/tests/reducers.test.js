@@ -73,4 +73,10 @@ describe('reducer', () => {
     deepFreeze(initilaState);
     expect(reducer(initilaState, actions.toggleMission(mission2.id))).toEqual(expectedState);
   });
+  /*test('should blcok a click', () => {
+    const initilaState = { missions: [mission1, mission2], people: [],blockedAction: 'undefined' };
+    const expectedState = {  missions: [mission1, mission2], people: [],blockedAction: 'UN_AUTHORIZED',isClicked : true };
+    deepFreeze(initilaState);
+    expect(reducer(initilaState, actions.unauthorized())).toEqual(expectedState);
+  });*/
 });
