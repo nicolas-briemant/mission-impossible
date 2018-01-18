@@ -8,6 +8,7 @@ describe('app | component | header', () => {
       const wrapper = shallow(<Header />);
       expect(wrapper).toMatchSnapshot();
     });
+
     test('should match snapshot with children', () => {
       const root = (
         <Header>

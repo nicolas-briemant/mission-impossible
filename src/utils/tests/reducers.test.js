@@ -1,6 +1,6 @@
 import deepFreeze from 'deep-freeze';
-import { removeMission, removeMissions, toggleMission } from '../actions';
-import reducer from '../reducers';
+import { removeMission, removeMissions, toggleMission, blockedAction, hideAlert } from '../../actions';
+import reducer from '../../reducers';
 
 const mission1 = {
   id: 26,
@@ -90,5 +90,21 @@ describe('reducer', () => {
 
     deepFreeze(initialState);
     expect(reducer(initialState, toggleMission(mission1.id))).toEqual(expected);
+  });
+
+  it('should blocked_action', () => {
+    const initialState = { missions: [mission1, mission2], people: [] };
+    const expected = { missions: [mission1, mission2], people: [], blockedAction: 'REMOVE_MISSION', showAlert: true };
+
+    deepFreeze(initialState);
+    expect(reducer(initialState, blockedAction('REMOVE_MISSION'))).toEqual(expected);
+  });
+
+  it('should hide_alert', () => {
+    const initialState = { missions: [mission1, mission2], people: [] };
+    const expected = { missions: [mission1, mission2], people: [], showAlert: false };
+
+    deepFreeze(initialState);
+    expect(reducer(initialState, hideAlert())).toEqual(expected);
   });
 });
