@@ -112,7 +112,7 @@
 //
 // const getPropsValues = (props) => compose(values, pick(props));
 //
-// const getTodoReport = (keys, todos) => map(getPropsValues(keys), todos);
+// const getTodoReport = (props, todos) => map(getPropsValues(props), todos);
 //
 // console.log(getTodoReport(['type', 'label', 'dueDate'], data));
 

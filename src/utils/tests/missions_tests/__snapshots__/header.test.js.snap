@@ -18,21 +18,11 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": <Blueprint.Navbar>
-        <Blueprint.NavbarGroup
+        <glamorous(Blueprint.NavbarGroup)
                 align="left"
-                className={
-                        Object {
-                                "data-css-12alag6": "",
-                              }
-                }
         />
-        <Blueprint.NavbarGroup
+        <glamorous(Blueprint.NavbarGroup)
                 align="right"
-                className={
-                        Object {
-                                "data-css-12alag6": "",
-                              }
-                }
         />
 </Blueprint.Navbar>,
     },
@@ -43,21 +33,11 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <Blueprint.NavbarGroup
+          <glamorous(Blueprint.NavbarGroup)
             align="left"
-            className={
-                        Object {
-                                    "data-css-12alag6": "",
-                                  }
-            }
 />,
-          <Blueprint.NavbarGroup
+          <glamorous(Blueprint.NavbarGroup)
             align="right"
-            className={
-                        Object {
-                                    "data-css-12alag6": "",
-                                  }
-            }
 />,
         ],
       },
@@ -70,9 +50,6 @@ ShallowWrapper {
           "props": Object {
             "align": "left",
             "children": undefined,
-            "className": Object {
-              "data-css-12alag6": "",
-            },
           },
           "ref": null,
           "rendered": null,
@@ -85,9 +62,6 @@ ShallowWrapper {
           "props": Object {
             "align": "right",
             "children": undefined,
-            "className": Object {
-              "data-css-12alag6": "",
-            },
           },
           "ref": null,
           "rendered": null,
@@ -105,21 +79,11 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": <Blueprint.Navbar>
-          <Blueprint.NavbarGroup
+          <glamorous(Blueprint.NavbarGroup)
                     align="left"
-                    className={
-                              Object {
-                                        "data-css-12alag6": "",
-                                      }
-                    }
           />
-          <Blueprint.NavbarGroup
+          <glamorous(Blueprint.NavbarGroup)
                     align="right"
-                    className={
-                              Object {
-                                        "data-css-12alag6": "",
-                                      }
-                    }
           />
 </Blueprint.Navbar>,
       },
@@ -130,21 +94,11 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <Blueprint.NavbarGroup
+            <glamorous(Blueprint.NavbarGroup)
               align="left"
-              className={
-                            Object {
-                                          "data-css-12alag6": "",
-                                        }
-              }
 />,
-            <Blueprint.NavbarGroup
+            <glamorous(Blueprint.NavbarGroup)
               align="right"
-              className={
-                            Object {
-                                          "data-css-12alag6": "",
-                                        }
-              }
 />,
           ],
         },
@@ -157,9 +111,6 @@ ShallowWrapper {
             "props": Object {
               "align": "left",
               "children": undefined,
-              "className": Object {
-                "data-css-12alag6": "",
-              },
             },
             "ref": null,
             "rendered": null,
@@ -172,9 +123,6 @@ ShallowWrapper {
             "props": Object {
               "align": "right",
               "children": undefined,
-              "className": Object {
-                "data-css-12alag6": "",
-              },
             },
             "ref": null,
             "rendered": null,

@@ -29,7 +29,7 @@ export const Header = ({ children }) => {
     <header>
       <Navbar>
         <MyNavbarGroup align="left">{headerLeft()}</MyNavbarGroup>
-        <NavbarGroup align="right">{headerRight()}</NavbarGroup>
+        <MyNavbarGroup align="right">{headerRight()}</MyNavbarGroup>
       </Navbar>
     </header>
   );
