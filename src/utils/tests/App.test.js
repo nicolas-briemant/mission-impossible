@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
-import App from '../App';
-import missions from '../data/missions2';
-import reducer from '../reducers';
-import { createStore } from '../store';
-import Provider from '../providers';
+import App from '../../App';
+import missions from '../../data/missions2';
+import reducer from '../../reducers';
 
 const initialState = {
   missions,

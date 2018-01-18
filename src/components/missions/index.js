@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import cx from 'classnames';
 import { Button } from '@blueprintjs/core';
-import 'normalize.css/normalize.css';
-import '@blueprintjs/core/dist/blueprint.css';
-import logger from '../logger';
 
 const StyleMission = glamorous.div(
   {
@@ -97,7 +94,7 @@ Mission.propTypes = {
   toggleMission: PropTypes.func.isRequired,
 };
 
-const Missions = ({ missions, removeMission, toggleMission, removeMissions }) => {
+const Missions = ({ missions, removeMission, toggleMission, removeMissions, filterAction }) => {
   const colorNbMissions = {
     red: false,
     green: true,
@@ -115,7 +112,7 @@ const Missions = ({ missions, removeMission, toggleMission, removeMissions }) =>
               <span className="pt-icon-standard pt-icon-cross pt-align-right" />
             </button>
           ) : null}
-          <button type="button" className="pt-button pt-intent-primary">
+          <button type="button" className="pt-button pt-intent-primary" onClick={() => filterAction()}>
             Filtre
             <span className="pt-icon-standard pt-icon-arrow-right pt-align-right" />
           </button>
@@ -139,6 +136,7 @@ Missions.propTypes = {
   removeMission: PropTypes.func.isRequired,
   toggleMission: PropTypes.func.isRequired,
   removeMissions: PropTypes.func.isRequired,
+  filterAction: PropTypes.func.isRequired,
 };
 
-export default logger('Missions')(Missions);
+export default Missions;

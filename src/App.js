@@ -1,14 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Alert } from '@blueprintjs/core';
 import './App.css';
 import Missions from './components/missions';
 import { Header, HeaderLeft, HeaderRight, HeaderCenter } from './components/header';
 import { Title, Logo, Menu } from './components/app/';
-import * as actions from './actions';
-import connect from './connect';
+import { removeMission, removeMissions, toggleMission, hideAlert, filterAction } from './actions';
 
-const App = ({ missions, removeMission, toggleMission, removeMissions }) => (
+const App = props => (
   <div>
+    <Alert isOpen={props.showAlert} onConfirm={() => props.hideAlert()}>
+      {"Vous n'avez pas la permission de faire cette action."}
+    </Alert>
     <Header>
       <HeaderLeft>
         <Logo />
@@ -20,26 +24,16 @@ const App = ({ missions, removeMission, toggleMission, removeMissions }) => (
         <Menu />
       </HeaderRight>
     </Header>
-    <Missions
-      missions={missions}
-      removeMission={removeMission}
-      toggleMission={toggleMission}
-      removeMissions={removeMissions}
-    />
+    <Missions {...props} />
   </div>
 );
 
-const mapDispatchToProps = dispatch => ({
-  removeMission: missionId => dispatch(actions.removeMission(missionId)),
-  toggleMission: missionId => dispatch(actions.toggleMission(missionId)),
-  removeMissions: () => dispatch(actions.removeMissions()),
-});
-
 App.propTypes = {
-  missions: PropTypes.array,
-  removeMission: PropTypes.func.isRequired,
-  toggleMission: PropTypes.func.isRequired,
-  removeMissions: PropTypes.func.isRequired,
+  showAlert: PropTypes.bool.isRequired,
+  hideAlert: PropTypes.func.isRequired,
 };
 
-export default connect(mapDispatchToProps)(App);
+const mapDispatchToProps = { removeMission, removeMissions, toggleMission, hideAlert, filterAction };
+const mapStateToProps = state => state;
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

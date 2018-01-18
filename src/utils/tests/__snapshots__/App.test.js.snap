@@ -9,11 +9,13 @@ ShallowWrapper {
         Object {
             "dispatch": [Function],
             "getState": [Function],
-            "listen": [Function],
+            "replaceReducer": [Function],
+            "subscribe": [Function],
+            Symbol(Symbol.observable): [Function],
           }
     }
 >
-    <ConnectedComponent />
+    <Connect(App) />
 </Provider>,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
