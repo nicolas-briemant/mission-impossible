@@ -89,7 +89,16 @@ const StyledLabel = glamorous.label({
   color: 'white',
   width: '100px',
 });
-const Missions = ({ missions, removeMission, toggleMission, removeMissions, unauthorized, isClicked }) => (
+const Missions = ({
+  missions,
+  removeMission,
+  toggleMission,
+  removeMissions,
+  unauthorized,
+  isClicked,
+  sortByName,
+  sortByAddenda,
+}) => (
   <Fragment>
     <Toolbar>
       <ToolbarLeft>
@@ -98,6 +107,9 @@ const Missions = ({ missions, removeMission, toggleMission, removeMissions, unau
       <ToolbarRight isClicked={isClicked}>
         <Button iconName="trash" text="Remove Missions" onClick={() => removeMissions()} />
         <Button iconName="error" text="Don't Click" onClick={() => unauthorized()} />
+        <Button iconName="sort" text="Sort By Name" onClick={() => sortByName()} />
+        <Button iconName="sort" text="Sort By Addenda" onClick={() => sortByAddenda()} />
+
         {isClicked ? <StyledLabel> {"Next time don't Click"} </StyledLabel> : null}
       </ToolbarRight>
     </Toolbar>
@@ -115,6 +127,8 @@ Missions.propTypes = {
   toggleMission: PropTypes.func.isRequired,
   removeMissions: PropTypes.func.isRequired,
   unauthorized: PropTypes.func.isRequired,
+  sortByAddenda: PropTypes.func.isRequired,
+  sortByName: PropTypes.func.isRequired,
   isClicked: PropTypes.bool,
 };
 
