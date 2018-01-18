@@ -6,15 +6,15 @@
 //   return next(blockAction(action.type));
 // };
 //
-// describe('Middleware', () => {
-//   test('shouldnt block an action', () => {
-//     const FORBIDDEN_ACTION_TYPES = ['BLOCK_ACTION'];
-//
-//     expect().toEqual();
-//   });
-//   test('should block an action', () => {
-//     const FORBIDDEN_ACTION_TYPES = ['BLOCK_ACTION'];
-//
-//     expect().toEqual();
-//   });
-// });
+describe('Middleware', () => {
+  test('shouldnt block an action', () => {
+    //     const FORBIDDEN_ACTION_TYPES = ['BLOCK_ACTION'];
+    //
+    //     expect().toEqual();
+  });
+  //   test('should block an action', () => {
+  //     const FORBIDDEN_ACTION_TYPES = ['BLOCK_ACTION'];
+  //
+  //     expect().toEqual();
+  //   });
+});
