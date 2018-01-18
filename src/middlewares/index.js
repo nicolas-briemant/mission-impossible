@@ -18,9 +18,9 @@ export const logger = ({ getState }) => next => action => {
     console.log('nextState:', getState().missions.filter(mission => mission.id === action.payload.missionId));
     return res;
   }
-  console.log(getState());
+  console.log(getState().missions);
   const res = next(action);
-  console.log(getState());
+  console.log(getState().missions);
   console.groupEnd(action.type);
 
   return res;
