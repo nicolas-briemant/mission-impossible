@@ -94,7 +94,7 @@ Mission.propTypes = {
   toggleMission: PropTypes.func.isRequired,
 };
 
-const Missions = ({ missions, removeMission, toggleMission, removeMissions, blockedAction }) => {
+const Missions = ({ missions, removeMission, toggleMission, removeMissions, filterAction }) => {
   const colorNbMissions = {
     red: false,
     green: true,
@@ -112,7 +112,7 @@ const Missions = ({ missions, removeMission, toggleMission, removeMissions, bloc
               <span className="pt-icon-standard pt-icon-cross pt-align-right" />
             </button>
           ) : null}
-          <button type="button" className="pt-button pt-intent-primary" onClick={() => blockedAction()}>
+          <button type="button" className="pt-button pt-intent-primary" onClick={() => filterAction()}>
             Filtre
             <span className="pt-icon-standard pt-icon-arrow-right pt-align-right" />
           </button>
@@ -136,7 +136,7 @@ Missions.propTypes = {
   removeMission: PropTypes.func.isRequired,
   toggleMission: PropTypes.func.isRequired,
   removeMissions: PropTypes.func.isRequired,
-  blockedAction: PropTypes.func.isRequired,
+  filterAction: PropTypes.func.isRequired,
 };
 
 export default Missions;

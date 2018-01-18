@@ -1,4 +1,4 @@
-import { REMOVE_MISSION, TOGGLE_MISSION, REMOVE_MISSIONS, BLOCKED_ACTION, HIDE_ALERT } from '../actions';
+import { REMOVE_MISSION, TOGGLE_MISSION, REMOVE_MISSIONS, FILTER_ACTION, BLOCKED_ACTION, HIDE_ALERT } from '../actions';
 
 const removeMissionFromArray = (missions, id) => {
   return missions.filter(mission => mission.id !== id);
@@ -22,6 +22,8 @@ export default (state, action = {}) => {
       return { ...state, missions: toggleMissionFromArray(state.missions, action.payload.missionId) };
     case REMOVE_MISSIONS:
       return { ...state, missions: removeMissionsFromArray(state.missions) };
+    case FILTER_ACTION:
+      return { ...state };
     case BLOCKED_ACTION:
       return { ...state, blockedAction: action.payload.actionType, showAlert: true };
     case HIDE_ALERT:

@@ -11,3 +11,6 @@ export const blockedAction = actionType => ({ type: BLOCKED_ACTION, payload: { a
 
 export const HIDE_ALERT = 'HIDE_ALERT';
 export const hideAlert = () => ({ type: HIDE_ALERT });
+
+export const FILTER_ACTION = 'FILTER_ACTION';
+export const filterAction = () => ({ type: FILTER_ACTION });
