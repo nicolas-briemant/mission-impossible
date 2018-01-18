@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import cx from 'classnames';
 import { Button } from '@blueprintjs/core';
+import { Toolbar, ToolbarLeft, ToolbarRight } from '../toolbar';
 import Status from '../status';
-import ToolBar from '../toolbar';
-import logger from '../logger';
 
 const StyledMission = glamorous.div({
   marginTop: '20px',
@@ -83,13 +82,25 @@ const StyledMissions = glamorous.div({
   flexDirection: 'row',
   justifyContent: 'space-between',
   flexWrap: 'wrap',
-  //backgroundColor: 'white',
 });
 
-const Missions = ({ missions, removeMission, toggleMission, removeMissions }) => (
+const StyledLabel = glamorous.label({
+  backgroundColor: 'red',
+  color: 'white',
+  width: '100px',
+});
+const Missions = ({ missions, removeMission, toggleMission, removeMissions, unauthorized, isClicked }) => (
   <Fragment>
-    <ToolBar removeMissions={removeMissions} />
-    <Status number={missions.length} />
+    <Toolbar>
+      <ToolbarLeft>
+        <Status number={missions.length} />
+      </ToolbarLeft>
+      <ToolbarRight isClicked={isClicked}>
+        <Button iconName="trash" text="Remove Missions" onClick={() => removeMissions()} />
+        <Button iconName="error" text="Don't Click" onClick={() => unauthorized()} />
+        {isClicked ? <StyledLabel> {"Next time don't Click"} </StyledLabel> : null}
+      </ToolbarRight>
+    </Toolbar>
     <StyledMissions>
       {missions.map(mission => (
         <Mission key={mission.id} {...mission} removeMission={removeMission} toggleMission={toggleMission} />
@@ -100,9 +111,11 @@ const Missions = ({ missions, removeMission, toggleMission, removeMissions }) =>
 
 Missions.propTypes = {
   missions: PropTypes.array,
-  removeMissions: PropTypes.func.isRequired,
   removeMission: PropTypes.func.isRequired,
   toggleMission: PropTypes.func.isRequired,
+  removeMissions: PropTypes.func.isRequired,
+  unauthorized: PropTypes.func.isRequired,
+  isClicked: PropTypes.bool,
 };
 
-export default logger('Missions')(Missions);
+export default Missions;

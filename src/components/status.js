@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import cx from 'classnames';
-import logger from './logger';
+//import logger from './logger';
 
 const StyledStatus = glamorous.span({
   fontWeight: 'bold',
@@ -25,4 +25,4 @@ Status.propTypes = {
   number: PropTypes.number.isRequired,
 };
 
-export default logger('Status')(Status);
+export default Status;

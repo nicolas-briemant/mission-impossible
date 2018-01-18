@@ -1,20 +1,16 @@
 import React from 'react';
 import '@blueprintjs/core/dist/blueprint.css';
-
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Header, HeaderLeft, HeaderRight } from './components/header';
 import { Menu } from './components/menu';
 import { Title } from './components/title';
 import Missions from './components/missions/index';
-import {
-  removeMission as removeMissionAction,
-  toggleMission as toggleMissionAction,
-  removeMissions as removeMissionsAction,
-} from './actions';
 import './App.css';
-import connect from './connect';
+import { removeMission, toggleMission, removeMissions, unauthorized } from './actions';
 
-const App = ({ missions, removeMission, removeMissions, toggleMission }) => (
+//import connect from './connect';
+
+const App = props => (
   <div>
     <Header>
       <HeaderLeft>
@@ -24,25 +20,10 @@ const App = ({ missions, removeMission, removeMissions, toggleMission }) => (
         <Menu />
       </HeaderRight>
     </Header>
-    <Missions
-      missions={missions}
-      removeMission={removeMission}
-      removeMissions={removeMissions}
-      toggleMission={toggleMission}
-    />
+    <Missions {...props} />
   </div>
 );
-App.propTypes = {
-  missions: PropTypes.array,
-  removeMission: PropTypes.func,
-  removeMissions: PropTypes.func,
-  toggleMission: PropTypes.func,
-};
+const mapDispatchToProps = { removeMission, removeMissions, toggleMission, unauthorized };
+const mapStateToProps = state => state;
 
-const mapDispatchToProps = dispatch => ({
-  removeMission: missionId => dispatch(removeMissionAction(missionId)),
-  toggleMission: missionId => dispatch(toggleMissionAction(missionId)),
-  removeMissions: () => dispatch(removeMissionsAction()),
-});
-
-export default connect(mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

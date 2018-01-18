@@ -1,22 +1,37 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
-import { Button } from '@blueprintjs/core';
+
+export const ToolbarLeft = ({ children }) => <Fragment>{children}</Fragment>;
+
+export const ToolbarRight = ({ children }) => <Fragment>{children}</Fragment>;
+
+ToolbarLeft.propTypes = {
+  children: PropTypes.node,
+};
+ToolbarRight.propTypes = {
+  children: PropTypes.node,
+};
 
 const StyledToolbar = glamorous.div({
-  fontWeight: 'bold',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  backgroundColor: 'white',
+  marginBottom: '10px',
+  paddingTop: '4px',
 });
 
-const ToolBar = ({ removeMissions }) => {
+export const Toolbar = ({ children }) => {
+  const toolbarLeft = () => React.Children.toArray(children).find(({ type }) => type === ToolbarLeft);
+  const toolbarRight = () => React.Children.toArray(children).find(({ type }) => type === ToolbarRight);
   return (
     <StyledToolbar>
-      <Button iconName="trash" text="Remove Missions" onClick={() => removeMissions()} />
+      <div>{toolbarLeft()}</div>
+      <div>{toolbarRight()}</div>
     </StyledToolbar>
   );
 };
-
-ToolBar.propTypes = {
-  removeMissions: PropTypes.func.isRequired,
+Toolbar.propTypes = {
+  children: PropTypes.node,
 };
-
-export default ToolBar;

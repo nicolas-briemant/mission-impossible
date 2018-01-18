@@ -13,4 +13,8 @@ describe('actions', () => {
     const expectedAction = { type: 'TOGGLE_MISSION', payload: { missionId: 1 } };
     expect(actions.toggleMission(1)).toEqual(expectedAction);
   });
+  test('should block an action', () => {
+    const expectedAction = { type: 'UN_AUTHORIZED' };
+    expect(actions.unauthorized()).toEqual(expectedAction);
+  });
 });

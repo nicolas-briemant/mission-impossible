@@ -9,11 +9,13 @@ ShallowWrapper {
         Object {
             "dispatch": [Function],
             "getState": [Function],
-            "listen": [Function],
+            "replaceReducer": [Function],
+            "subscribe": [Function],
+            Symbol(Symbol.observable): [Function],
           }
     }
 >
-    <ConnectedComponent />
+    <Unknown />
 </Provider>,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -25,7 +27,7 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "function",
     "props": Object {},
     "ref": null,
     "rendered": null,
@@ -35,7 +37,7 @@ ShallowWrapper {
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {},
       "ref": null,
       "rendered": null,
