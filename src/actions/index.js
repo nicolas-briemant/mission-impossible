@@ -9,3 +9,6 @@ export const removeSelectedMissions = selectedMissions => ({
   type: REMOVE_SELECTED_MISSIONS,
   payload: { selectedMissions },
 });
+
+export const BLOCKED_ACTION = 'BLOCKED_ACTION';
+export const blockedAction = (typeBlocked = '') => ({ type: BLOCKED_ACTION, payload: { typeBlocked } });

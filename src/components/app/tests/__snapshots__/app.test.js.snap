@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App should match snapshot 1`] = `
+exports[`app should match snapshot 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
@@ -9,11 +9,13 @@ ShallowWrapper {
         Object {
             "dispatch": [Function],
             "getState": [Function],
-            "listen": [Function],
+            "replaceReducer": [Function],
+            "subscribe": [Function],
+            Symbol(Symbol.observable): [Function],
           }
     }
 >
-    <ConnectedComponent />
+    <Connect(App) />
 </Provider>,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
