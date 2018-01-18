@@ -1,27 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import './App.css';
+import { connect } from 'react-redux';
+import { selectMission, removeMission, removeSelectedMissions, blockAction } from './actions';
 import Header from './components/missions/header';
 import Missions from './components/missions/sections';
-import * as actionCreators from './actions';
-import connect from './connect';
 
-const App = ({ missions, actions }) => (
+const App = props => (
   <div className="App">
-    <Header missions={missions} />
-    <Missions missions={missions} {...actions} />
+    <Header {...props} />
+    <Missions {...props} />
   </div>
 );
 
-App.propTypes = {
-  missions: PropTypes.array,
-  actions: PropTypes.object,
-};
+const mapStateToProps = state => state;
+const MapDispatchToProps = { selectMission, removeMission, removeSelectedMissions, blockAction };
 
-const mapDispatchToProps = dispatch => ({
-  selectMission: missionId => dispatch(actionCreators.selectMission(missionId)),
-  removeMission: missionId => dispatch(actionCreators.removeMission(missionId)),
-  removeSelectedMissions: () => dispatch(actionCreators.removeSelectedMissions()),
-});
-
-export default connect(mapDispatchToProps)(App);
+export default connect(mapStateToProps, MapDispatchToProps)(App);

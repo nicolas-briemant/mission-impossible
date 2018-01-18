@@ -1,67 +1,35 @@
 import React from 'react';
-import glamorous from 'glamorous';
-import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { HeaderFull, HeaderLeft, HeaderMiddle, HeaderRight } from './header';
+import glamorous from 'glamorous';
+import { ButtonGroup, Button } from '@blueprintjs/core';
+import { Header, HeaderLeft, HeaderRight } from './header';
 import logo from '../../../data/logo.png';
-import '../../../App.css';
 
 const Logo = glamorous.img({
   width: 75,
 });
 
-const Menu = glamorous.ul({
-  display: 'flex',
-  flexDirection: 'row',
-  marginRight: 10,
-});
-
-const ItemMenu = glamorous.li({
-  display: 'flex',
-  flexDirection: 'row',
-  listStyleType: 'none',
-  margin: 20,
-});
-
-const LogoItemMenu = glamorous.span({
-  marginRight: 10,
-});
-
-const isAff = ({ missions }) => {
-  if (missions.length) {
-    return { notDisplay: true };
-  }
-  return { notDisplay: false };
-};
-
-const Header = ({ missions }) => (
-  <HeaderFull>
+const Header2 = ({ blockAction }) => (
+  <Header>
     <HeaderLeft>
-      <a>
-        <Logo alt="Logo" src={logo} />
-      </a>
+      <Logo alt="Logo" src={logo} />
+      <h4>Titre du site</h4>
     </HeaderLeft>
-    <HeaderMiddle>
-      <h1 className="App-title">Missions List</h1>
-      <p className={cx(isAff({ missions }))}>No Mission</p>
-    </HeaderMiddle>
     <HeaderRight>
-      <Menu>
-        <ItemMenu>
-          <LogoItemMenu className="pt-icon-list" />
-          <p>Missions</p>
-        </ItemMenu>
-        <ItemMenu>
-          <LogoItemMenu className="pt-icon-people" />
-          <p>Peoples</p>
-        </ItemMenu>
-      </Menu>
+      <ButtonGroup minimal="true" large="true">
+        <Button iconName="pt-icon-align-justify" onClick={() => blockAction()}>
+          Missions
+        </Button>
+        <Button iconName="people" onClick={() => blockAction()}>
+          Peoples
+        </Button>
+      </ButtonGroup>
     </HeaderRight>
-  </HeaderFull>
+  </Header>
 );
 
-Header.propTypes = {
-  missions: PropTypes.array,
+Header2.propTypes = {
+  blockAction: PropTypes.func,
 };
 
-export default Header;
+export default Header2;

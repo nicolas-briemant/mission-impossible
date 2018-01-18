@@ -1,4 +1,4 @@
-import * as actions from '../index';
+import * as actions from '../../../actions';
 
 describe('actions', () => {
   test('should create selectMission', () => {
@@ -12,5 +12,9 @@ describe('actions', () => {
   test('should create removeSelectedMission', () => {
     const expectedAction = { type: 'REMOVE_SELECTED_MISSIONS' };
     expect(actions.removeSelectedMissions()).toEqual(expectedAction);
+  });
+  test('should create blockAction', () => {
+    const expectedAction = { type: 'BLOCK_ACTION', payload: { actionType: 'SELECT_MISSION' } };
+    expect(actions.blockAction('SELECT_MISSION')).toEqual(expectedAction);
   });
 });
