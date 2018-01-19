@@ -6,7 +6,8 @@ import './App.css';
 import Missions from './components/missions';
 import { Header, HeaderLeft, HeaderRight, HeaderCenter } from './components/header';
 import { Title, Logo, Menu } from './components/app/';
-import { removeMission, removeMissions, toggleMission, hideAlert, filterAction } from './actions';
+import { removeMission, removeMissions, toggleMission, hideAlert, sortName, sortAddenda } from './actions';
+import { getSortByName, getSortByAddenda } from './selectors';
 
 const App = props => (
   <div>
@@ -33,7 +34,16 @@ App.propTypes = {
   hideAlert: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = { removeMission, removeMissions, toggleMission, hideAlert, filterAction };
-const mapStateToProps = state => state;
+const sortMissions = state => {
+  if (state.sortNameBool !== undefined) return getSortByName(state, state.sortNameBool);
+  else if (state.sortAddendaBool !== undefined) return getSortByAddenda(state, state.sortAddendaBool);
+  return state.missions;
+};
+
+const mapDispatchToProps = { removeMission, removeMissions, toggleMission, hideAlert, sortName, sortAddenda };
+const mapStateToProps = state => ({
+  ...state,
+  missions: sortMissions(state),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

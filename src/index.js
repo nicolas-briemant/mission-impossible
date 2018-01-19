@@ -14,6 +14,8 @@ const initialState = {
   people: [],
   blockedAction: undefined,
   showAlert: false,
+  sortNameBool: undefined,
+  sortAddendaBool: undefined,
 };
 
 const store = createStore(reducer, initialState, applyMiddleware(firewall, logger));

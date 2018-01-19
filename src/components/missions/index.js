@@ -94,7 +94,7 @@ Mission.propTypes = {
   toggleMission: PropTypes.func.isRequired,
 };
 
-const Missions = ({ missions, removeMission, toggleMission, removeMissions, filterAction }) => {
+const Missions = ({ missions, removeMission, toggleMission, removeMissions, sortName, sortAddenda }) => {
   const colorNbMissions = {
     red: false,
     green: true,
@@ -112,9 +112,19 @@ const Missions = ({ missions, removeMission, toggleMission, removeMissions, filt
               <span className="pt-icon-standard pt-icon-cross pt-align-right" />
             </button>
           ) : null}
-          <button type="button" className="pt-button pt-intent-primary" onClick={() => filterAction()}>
-            Filtre
-            <span className="pt-icon-standard pt-icon-arrow-right pt-align-right" />
+          <button
+            type="button"
+            className="pt-button pt-icon-sort-alphabetical pt-intent-primary"
+            onClick={() => sortName()}
+          >
+            Trier par nom
+          </button>
+          <button
+            type="button"
+            className="pt-button pt-icon-sort-numerical pt-intent-primary"
+            onClick={() => sortAddenda()}
+          >
+            {"Trier par nombre d'addenda"}
           </button>
         </div>
       </Toolbar>
@@ -136,7 +146,8 @@ Missions.propTypes = {
   removeMission: PropTypes.func.isRequired,
   toggleMission: PropTypes.func.isRequired,
   removeMissions: PropTypes.func.isRequired,
-  filterAction: PropTypes.func.isRequired,
+  sortName: PropTypes.func.isRequired,
+  sortAddenda: PropTypes.func.isRequired,
 };
 
 export default Missions;
