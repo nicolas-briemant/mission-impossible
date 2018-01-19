@@ -5,12 +5,16 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import missions from './data/missions2';
+import workers from './data/workers';
+import companies from './data/companies';
 import reducer from './reducers';
 // import logger from 'redux-logger';
 import { firewall, logger } from './middlewares';
 
 const initialState = {
   missions,
+  workers,
+  companies,
   people: [],
   blockedAction: undefined,
   showAlert: false,

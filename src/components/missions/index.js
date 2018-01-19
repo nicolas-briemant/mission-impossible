@@ -52,7 +52,17 @@ class Mission extends Component {
   }
 
   render() {
-    const { id, name, clientId, partnerId, managerId, addenda, isSelected, removeMission, toggleMission } = this.props;
+    const {
+      id,
+      name,
+      clientName,
+      partnerName,
+      managerId,
+      addenda,
+      isSelected,
+      removeMission,
+      toggleMission,
+    } = this.props;
     return (
       <StyleMission
         isHovered={this.state.isHovered}
@@ -61,9 +71,9 @@ class Mission extends Component {
         onMouseLeave={() => this.boundUpdateIsHovered()}
       >
         <h3>{name}</h3>
-        <p>
-          clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
-        </p>
+        <p>Client: {clientName}</p>
+        <p>Partner: {partnerName}</p>
+        <p>managerId: {managerId}</p>
         <p>
           Workers ({addenda.length}): {addenda.map(w => w.workerId).join(' ')}
         </p>
@@ -81,8 +91,8 @@ class Mission extends Component {
 Mission.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  clientId: PropTypes.string,
-  partnerId: PropTypes.string,
+  clientName: PropTypes.string.isRequired,
+  partnerName: PropTypes.string.isRequired,
   managerId: PropTypes.string,
   addenda: PropTypes.arrayOf(
     PropTypes.shape({
