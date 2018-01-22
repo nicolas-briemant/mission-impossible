@@ -3,24 +3,26 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
-import { reduce } from 'ramda';
-import './index.css';
 import App from './App';
-import missions from './data/missions2';
+import './index.css';
+import { indexBy } from './utils';
+import missions from './data/missions';
 import companies from './data/companies';
 import workers from './data/workers';
 import reducer from './reducers';
 
-const transform = (collection) => reduce(
-  (memo, item) => ({ ...memo, [item.id]: item }),
-  {},
-  collection
-);
+const indexById = indexBy('id');
 
 const initialState = {
-  missions,
-  workers: transform(workers),
-  companies: transform(companies),
+  missions: {
+    collection: missions,
+    sort: {
+      type: 'name',
+      direction: true, // true is asc and false is desc
+    },
+  },
+  workers: indexById(workers),
+  companies: indexById(companies),
 };
 
 const logger = createLogger({ collapsed: true });

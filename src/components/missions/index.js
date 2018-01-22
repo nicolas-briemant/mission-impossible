@@ -1,6 +1,9 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import glamorous from 'glamorous';
+import { removeMission as removeMissionAC, toggleMission as toggleMissionAC } from '../../actions';
+import { getSortedMissions } from '../../selectors';
 import Mission from './mission';
 import Toolbar from './toolbar';
 
@@ -11,9 +14,9 @@ const StyledMissions = glamorous.div({
   padding: '0 15px',
 });
 
-const Missions = ({ missions, workers, removeMissions, toggleMission, removeMission }) => (
+const Missions = ({ missions, workers, toggleMission, removeMission }) => (
   <Fragment>
-    <Toolbar missions={missions} removeMissions={removeMissions} />
+    <Toolbar />
     <StyledMissions>
       {missions.map((mission) => (
         <Mission
@@ -35,9 +38,18 @@ Missions.propTypes = {
     })
   ).isRequired,
   workers: PropTypes.object.isRequired,
-  removeMissions: PropTypes.func.isRequired,
   toggleMission: PropTypes.func.isRequired,
   removeMission: PropTypes.func.isRequired,
 };
 
-export default Missions;
+const mapDispatchToProps = {
+  removeMission: removeMissionAC,
+  toggleMission: toggleMissionAC,
+};
+
+const mapStateToProps = (state) => ({
+  ...state,
+  missions: getSortedMissions(state),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Missions);

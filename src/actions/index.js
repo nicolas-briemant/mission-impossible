@@ -6,3 +6,6 @@ export const removeMissions = () => ({ type: REMOVE_MISSIONS });
 
 export const TOGGLE_MISSION = 'TOGGLE_MISSION';
 export const toggleMission = (missionId) => ({ type: TOGGLE_MISSION, payload: { missionId } });
+
+export const SORT_MISSIONS = 'SORT_MISSIONS';
+export const sortMissions = (type) => ({ type: SORT_MISSIONS, payload: { type } });

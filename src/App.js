@@ -1,12 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Header, HeaderLeft, HeaderRight, Title, Menu } from './components/app';
+import { Header, HeaderLeft, HeaderRight } from './components/header';
+import Title from './components/title';
+import Menu from './components/menu';
 import Missions from './components/missions';
-import { removeMission, removeMissions, toggleMission } from './actions';
-import { getEnhancedMissions } from './selectors';
 
-const App = (props) => (
+const App = () => (
   <div className="pt-dark">
     <Header isFixed>
       <HeaderRight>
@@ -14,21 +12,10 @@ const App = (props) => (
       </HeaderRight>
       <HeaderLeft>
         <Title />
-        {props.shallNotPassLog ? <code>shallNotPassLog: {props.shallNotPassLog}</code> : null }
       </HeaderLeft>
     </Header>
-    <Missions {...props} />
+    <Missions />
   </div>
 );
 
-App.propTypes = {
-  shallNotPassLog: PropTypes.string,
-};
-
-const mapDispatchToProps = { removeMission, removeMissions, toggleMission };
-const mapStateToProps = (state) => ({
-  ...state,
-  missions: getEnhancedMissions(state),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
