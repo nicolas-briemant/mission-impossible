@@ -6,6 +6,9 @@ import { Button } from '@blueprintjs/core';
 import { Toolbar, ToolbarLeft, ToolbarRight } from '../toolbar';
 import Status from '../status';
 
+const Logo = glamorous.img({
+  width: '5%',
+});
 const StyledMission = glamorous.div({
   marginTop: '20px',
   background: '#ccebff',
@@ -35,7 +38,20 @@ class Mission extends React.Component {
   }
 
   render() {
-    const { id, name, clientId, partnerId, managerId, addenda, removeMission, toggleMission, isSelected } = this.props;
+    const {
+      id,
+      name,
+      clientLogo,
+      partnerLogo,
+      client,
+      partner,
+      managerFirstName,
+      managerLastName,
+      developers,
+      removeMission,
+      toggleMission,
+      isSelected,
+    } = this.props;
     return (
       <StyledMission
         className={cx({ selected: isSelected })}
@@ -44,12 +60,21 @@ class Mission extends React.Component {
       >
         <h2> Mission {id}</h2>
         <h3>{name}</h3>
-        <p>
-          {clientId}, {partnerId}, {managerId}
-        </p>
-        <p>
-          Workers ({addenda.length}): {addenda.map(worker => worker.workerId)}
-        </p>
+        <ul>
+          <li>
+            Client: {client}
+            {clientLogo ? <Logo alt="avatar" src={clientLogo} /> : null}
+          </li>
+          <li>
+            Partner: {partner}
+            {partnerLogo ? <Logo alt="avatar" src={partnerLogo} /> : null}
+          </li>
+          <li>
+            Manager: {managerFirstName} {managerLastName}
+          </li>
+        </ul>
+        Workers ({developers.length}):{' '}
+        {developers.map(worker => <p key={worker.id}>{`${worker.firstName} ${worker.lastName}`}</p>)}
         {this.state.isHovered ? (
           <Fragment>
             <Button iconName="select" text="select" onClick={() => toggleMission(id)} />
@@ -63,16 +88,15 @@ class Mission extends React.Component {
 
 Mission.propTypes = {
   id: PropTypes.number,
+  managerFirstName: PropTypes.string,
+  managerLastName: PropTypes.string,
   isSelected: PropTypes.bool,
   name: PropTypes.string.isRequired,
-  clientId: PropTypes.string,
-  partnerId: PropTypes.string,
-  managerId: PropTypes.string,
-  addenda: PropTypes.arrayOf(
-    PropTypes.shape({
-      workerId: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  client: PropTypes.string.isRequired,
+  clientLogo: PropTypes.string,
+  partnerLogo: PropTypes.string,
+  partner: PropTypes.string,
+  developers: PropTypes.array,
   removeMission: PropTypes.func.isRequired,
   toggleMission: PropTypes.func.isRequired,
 };
@@ -89,16 +113,7 @@ const StyledLabel = glamorous.label({
   color: 'white',
   width: '100px',
 });
-const Missions = ({
-  missions,
-  removeMission,
-  toggleMission,
-  removeMissions,
-  unauthorized,
-  isClicked,
-  sortByName,
-  sortByAddenda,
-}) => (
+const Missions = ({ missions, removeMission, toggleMission, removeMissions, unauthorized, isClicked, sortByName }) => (
   <Fragment>
     <Toolbar>
       <ToolbarLeft>
@@ -108,7 +123,7 @@ const Missions = ({
         <Button iconName="trash" text="Remove Missions" onClick={() => removeMissions()} />
         <Button iconName="error" text="Don't Click" onClick={() => unauthorized()} />
         <Button iconName="sort" text="Sort By Name" onClick={() => sortByName()} />
-        <Button iconName="sort" text="Sort By Addenda" onClick={() => sortByAddenda()} />
+        <Button iconName="sort" text="Sort By Addenda" onClick={() => {}} />
 
         {isClicked ? <StyledLabel> {"Next time don't Click"} </StyledLabel> : null}
       </ToolbarRight>
@@ -127,7 +142,6 @@ Missions.propTypes = {
   toggleMission: PropTypes.func.isRequired,
   removeMissions: PropTypes.func.isRequired,
   unauthorized: PropTypes.func.isRequired,
-  sortByAddenda: PropTypes.func.isRequired,
   sortByName: PropTypes.func.isRequired,
   isClicked: PropTypes.bool,
 };

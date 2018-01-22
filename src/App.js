@@ -6,7 +6,8 @@ import { Menu } from './components/menu';
 import { Title } from './components/title';
 import Missions from './components/missions/index';
 import './App.css';
-import { removeMission, toggleMission, removeMissions, unauthorized, sortByName, sortByAddenda } from './actions';
+import { removeMission, toggleMission, removeMissions, unauthorized, sortByName } from './actions';
+import { getComposedSelector } from './selectors';
 
 //import connect from './connect';
 
@@ -23,7 +24,10 @@ const App = props => (
     <Missions {...props} />
   </div>
 );
-const mapDispatchToProps = { removeMission, removeMissions, toggleMission, unauthorized, sortByName, sortByAddenda };
-const mapStateToProps = state => state;
+const mapDispatchToProps = { removeMission, removeMissions, toggleMission, unauthorized, sortByName };
+const mapStateToProps = state => ({
+  ...state,
+  missions: getComposedSelector(state),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

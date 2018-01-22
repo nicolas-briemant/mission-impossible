@@ -17,6 +17,3 @@ export const unauthorized = () => ({ type: UN_AUTHORIZED });
 
 export const SORT_BY_NAME = 'SORT_BY_NAME';
 export const sortByName = () => ({ type: SORT_BY_NAME });
-
-export const SORT_BY_ADDENDA = 'SORT_BY_ADDENDA';
-export const sortByAddenda = () => ({ type: SORT_BY_ADDENDA });
