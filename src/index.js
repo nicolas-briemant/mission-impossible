@@ -19,7 +19,9 @@ const initialState = {
   companies,
   workers,
   blockedAction: undefined,
-  nameIsSorted: false,
+  nameIsSorted: undefined,
+  startDateIsSorted: undefined,
+  endDateIsSorted: undefined,
 };
 
 const store = createStore(reducer, initialState, applyMiddleware(fireWall, logger));

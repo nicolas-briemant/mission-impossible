@@ -1,4 +1,12 @@
-import { REMOVE_MISSION, TOGGLE_MISSION, REMOVE_MISSIONS, BLOCKED_ACTION, SORT_BY_NAME } from '../actions';
+import {
+  REMOVE_MISSION,
+  TOGGLE_MISSION,
+  REMOVE_MISSIONS,
+  BLOCKED_ACTION,
+  SORT_BY_NAME,
+  SORT_BY_START_DATE,
+  SORT_BY_END_DATE,
+} from '../actions';
 export default (state, action = {}) => {
   switch (action.type) {
     case REMOVE_MISSION: {
@@ -24,6 +32,23 @@ export default (state, action = {}) => {
     }
     case SORT_BY_NAME: {
       return { ...state, nameIsSorted: !state.nameIsSorted };
+    }
+    case SORT_BY_START_DATE: {
+      return {
+        ...state,
+        startDateIsSorted: !state.startDateIsSorted,
+        nameIsSorted: undefined,
+        endDateIsSorted: undefined,
+      };
+    }
+
+    case SORT_BY_END_DATE: {
+      return {
+        ...state,
+        endDateIsSorted: !state.endDateIsSorted,
+        nameIsSorted: undefined,
+        startDateIsSorted: undefined,
+      };
     }
 
     default:

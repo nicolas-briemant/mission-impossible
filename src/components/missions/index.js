@@ -38,20 +38,7 @@ class Mission extends React.Component {
   }
 
   render() {
-    const {
-      id,
-      name,
-      clientLogo,
-      partnerLogo,
-      client,
-      partner,
-      managerFirstName,
-      managerLastName,
-      developers,
-      removeMission,
-      toggleMission,
-      isSelected,
-    } = this.props;
+    const { id, name, client, partner, manager, developers, removeMission, toggleMission, isSelected } = this.props;
     return (
       <StyledMission
         className={cx({ selected: isSelected })}
@@ -62,15 +49,15 @@ class Mission extends React.Component {
         <h3>{name}</h3>
         <ul>
           <li>
-            Client: {client}
-            {clientLogo ? <Logo alt="avatar" src={clientLogo} /> : null}
+            Client: {client.name}
+            {client.logo ? <Logo alt="avatar" src={client.avatar.src} /> : null}
           </li>
           <li>
-            Partner: {partner}
-            {partnerLogo ? <Logo alt="avatar" src={partnerLogo} /> : null}
+            Partner:{partner ? partner.name : null}
+            {partner ? <Logo src={partner.avatar.src} /> : null}
           </li>
           <li>
-            Manager: {managerFirstName} {managerLastName}
+            Manager: {manager.firstName} {manager.lastName}
           </li>
         </ul>
         Workers ({developers.length}):{' '}
@@ -88,14 +75,11 @@ class Mission extends React.Component {
 
 Mission.propTypes = {
   id: PropTypes.number,
-  managerFirstName: PropTypes.string,
-  managerLastName: PropTypes.string,
+  manager: PropTypes.object,
   isSelected: PropTypes.bool,
   name: PropTypes.string.isRequired,
-  client: PropTypes.string.isRequired,
-  clientLogo: PropTypes.string,
-  partnerLogo: PropTypes.string,
-  partner: PropTypes.string,
+  client: PropTypes.object,
+  partner: PropTypes.object,
   developers: PropTypes.array,
   removeMission: PropTypes.func.isRequired,
   toggleMission: PropTypes.func.isRequired,
@@ -113,7 +97,17 @@ const StyledLabel = glamorous.label({
   color: 'white',
   width: '100px',
 });
-const Missions = ({ missions, removeMission, toggleMission, removeMissions, unauthorized, isClicked, sortByName }) => (
+const Missions = ({
+  missions,
+  sortByEndDate,
+  sortByStartDate,
+  removeMission,
+  toggleMission,
+  removeMissions,
+  unauthorized,
+  isClicked,
+  sortByName,
+}) => (
   <Fragment>
     <Toolbar>
       <ToolbarLeft>
@@ -123,7 +117,8 @@ const Missions = ({ missions, removeMission, toggleMission, removeMissions, unau
         <Button iconName="trash" text="Remove Missions" onClick={() => removeMissions()} />
         <Button iconName="error" text="Don't Click" onClick={() => unauthorized()} />
         <Button iconName="sort" text="Sort By Name" onClick={() => sortByName()} />
-        <Button iconName="sort" text="Sort By Addenda" onClick={() => {}} />
+        <Button iconName="sort" text="Sort By Start Date" onClick={() => sortByStartDate()} />
+        <Button iconName="sort" text="Sort By End Date" onClick={() => sortByEndDate()} />
 
         {isClicked ? <StyledLabel> {"Next time don't Click"} </StyledLabel> : null}
       </ToolbarRight>
@@ -140,6 +135,8 @@ Missions.propTypes = {
   missions: PropTypes.array,
   removeMission: PropTypes.func.isRequired,
   toggleMission: PropTypes.func.isRequired,
+  sortByStartDate: PropTypes.func.isRequired,
+  sortByEndDate: PropTypes.func.isRequired,
   removeMissions: PropTypes.func.isRequired,
   unauthorized: PropTypes.func.isRequired,
   sortByName: PropTypes.func.isRequired,

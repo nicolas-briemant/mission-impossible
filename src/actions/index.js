@@ -17,3 +17,9 @@ export const unauthorized = () => ({ type: UN_AUTHORIZED });
 
 export const SORT_BY_NAME = 'SORT_BY_NAME';
 export const sortByName = () => ({ type: SORT_BY_NAME });
+
+export const SORT_BY_START_DATE = 'SORT_BY_START_DATE';
+export const sortByStartDate = () => ({ type: SORT_BY_START_DATE });
+
+export const SORT_BY_END_DATE = 'SORT_BY_END_DATE';
+export const sortByEndDate = () => ({ type: SORT_BY_END_DATE });
