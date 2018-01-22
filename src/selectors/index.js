@@ -34,7 +34,7 @@ export const getCompanyData = (companieId, companies) => {
 export const getWorkerName = (managerId, workers) => {
   const worker = find(propEq('id', managerId))(workers);
 
-  return `${worker.firstName} ${worker.lastName}`;
+  return worker;
 };
 
 export const getWorkersNames = (addenda, workers) => {
@@ -69,11 +69,11 @@ export const getStartDate = addenda => {
     new Date(),
     addenda,
   );
-  // console.log(startDate)
   return startDate;
 };
 
 export const getEndDate = addenda => {
+  //compose map / max
   const date = reduce(
     (acc, worker) => {
       const endDate = prop('endDate', worker);

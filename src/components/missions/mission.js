@@ -75,8 +75,8 @@ export default class Mission extends Component {
             {partner.avatar.src ? <Logo src={partner.avatar.src} /> : null}
           </FlexDiv>
         ) : null}
-        {manager ? <p>manager: {manager}</p> : null}
-        <ul>{workers.map(worker => <Worker key={uniqid()} name={worker} />)}</ul>
+        {manager ? <p>manager: {`${manager.firstName} ${manager.lastName}`}</p> : null}
+        <ul>{workers.map(worker => <Worker key={uniqid()} name={`${worker.firstName} ${worker.lastName}`} />)}</ul>
         {this.state.isHovered ? (
           <div>
             <Button iconName="select" text="select" onClick={() => selectMission(id)} />
@@ -100,7 +100,10 @@ Mission.propTypes = {
     name: PropTypes.string.isRequired,
     src: PropTypes.string,
   }),
-  manager: PropTypes.string.isRequired,
+  manager: PropTypes.shape({
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+  }).isRequired,
   workers: PropTypes.array,
   status: PropTypes.string,
   isSelected: PropTypes.bool,

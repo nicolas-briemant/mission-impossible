@@ -31,13 +31,9 @@ const Missions = ({
       <b>Nombre de Missions: {missions.length}</b>
       {blockedAction ? <div>You are not allow to execute this action ({blockedAction})</div> : null}
       <ButtonGroup>
+        <Button iconName="pt-icon-sort-alphabetical-desc" text="by names" onClick={() => toogleSortMissionsByNames()} />
         <Button
-          iconName={sortByMissionsNames ? 'pt-icon-sort-alphabetical' : 'pt-icon-sort-alphabetical-desc'}
-          text="by names"
-          onClick={() => toogleSortMissionsByNames()}
-        />
-        <Button
-          iconName={sortByMissionsNames ? 'pt-icon-sort-alphabetical' : 'pt-icon-sort-alphabetical-desc'}
+          iconName="pt-icon-sort-alphabetical-desc"
           text="by start date"
           onClick={() => sortMissionsByStartDate()}
         />
