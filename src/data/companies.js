@@ -1,6 +1,6 @@
 const companies = [
   {
-    _id: '566abdf896de2706000c9481',
+    id: '566abdf896de2706000c9481',
     name: 'redpelicans',
     type: 'tenant',
     website: 'http://redpelicans.com',
@@ -16,13 +16,13 @@ const companies = [
     tags: ['redpelicans', 'Test'],
   },
   {
-    _id: '566ac1d996de2706000c9484',
+    id: '566ac1d996de2706000c9484',
     name: 'OECD',
     type: 'client',
     website: 'http://www.oecd.org/',
     address: {},
     avatar: {
-      url: 'http://catalyst-fp7.eu/wp-content/uploads/2015/07/oecd-logo-tw_20140127115221960.png',
+      url: 'http://catalyst-fp7.eu/wp-content/uploads/2015/07/oecd-logo-tw20140127115221960.png',
       color: '#d61a7f',
       type: 'color',
     },
@@ -31,7 +31,7 @@ const companies = [
     tags: [],
   },
   {
-    _id: '566acaba96de2706000c9488',
+    id: '566acaba96de2706000c9488',
     name: 'Groupagora',
     type: 'partner',
     website: 'http://www.groupagora.fr',
@@ -42,7 +42,7 @@ const companies = [
     tags: ['Avocat'],
   },
   {
-    _id: '566acc3b96de2706000c948a',
+    id: '566acc3b96de2706000c948a',
     name: 'Infocubed',
     type: 'partner',
     website: 'http://www.infocubed.com',
@@ -53,7 +53,7 @@ const companies = [
     tags: [],
   },
   {
-    _id: '566aeb6596de2706000c9491',
+    id: '566aeb6596de2706000c9491',
     name: 'degetel',
     type: 'client',
     website: 'http://www.degetel.com',
@@ -73,7 +73,7 @@ const companies = [
     createdAt: '2015-12-11T15:27:33.999Z',
   },
   {
-    _id: '566aef4496de2706000c9494',
+    id: '566aef4496de2706000c9494',
     name: 'Société Générale',
     type: 'client',
     address: {},
@@ -82,7 +82,7 @@ const companies = [
     createdAt: '2015-12-11T15:44:04.840Z',
   },
   {
-    _id: '5671444574cd4006000b911c',
+    id: '5671444574cd4006000b911c',
     name: 'Adonys',
     type: 'partner',
     website: 'http://www.adonys.net',
@@ -93,7 +93,7 @@ const companies = [
     tags: ['Test', 'avocat'],
   },
   {
-    _id: '5682cc517696ba07003b3867',
+    id: '5682cc517696ba07003b3867',
     name: 'HIGHTEAM',
     type: 'partner',
     website: 'http://www.highteam.fr/',
@@ -103,7 +103,7 @@ const companies = [
     createdAt: '2015-12-29T18:09:21.980Z',
   },
   {
-    _id: '568a68c8c08f1907004483c8',
+    id: '568a68c8c08f1907004483c8',
     name: 'Oligos',
     type: 'partner',
     website: 'www.oligos.fr',
@@ -113,7 +113,7 @@ const companies = [
     createdAt: '2016-01-04T12:42:48.028Z',
   },
   {
-    _id: '568c153be355a707004f003c',
+    id: '568c153be355a707004f003c',
     name: 'Skillwise',
     type: 'partner',
     website: 'http://www.skillwise.fr/',
@@ -128,7 +128,7 @@ const companies = [
     tags: [],
   },
   {
-    _id: '568e664eaf96db07008ae1f1',
+    id: '568e664eaf96db07008ae1f1',
     name: 'Hays',
     type: 'partner',
     website: 'http://hays.fr/',
@@ -139,7 +139,7 @@ const companies = [
     tags: ['Avocat'],
   },
   {
-    _id: '568f6b3faf96db07008ae1f3',
+    id: '568f6b3faf96db07008ae1f3',
     name: 'Neexium',
     type: 'partner',
     website: 'http://www.neexium.com/',
@@ -149,7 +149,7 @@ const companies = [
     createdAt: '2016-01-08T07:54:39.951Z',
   },
   {
-    _id: '56937dcaaf96db07008ae1f5',
+    id: '56937dcaaf96db07008ae1f5',
     name: 'Emagine Consulting',
     type: 'partner',
     website: 'http://www.emagine.org/fr',
@@ -159,7 +159,7 @@ const companies = [
     createdAt: '2016-01-11T10:02:50.303Z',
   },
   {
-    _id: '5697598caf96db07008ae1f7',
+    id: '5697598caf96db07008ae1f7',
     name: 'InfoLink',
     type: 'partner',
     website: 'http://www.1folink.com/',
@@ -174,7 +174,7 @@ const companies = [
     createdAt: '2016-01-14T08:17:16.484Z',
   },
   {
-    _id: '56c705cef3877e012d89e3ed',
+    id: '56c705cef3877e012d89e3ed',
     name: 'Hello World Company',
     type: 'client',
     address: {},

@@ -2,18 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-// import logger from 'redux-logger';
 import { firewall, logger } from './middlewares';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import missions from './data/missions2';
+import companies from './data/companies';
+import workers from './data/workers';
 import reducer from './reducers';
 
 const initialState = {
   missions,
-  people: [],
-  blockedAction: undefined,
+  companies,
+  workers,
+  filter: { type: undefined, order: undefined },
 };
 
 const store = createStore(reducer, initialState, applyMiddleware(firewall, logger));

@@ -5,11 +5,15 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import App from '../../../App';
 import missions from '../../../data/missions2';
+import companies from '../../../data/companies';
+import workers from '../../../data/workers';
 import reducer from '../../../reducers';
 
 const initialState = {
   missions,
-  people: [],
+  companies,
+  workers,
+  filter: { type: undefined, order: undefined },
 };
 
 const store = createStore(reducer, initialState);
