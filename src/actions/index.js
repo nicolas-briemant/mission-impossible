@@ -8,4 +8,10 @@ export const TOGGLE_MISSION = 'TOGGLE_MISSION';
 export const toggleMission = (missionId) => ({ type: TOGGLE_MISSION, payload: { missionId } });
 
 export const SORT_MISSIONS = 'SORT_MISSIONS';
-export const sortMissions = (type) => ({ type: SORT_MISSIONS, payload: { type } });
+export const sortMissions = (sortId) => ({ type: SORT_MISSIONS, payload: { sortId } });
+
+export const FILTER_MISSIONS = 'FILTER_MISSIONS';
+export const filterMissions = (filterId) => ({ type: FILTER_MISSIONS, payload: { filterId } });
+
+export const SPOTLIGHT_MISSIONS = 'SPOTLIGHT_MISSIONS';
+export const spotlightMissions = (term) => ({ type: SPOTLIGHT_MISSIONS, payload: { term } });

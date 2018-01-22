@@ -15,18 +15,22 @@ const indexById = indexBy('id');
 
 const initialState = {
   missions: {
-    collection: missions,
+    collection: indexById(missions),
     sort: {
-      type: 'name',
+      id: 'name',
       direction: true, // true is asc and false is desc
     },
+    filter: 'all',
+    spotlight: '',
+    availableSorts: ['name', 'startDate', 'endDate'],
+    availableFilters: ['open', 'close', 'all'],
   },
   workers: indexById(workers),
   companies: indexById(companies),
 };
 
 const logger = createLogger({ collapsed: true });
-const store = createStore(reducer, initialState, applyMiddleware(logger));
+const store = createStore(reducer(initialState), initialState, applyMiddleware(logger));
 
 ReactDOM.render(
   <Provider store={store}>
