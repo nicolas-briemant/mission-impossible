@@ -1,20 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import cx from 'classnames';
-import { Button } from '@blueprintjs/core';
-
-const StyleMission = glamorous.div(
-  {
-    width: '300px',
-    padding: '20px',
-    textAlign: 'center',
-    border: '1px solid #c8c8c8',
-  },
-  ({ isSelected }) => ({
-    backgroundColor: isSelected ? 'indianred' : 'white',
-  }),
-);
+import Mission from './mission';
 
 const MainContainer = glamorous.div({
   margin: '2rem',
@@ -39,70 +27,6 @@ const MissionsContainer = glamorous.div({
   flexWrap: 'wrap',
   justifyContent: 'center',
 });
-
-class Mission extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isHovered: false };
-    this.boundUpdateIsHovered = this.updateIsHovered.bind(this);
-  }
-
-  updateIsHovered() {
-    this.setState({ isHovered: !this.state.isHovered });
-  }
-
-  render() {
-    const {
-      id,
-      name,
-      clientName,
-      partnerName,
-      managerId,
-      addenda,
-      isSelected,
-      removeMission,
-      toggleMission,
-    } = this.props;
-    return (
-      <StyleMission
-        isHovered={this.state.isHovered}
-        isSelected={isSelected}
-        onMouseEnter={() => this.boundUpdateIsHovered()}
-        onMouseLeave={() => this.boundUpdateIsHovered()}
-      >
-        <h3>{name}</h3>
-        <p>Client: {clientName}</p>
-        <p>Partner: {partnerName}</p>
-        <p>managerId: {managerId}</p>
-        <p>
-          Workers ({addenda.length}): {addenda.map(w => w.workerId).join(' ')}
-        </p>
-        {this.state.isHovered ? (
-          <div>
-            <Button iconName="trash" text="Supprimer" onClick={() => removeMission(id)} />
-            <Button iconName="add" text="Sélectionner" onClick={() => toggleMission(id)} />
-          </div>
-        ) : null}
-      </StyleMission>
-    );
-  }
-}
-
-Mission.propTypes = {
-  id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  clientName: PropTypes.string.isRequired,
-  partnerName: PropTypes.string.isRequired,
-  managerId: PropTypes.string,
-  addenda: PropTypes.arrayOf(
-    PropTypes.shape({
-      workerId: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  isSelected: PropTypes.bool,
-  removeMission: PropTypes.func.isRequired,
-  toggleMission: PropTypes.func.isRequired,
-};
 
 const Missions = ({ missions, removeMission, toggleMission, removeMissions, sortName, sortAddenda }) => {
   const colorNbMissions = {

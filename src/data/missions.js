@@ -1,6 +1,6 @@
 const missions = [
   {
-    _id: '1',
+    id: '1',
     name: 'React Components',
     clientId: '566ac1d996de2706000c9484',
     managerId: '2',
@@ -36,7 +36,7 @@ const missions = [
     ],
   },
   {
-    _id: '2',
+    id: '2',
     name: 'Groupagora',
     clientId: '566acaba96de2706000c9488',
     managerId: '1',
@@ -65,7 +65,7 @@ const missions = [
     ],
   },
   {
-    _id: '3',
+    id: '3',
     name: 'BFI',
     clientId: '566aef4496de2706000c9494',
     partnerid: '5671444574cd4006000b911c',
@@ -100,7 +100,7 @@ const missions = [
     ],
   },
   {
-    _id: '4',
+    id: '4',
     name: 'Graph satelites',
     clientId: '568a68c8c08f1907004483c8',
     partnerid: '568c153be355a707004f003c',

@@ -26,4 +26,5 @@ import { reduce } from 'ramda';
 //   }, 1000);
 // };
 
-export const arrayToObjectWithId = list => reduce((memo, item) => ({ ...memo, [item.id]: item }), {}, list);
+// export const arrayToObject = list => reduce((memo, element) => ({ ...memo}, element }), {}, list);
+export const arrayToObjectWithId = list => reduce((memo, element) => ({ ...memo, [element.id]: element }), {}, list);

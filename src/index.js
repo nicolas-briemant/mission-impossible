@@ -10,11 +10,12 @@ import companies from './data/companies';
 import reducer from './reducers';
 // import logger from 'redux-logger';
 import { firewall, logger } from './middlewares';
+import { arrayToObjectWithId } from './utils';
 
 const initialState = {
   missions,
-  workers,
-  companies,
+  workers: arrayToObjectWithId(workers),
+  companies: arrayToObjectWithId(companies),
   people: [],
   blockedAction: undefined,
   showAlert: false,

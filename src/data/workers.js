@@ -134,7 +134,7 @@ const workers = [
     roles: ['access'],
     prefix: 'Mr',
     firstName: 'Arnaud',
-    lastName: 'LeFloch',
+    lastName: 'Le Floch',
     type: 'worker',
     jobType: 'developer',
     companyId: '1',
