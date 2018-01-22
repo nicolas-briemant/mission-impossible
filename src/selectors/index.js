@@ -15,14 +15,13 @@ export const getMissionsDatas = state => {
       manager: mission.managerId ? getWorkerName(mission.managerId, workers) : undefined,
       workers: getWorkersNames(mission.addenda, workers),
       status: getMissionStatus(mission.addenda),
+      isSelected: mission.isSelected,
     }),
     missions,
   );
 
   return missionsDatas;
 };
-
-// export const getMissionName = (mission) => mission.name;
 
 export const getCompanyData = (companieId, companies) => {
   const companie = find(propEq('id', companieId))(companies);

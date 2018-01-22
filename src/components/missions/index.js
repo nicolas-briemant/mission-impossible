@@ -48,7 +48,6 @@ const Missions = ({
       />
       <ListMissions>
         {missions.map(mission => {
-          // console.log(mission)
           return <Mission key={mission.id} {...mission} selectMission={selectMission} removeMission={removeMission} />;
         })}
       </ListMissions>
