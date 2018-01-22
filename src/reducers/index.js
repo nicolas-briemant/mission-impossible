@@ -38,7 +38,7 @@ export default (state, action = {}) => {
     case FILTER_MISSION_END:
       return {
         ...state,
-        filterMissions: { ...state.filterMissions, missionFinish: !state.filterMissions.missionFinish },
+        filterMissions: { ...state.filterMissions, missionEnd: !state.filterMissions.missionEnd },
       };
     case BLOCKED_ACTION:
       return { ...state, blockedAction: action.payload.actionType, showAlert: true };

@@ -7,15 +7,15 @@ const getWorkers = state => state.workers;
 const getSortValues = state => state.sort;
 const getListWorkers = (addenda, workers) => map(w => workers[w.workerId], addenda);
 
-const getStartDate = addenda => {
+export const getStartDate = addenda => {
   const array = [];
-  addenda.map(e => (e.startDate ? array.push(new Date(e.startDate)) : array.push(new Date())));
+  addenda.map(e => array.push(new Date(e.startDate)));
   return array.reduce((a, b) => {
     return a < b ? a : b;
   });
 };
 
-const getEndDate = addenda => {
+export const getEndDate = addenda => {
   const array = [];
   addenda.map(e => (e.endDate ? array.push(new Date(e.endDate)) : array.push(new Date())));
   return array.reduce((a, b) => {
@@ -23,7 +23,7 @@ const getEndDate = addenda => {
   });
 };
 
-const getStatusMission = addenda => {
+export const getStatusMission = addenda => {
   const array = [];
   addenda.map(e => (e.endDate ? array.push(false) : array.push(true)));
   return array.includes(true);
@@ -47,8 +47,7 @@ export const getDataMissions = createSelector([getMissions, getCompanies, getWor
 export const filterMissions = (state, missions) => {
   let tmpMissions = missions;
   if (state.filterMissions.missionOpen) tmpMissions = tmpMissions.filter(mission => mission.open === true, tmpMissions);
-  if (state.filterMissions.missionFinish)
-    tmpMissions = tmpMissions.filter(mission => mission.open === false, tmpMissions);
+  if (state.filterMissions.missionEnd) tmpMissions = tmpMissions.filter(mission => mission.open === false, tmpMissions);
   return tmpMissions;
 };
 

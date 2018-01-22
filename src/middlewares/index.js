@@ -1,7 +1,7 @@
 import { blockedAction } from '../actions';
 
 export const firewall = () => next => action => {
-  const FORBIDDEN_ACTION_TYPES = ['FILTER_ACTION'];
+  const FORBIDDEN_ACTION_TYPES = ['REMOVE_MISSION'];
 
   if (!FORBIDDEN_ACTION_TYPES.includes(action.type)) return next(action);
 

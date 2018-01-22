@@ -102,7 +102,7 @@ describe('selectors', () => {
   it('should filter mission open', () => {
     const initialState = {
       missions: [mission1, mission2, mission3],
-      filterMissions: { missionOpen: true, missionFinish: false },
+      filterMissions: { missionOpen: true, missionEnd: false },
     };
     const expected = [mission2, mission3];
 
@@ -110,10 +110,10 @@ describe('selectors', () => {
     expect(filterMissions(initialState, initialState.missions)).toEqual(expected);
   });
 
-  it('should filter mission finish', () => {
+  it('should filter mission end', () => {
     const initialState = {
       missions: [mission1, mission2, mission3],
-      filterMissions: { missionOpen: false, missionFinish: true },
+      filterMissions: { missionOpen: false, missionEnd: true },
     };
     const expected = [mission1];
 
@@ -124,6 +124,14 @@ describe('selectors', () => {
   it('should sort name mission', () => {
     const initialState = { missions: [mission1, mission2, mission3], sort: { type: 'SORT_NAME', direction: true } };
     const expected = [mission2, mission3, mission1];
+
+    deepFreeze(initialState);
+    expect(sortMissions(initialState.missions, initialState.sort)).toEqual(expected);
+  });
+
+  it('should sort name reverse mission', () => {
+    const initialState = { missions: [mission1, mission2, mission3], sort: { type: 'SORT_NAME', direction: false } };
+    const expected = [mission1, mission3, mission2];
 
     deepFreeze(initialState);
     expect(sortMissions(initialState.missions, initialState.sort)).toEqual(expected);
@@ -140,9 +148,31 @@ describe('selectors', () => {
     expect(sortMissions(initialState.missions, initialState.sort)).toEqual(expected);
   });
 
+  it('should sort start date reverse mission', () => {
+    const initialState = {
+      missions: [mission1, mission2, mission3],
+      sort: { type: 'SORT_DATE_START', direction: false },
+    };
+    const expected = [mission2, mission3, mission1];
+
+    deepFreeze(initialState);
+    expect(sortMissions(initialState.missions, initialState.sort)).toEqual(expected);
+  });
+
   it('should sort end date mission', () => {
     const initialState = { missions: [mission1, mission2, mission3], sort: { type: 'SORT_DATE_END', direction: true } };
     const expected = [mission3, mission2, mission1];
+
+    deepFreeze(initialState);
+    expect(sortMissions(initialState.missions, initialState.sort)).toEqual(expected);
+  });
+
+  it('should sort end date reverse mission', () => {
+    const initialState = {
+      missions: [mission3, mission2, mission1],
+      sort: { type: 'SORT_DATE_END', direction: false },
+    };
+    const expected = [mission1, mission2, mission3];
 
     deepFreeze(initialState);
     expect(sortMissions(initialState.missions, initialState.sort)).toEqual(expected);

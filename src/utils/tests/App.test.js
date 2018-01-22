@@ -23,7 +23,7 @@ const initialState = {
   },
   filterMissions: {
     missionOpen: false,
-    missionFinish: false,
+    missionEnd: false,
   },
 };
 

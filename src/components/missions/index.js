@@ -65,7 +65,7 @@ const Missions = ({
         <h6>Filtre</h6>
       </li>
       <Checkbox checked={filterMissions.missionOpen} onChange={() => filterMissionOpen()} label="Missions en cours" />
-      <Checkbox checked={filterMissions.missionFinish} onChange={() => filterMissionEnd()} label="Missions terminée" />
+      <Checkbox checked={filterMissions.missionEnd} onChange={() => filterMissionEnd()} label="Missions terminée" />
     </Menu>
   );
 
@@ -108,7 +108,7 @@ Missions.propTypes = {
   sortMissions: PropTypes.func.isRequired,
   filterMissionOpen: PropTypes.func.isRequired,
   filterMissionEnd: PropTypes.func.isRequired,
-  filterMissions: PropTypes.func.isRequired,
+  filterMissions: PropTypes.object.isRequired,
 };
 
 export default Missions;
