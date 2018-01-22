@@ -5,11 +5,20 @@ import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
 import App from '../../App';
 import missions from '../../data/missions2';
+import workers from '../../data/workers';
+import companies from '../../data/companies';
 import reducer from '../../reducers';
+import { arrayToObjectWithId } from '../';
 
 const initialState = {
   missions,
+  workers: arrayToObjectWithId(workers),
+  companies: arrayToObjectWithId(companies),
   people: [],
+  blockedAction: undefined,
+  showAlert: false,
+  sortNameBool: undefined,
+  sortAddendaBool: undefined,
 };
 
 const store = createStore(reducer, initialState);
