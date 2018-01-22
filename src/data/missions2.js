@@ -12,8 +12,18 @@ const missions = [
         endDate: '2016-02-08T16:04:30.880Z',
         fees: { currency: 'EUR', amount: 192, unit: 'day' },
       },
-      { workerId: '5', startDate: '2017-05-09T01:26:37.729Z', fees: { currency: 'EUR', amount: 494, unit: 'day' } },
-      { workerId: '3', startDate: '2017-02-09T23:22:53.535Z', fees: { currency: 'EUR', amount: 337, unit: 'day' } },
+      {
+        workerId: '5',
+        startDate: '2017-05-09T01:26:37.729Z',
+        endDate: '2016-02-08T16:04:30.880Z',
+        fees: { currency: 'EUR', amount: 494, unit: 'day' },
+      },
+      {
+        workerId: '3',
+        startDate: '2017-02-09T23:22:53.535Z',
+        endDate: '2016-02-08T16:04:30.880Z',
+        fees: { currency: 'EUR', amount: 337, unit: 'day' },
+      },
     ],
   },
   {
@@ -1233,7 +1243,12 @@ const missions = [
     partnerId: '568e664eaf96db07008ae1f1',
     managerId: '3',
     addenda: [
-      { workerId: '9', startDate: '2015-02-04T07:02:44.187Z', fees: { currency: 'EUR', amount: 298, unit: 'day' } },
+      {
+        workerId: '9',
+        startDate: '2015-02-04T07:02:44.187Z',
+        endDate: '2016-02-08T16:04:30.880Z',
+        fees: { currency: 'EUR', amount: 298, unit: 'day' },
+      },
     ],
   },
   {
@@ -1242,8 +1257,18 @@ const missions = [
     clientId: '566aef4496de2706000c9494',
     managerId: '9',
     addenda: [
-      { workerId: '2', startDate: '2016-02-10T02:44:40.451Z', fees: { currency: 'EUR', amount: 365, unit: 'day' } },
-      { workerId: '10', startDate: '2017-11-12T06:03:38.861Z', fees: { currency: 'EUR', amount: 488, unit: 'day' } },
+      {
+        workerId: '2',
+        startDate: '2016-02-10T02:44:40.451Z',
+        endDate: '2016-02-08T16:04:30.880Z',
+        fees: { currency: 'EUR', amount: 365, unit: 'day' },
+      },
+      {
+        workerId: '10',
+        startDate: '2017-11-12T06:03:38.861Z',
+        endDate: '2016-02-08T16:04:30.880Z',
+        fees: { currency: 'EUR', amount: 488, unit: 'day' },
+      },
     ],
   },
   {

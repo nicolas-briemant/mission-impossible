@@ -6,8 +6,16 @@ import './App.css';
 import Missions from './components/missions';
 import { Header, HeaderLeft, HeaderRight, HeaderCenter } from './components/header';
 import { Title, Logo, Menu } from './components/app/';
-import { removeMission, removeMissions, toggleMission, hideAlert, sortName, sortAddenda } from './actions';
-import { getSortByName, getSortByAddenda, getDataMissions } from './selectors';
+import {
+  removeMission,
+  removeMissions,
+  toggleMission,
+  hideAlert,
+  filterMissionOpen,
+  filterMissionEnd,
+  sortMissions,
+} from './actions';
+import { getSortedMissions, filterMissions } from './selectors';
 
 const App = props => (
   <div>
@@ -34,17 +42,19 @@ App.propTypes = {
   hideAlert: PropTypes.func.isRequired,
 };
 
-const sortMissions = (state, missions) => {
-  if (state.sortNameBool !== undefined) return getSortByName(missions, state.sortNameBool);
-  else if (state.sortAddendaBool !== undefined) return getSortByAddenda(missions, state.sortAddendaBool);
-  return missions;
+const mapDispatchToProps = {
+  removeMission,
+  removeMissions,
+  toggleMission,
+  hideAlert,
+  filterMissionOpen,
+  filterMissionEnd,
+  sortMissions,
 };
-
-const mapDispatchToProps = { removeMission, removeMissions, toggleMission, hideAlert, sortName, sortAddenda };
 const mapStateToProps = state => {
   return {
     ...state,
-    missions: sortMissions(state, getDataMissions(state)),
+    missions: filterMissions(state, getSortedMissions(state)),
   };
 };
 

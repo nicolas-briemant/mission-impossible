@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import cx from 'classnames';
+import { Menu, MenuItem, Popover, Position, Checkbox } from '@blueprintjs/core';
 import Mission from './mission';
 
 const MainContainer = glamorous.div({
@@ -28,13 +29,46 @@ const MissionsContainer = glamorous.div({
   justifyContent: 'center',
 });
 
-const Missions = ({ missions, removeMission, toggleMission, removeMissions, sortName, sortAddenda }) => {
+const Missions = ({
+  missions,
+  removeMission,
+  toggleMission,
+  removeMissions,
+  filterMissionOpen,
+  filterMissionEnd,
+  filterMissions,
+  sortMissions,
+}) => {
   const colorNbMissions = {
     red: false,
     green: true,
   };
-
   const isAnyoneIsSelected = missions.filter(e => e.isSelected === true);
+
+  const filterAndSortMenu = (
+    <Menu>
+      <li className="pt-menu-header">
+        <h6>Tri</h6>
+      </li>
+      <MenuItem iconName="pt-icon-sort-alphabetical" text="Trier par nom" onClick={() => sortMissions('SORT_NAME')} />
+      <MenuItem
+        iconName="pt-icon-sort-numerical"
+        text="Trier par date de debut"
+        onClick={() => sortMissions('SORT_DATE_START')}
+      />
+      <MenuItem
+        iconName="pt-icon-sort-numerical"
+        text="Trier par date de fin"
+        onClick={() => sortMissions('SORT_DATE_END')}
+      />
+      <li className="pt-menu-header">
+        <h6>Filtre</h6>
+      </li>
+      <Checkbox checked={filterMissions.missionOpen} onChange={() => filterMissionOpen()} label="Missions en cours" />
+      <Checkbox checked={filterMissions.missionFinish} onChange={() => filterMissionEnd()} label="Missions terminée" />
+    </Menu>
+  );
+
   return (
     <MainContainer>
       <Toolbar>
@@ -46,20 +80,11 @@ const Missions = ({ missions, removeMission, toggleMission, removeMissions, sort
               <span className="pt-icon-standard pt-icon-cross pt-align-right" />
             </button>
           ) : null}
-          <button
-            type="button"
-            className="pt-button pt-icon-sort-alphabetical pt-intent-primary"
-            onClick={() => sortName()}
-          >
-            Trier par nom
-          </button>
-          <button
-            type="button"
-            className="pt-button pt-icon-sort-numerical pt-intent-primary"
-            onClick={() => sortAddenda()}
-          >
-            {"Trier par nombre d'addenda"}
-          </button>
+          <Popover content={filterAndSortMenu} position={Position.BOTTOM}>
+            <button className="pt-button pt-icon-filter" type="button">
+              Filtre et tri
+            </button>
+          </Popover>
         </div>
       </Toolbar>
       <MissionsContainer>
@@ -80,8 +105,10 @@ Missions.propTypes = {
   removeMission: PropTypes.func.isRequired,
   toggleMission: PropTypes.func.isRequired,
   removeMissions: PropTypes.func.isRequired,
-  sortName: PropTypes.func.isRequired,
-  sortAddenda: PropTypes.func.isRequired,
+  sortMissions: PropTypes.func.isRequired,
+  filterMissionOpen: PropTypes.func.isRequired,
+  filterMissionEnd: PropTypes.func.isRequired,
+  filterMissions: PropTypes.func.isRequired,
 };
 
 export default Missions;

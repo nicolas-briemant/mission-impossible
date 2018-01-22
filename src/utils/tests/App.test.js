@@ -17,8 +17,14 @@ const initialState = {
   people: [],
   blockedAction: undefined,
   showAlert: false,
-  sortNameBool: undefined,
-  sortAddendaBool: undefined,
+  sort: {
+    type: '',
+    direction: false,
+  },
+  filterMissions: {
+    missionOpen: false,
+    missionFinish: false,
+  },
 };
 
 const store = createStore(reducer, initialState);
