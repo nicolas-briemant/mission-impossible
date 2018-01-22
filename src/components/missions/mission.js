@@ -1,8 +1,11 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Classes, Button } from '@blueprintjs/core';
 import cx from 'classnames';
 import glamorous from 'glamorous';
+import Company from '../company';
+import Worker from '../worker';
+import { getWorker } from '../../selectors';
 
 const StyledMission = glamorous.div({
   margin: '10px 0',
@@ -41,9 +44,8 @@ class Mission extends Component {
 
   render() {
     const {
-      id, name, clientId, partnerId, managerId, addenda, isSelected, toggleMission, removeMission
+      id, name, client, partner, manager, workers, addenda, isSelected, toggleMission, removeMission
     } = this.props;
-    const relationships = [clientId, partnerId, managerId];
 
     return (
       <StyledMission
@@ -53,11 +55,13 @@ class Mission extends Component {
       >
         <StyledContent>
           <h5>{name}</h5>
+          <Company {...client} />
+          { partner ? <Company {...partner} /> : null }
+          <Worker {...manager} />
+          <hr />
           <Fragment>
-            { relationships.map((rid, i) => <code key={`${rid}-${i}`}>{rid}</code>)}
+            {addenda.map(({workerId}) => <Worker {...getWorker(workerId, workers)} />)}
           </Fragment>
-          <div>(#{addenda.length} addenda)</div>
-          <code>{addenda.map((a) => a.workerId).join(' - ')}</code>
         </StyledContent>
         { this.state.isHovered
           ? <StyledActions>
@@ -83,9 +87,10 @@ class Mission extends Component {
 Mission.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  clientId: PropTypes.string,
-  partnerId: PropTypes.string,
-  managerId: PropTypes.string,
+  client: PropTypes.object.isRequired,
+  partner: PropTypes.object,
+  manager: PropTypes.object.isRequired,
+  workers: PropTypes.object.isRequired,
   addenda: PropTypes.arrayOf(
     PropTypes.shape({
       workerId: PropTypes.string.isRequired,

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Header, HeaderLeft, HeaderRight, Title, Menu } from './components/app';
 import Missions from './components/missions';
 import { removeMission, removeMissions, toggleMission } from './actions';
+import { getEnhancedMissions } from './selectors';
 
 const App = (props) => (
   <div className="pt-dark">
@@ -25,6 +26,9 @@ App.propTypes = {
 };
 
 const mapDispatchToProps = { removeMission, removeMissions, toggleMission };
-const mapStateToProps = (state) => state;
+const mapStateToProps = (state) => ({
+  ...state,
+  missions: getEnhancedMissions(state),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

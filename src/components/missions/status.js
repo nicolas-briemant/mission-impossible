@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Classes, Tag } from '@blueprintjs/core';
-import logger from '../logger';
 
 const Status = ({ count }) => {
   const isEmpty = count <= 0;
@@ -16,4 +15,4 @@ Status.propTypes = {
   count: PropTypes.number.isRequired,
 };
 
-export default logger('Status')(Status);
+export default Status;
