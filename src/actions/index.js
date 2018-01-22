@@ -16,5 +16,8 @@ export const toogleSortMissionsByNames = actionType => ({
   payload: { actionType },
 });
 
-export const SORT_MISSIONS_BY_NB_ADDENDAS = 'SORT_MISSIONS_BY_NB_ADDENDAS';
-export const sortMissionsByNbAddendas = actionType => ({ type: SORT_MISSIONS_BY_NB_ADDENDAS, payload: { actionType } });
+export const SORT_MISSIONS_BY_STARTDATE = 'SORT_MISSIONS_BY_STARTDATE';
+export const sortMissionsByStartDate = actionType => ({ type: SORT_MISSIONS_BY_STARTDATE, payload: { actionType } });
+
+export const SORT_MISSIONS_BY_ENDDATE = 'SORT_MISSIONS_BY_ENDDATE';
+export const sortMissionsByEndDate = actionType => ({ type: SORT_MISSIONS_BY_ENDDATE, payload: { actionType } });

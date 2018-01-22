@@ -12,7 +12,7 @@ export const logger = ({ getState }) => next => action => {
   console.group(action.type);
   // console.log('action:', action.type);
   // console.log('payload:', action.payload);
-  if (action.type !== 'REMOVE_SELECTED_MISSIONS') {
+  if (action.type === 'SELECT_MISSION' || action.type === 'REMOVE_MISSION') {
     console.log('prevState:', getState().missions.filter(mission => mission.id === action.payload.missionId));
     const res = next(action);
     console.log('nextState:', getState().missions.filter(mission => mission.id === action.payload.missionId));

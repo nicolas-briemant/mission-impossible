@@ -16,6 +16,8 @@ export const getMissionsDatas = state => {
       workers: getWorkersNames(mission.addenda, workers),
       status: getMissionStatus(mission.addenda),
       isSelected: mission.isSelected,
+      startDate: getStartDate(mission.addenda),
+      endDate: getEndDate(mission.addenda),
     }),
     missions,
   );
@@ -57,12 +59,42 @@ export const getMissionStatus = addenda => {
   return status;
 };
 
+export const getStartDate = addenda => {
+  const startDate = reduce(
+    (acc, worker) => {
+      const date = new Date(prop('startDate', worker));
+
+      return date < acc ? date : acc;
+    },
+    new Date(),
+    addenda,
+  );
+  // console.log(startDate)
+  return startDate;
+};
+
+export const getEndDate = addenda => {
+  const date = reduce(
+    (acc, worker) => {
+      const endDate = prop('endDate', worker);
+      const newDate = endDate ? new Date(endDate) : new Date();
+
+      return newDate > acc ? newDate : acc;
+    },
+    new Date(0),
+    addenda,
+  );
+  return date;
+};
+
 export const sortMissions = (missions, filter) => {
   switch (filter.type) {
     case 'TOOGLE_SORT_MISSIONS_BY_NAMES':
       return filter.order ? sortBy(prop('name'), missions) : reverse(sortBy(prop('name'), missions));
-    case 'SORT_MISSIONS_BY_NB_ADDENDAS':
-      return filter.order ? sortBy(prop('workers'), missions) : reverse(sortBy(prop('workers'), missions));
+    case 'SORT_MISSIONS_BY_STARTDATE':
+      return filter.order ? sortBy(prop('startDate'), missions) : reverse(sortBy(prop('startDate'), missions));
+    case 'SORT_MISSIONS_BY_ENDDATE':
+      return filter.order ? sortBy(prop('endDate'), missions) : reverse(sortBy(prop('endDate'), missions));
     default:
       return missions;
   }

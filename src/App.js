@@ -5,7 +5,8 @@ import {
   removeMission,
   removeSelectedMissions,
   toogleSortMissionsByNames,
-  sortMissionsByNbAddendas,
+  sortMissionsByStartDate,
+  sortMissionsByEndDate,
 } from './actions';
 import Header from './components/header';
 import Missions from './components/missions';
@@ -23,7 +24,8 @@ const MapDispatchToProps = {
   removeMission,
   removeSelectedMissions,
   toogleSortMissionsByNames,
-  sortMissionsByNbAddendas,
+  sortMissionsByStartDate,
+  sortMissionsByEndDate,
 };
 
 const mapStateToProps = state => ({

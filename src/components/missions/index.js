@@ -21,7 +21,8 @@ const Missions = ({
   blockedAction,
   toogleSortMissionsByNames,
   sortByMissionsNames,
-  sortMissionsByNbAddendas,
+  sortMissionsByStartDate,
+  sortMissionsByEndDate,
 }) => {
   const nbSelectedMissions = missions.filter(mission => mission.isSelected).length;
 
@@ -37,8 +38,13 @@ const Missions = ({
         />
         <Button
           iconName={sortByMissionsNames ? 'pt-icon-sort-alphabetical' : 'pt-icon-sort-alphabetical-desc'}
-          text="by workers"
-          onClick={() => sortMissionsByNbAddendas()}
+          text="by start date"
+          onClick={() => sortMissionsByStartDate()}
+        />
+        <Button
+          iconName={sortByMissionsNames ? 'pt-icon-sort-alphabetical' : 'pt-icon-sort-alphabetical-desc'}
+          text="by end date"
+          onClick={() => sortMissionsByEndDate()}
         />
       </ButtonGroup>
       <Button
@@ -63,7 +69,8 @@ Missions.propTypes = {
   blockedAction: PropTypes.string,
   toogleSortMissionsByNames: PropTypes.func,
   sortByMissionsNames: PropTypes.bool,
-  sortMissionsByNbAddendas: PropTypes.func,
+  sortMissionsByStartDate: PropTypes.func,
+  sortMissionsByEndDate: PropTypes.func,
 };
 
 export default Missions;

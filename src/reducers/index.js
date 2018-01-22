@@ -4,7 +4,8 @@ import {
   REMOVE_SELECTED_MISSIONS,
   BLOCK_ACTION,
   TOOGLE_SORT_MISSIONS_BY_NAMES,
-  SORT_MISSIONS_BY_NB_ADDENDAS,
+  SORT_MISSIONS_BY_STARTDATE,
+  SORT_MISSIONS_BY_ENDDATE,
 } from '../actions';
 
 const select = (missions, id) => {
@@ -33,7 +34,9 @@ export default (state, action = {}) => {
       return { ...state, blockedAction: action.payload.actionType };
     case TOOGLE_SORT_MISSIONS_BY_NAMES:
       return { ...state, filter: { type: action.type, order: !state.filter.order } };
-    case SORT_MISSIONS_BY_NB_ADDENDAS:
+    case SORT_MISSIONS_BY_STARTDATE:
+      return { ...state, filter: { type: action.type, order: !state.filter.order } };
+    case SORT_MISSIONS_BY_ENDDATE:
       return { ...state, filter: { type: action.type, order: !state.filter.order } };
     default:
       return state;
