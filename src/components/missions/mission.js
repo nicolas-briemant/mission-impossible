@@ -51,6 +51,8 @@ export default class Mission extends Component {
       partner,
       manager,
       workers,
+      startDate,
+      endDate,
       status,
       isSelected,
       selectMission,
@@ -83,6 +85,8 @@ export default class Mission extends Component {
             <Button iconName="trash" text="remove" onClick={() => removeMission(id)} />
           </div>
         ) : null}
+        <p>Start date: {startDate.format('LL')}</p>
+        <p>End date: {endDate.format('LL')}</p>
         <p>{status}</p>
       </CellMission>
     );
@@ -105,6 +109,8 @@ Mission.propTypes = {
     lastName: PropTypes.string.isRequired,
   }).isRequired,
   workers: PropTypes.array,
+  startDate: PropTypes.object,
+  endDate: PropTypes.object,
   status: PropTypes.string,
   isSelected: PropTypes.bool,
   selectMission: PropTypes.func.isRequired,

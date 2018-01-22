@@ -7,10 +7,12 @@ import {
   toogleSortMissionsByNames,
   sortMissionsByStartDate,
   sortMissionsByEndDate,
+  filterMissionsInProgress,
+  filterMissionsEnded,
 } from './actions';
 import Header from './components/header';
 import Missions from './components/missions';
-import { selectorMissions } from './selectors';
+import { selector, getMissionsDatas } from './selectors';
 
 const App = props => (
   <div className="App">
@@ -26,11 +28,17 @@ const MapDispatchToProps = {
   toogleSortMissionsByNames,
   sortMissionsByStartDate,
   sortMissionsByEndDate,
+  filterMissionsInProgress,
+  filterMissionsEnded,
 };
 
-const mapStateToProps = state => ({
-  ...state,
-  missions: selectorMissions(state),
-});
+const mapStateToProps = state => {
+  console.log(selector(state));
+  console.log(getMissionsDatas(state));
+  return {
+    ...state,
+    missions: selector(state),
+  };
+};
 
 export default connect(mapStateToProps, MapDispatchToProps)(App);

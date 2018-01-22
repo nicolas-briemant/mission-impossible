@@ -1,7 +1,8 @@
-import { slice, sortBy, prop, map, reduce, find, propEq, uniq, reverse } from 'ramda';
+import { filter, sortBy, prop, map, reduce, find, propEq, uniq, reverse } from 'ramda';
 import { createSelector } from 'reselect';
+import moment from 'moment';
 
-export const getMissionsPage = (pageSize = 20) => state => slice(0, pageSize, state.missions);
+// const getMissionsPage = (pageSize = 20) => state => slice(0, pageSize, state.missions);
 
 export const getMissionsDatas = state => {
   const { missions, companies, workers } = state;
@@ -25,33 +26,33 @@ export const getMissionsDatas = state => {
   return missionsDatas;
 };
 
-export const getCompanyData = (companieId, companies) => {
+const getCompanyData = (companieId, companies) => {
   const companie = find(propEq('id', companieId))(companies);
 
-  return { name: companie.name, avatar: companie.avatar };
+  return companie;
 };
 
-export const getWorkerName = (managerId, workers) => {
+const getWorkerName = (managerId, workers) => {
   const worker = find(propEq('id', managerId))(workers);
 
   return worker;
 };
 
-export const getWorkersNames = (addenda, workers) => {
+const getWorkersNames = (addenda, workers) => {
   const workersNames = uniq(map(worker => getWorkerName(worker.workerId, workers), addenda));
 
   return workersNames;
 };
 
-export const getMissionStatus = addenda => {
+const getMissionStatus = addenda => {
   const status = reduce(
     (acc, worker) => {
       if (acc === 'In progress') return acc;
 
-      const date = new Date(prop('endDate', worker));
+      const date = moment(prop('endDate', worker));
       if (!date) return 'In progress';
 
-      return date < new Date() ? 'Ended' : 'In progress';
+      return date < moment() ? 'Ended' : 'In progress';
     },
     'Ended',
     addenda,
@@ -59,49 +60,52 @@ export const getMissionStatus = addenda => {
   return status;
 };
 
-export const getStartDate = addenda => {
-  const startDate = reduce(
+const getStartDate = addenda => {
+  const date = reduce(
     (acc, worker) => {
-      const date = new Date(prop('startDate', worker));
-
-      return date < acc ? date : acc;
+      const newDate = moment(prop('startDate', worker));
+      return newDate.isBefore(acc) ? newDate : acc;
     },
-    new Date(),
+    moment(),
     addenda,
   );
-  return startDate;
+  return date;
+
+  // const tmp = compose(moment, prop('startDate'));
+  // console.log(max(map(tmp, addenda)))
+  // return max(map(moment(prop('startDate')), addenda));
 };
 
-export const getEndDate = addenda => {
+const getEndDate = addenda => {
   //compose map / max
   const date = reduce(
     (acc, worker) => {
-      const endDate = prop('endDate', worker);
-      const newDate = endDate ? new Date(endDate) : new Date();
-
-      return newDate > acc ? newDate : acc;
+      const newDate = moment(prop('endDate', worker));
+      return newDate.isAfter(acc) ? newDate : acc;
     },
-    new Date(0),
+    moment(0),
     addenda,
   );
   return date;
 };
 
-export const sortMissions = (missions, filter) => {
-  switch (filter.type) {
-    case 'TOOGLE_SORT_MISSIONS_BY_NAMES':
-      return filter.order ? sortBy(prop('name'), missions) : reverse(sortBy(prop('name'), missions));
-    case 'SORT_MISSIONS_BY_STARTDATE':
-      return filter.order ? sortBy(prop('startDate'), missions) : reverse(sortBy(prop('startDate'), missions));
-    case 'SORT_MISSIONS_BY_ENDDATE':
-      return filter.order ? sortBy(prop('endDate'), missions) : reverse(sortBy(prop('endDate'), missions));
-    default:
-      return missions;
-  }
+const sortMissions = (missions, order) => {
+  if (!order.type) return missions;
+  return order.direction ? sortBy(prop([order.type]), missions) : reverse(sortBy(prop([order.type]), missions));
 };
 
-const getFilter = state => state.filter;
+const myFilterMissions = (missions, filterMissions) => {
+  return filterMissions.type ? filter(mission => mission.status === filterMissions.type, missions) : missions;
+};
 
-export const selectorMissions = createSelector(getMissionsDatas, getFilter, (missions, filter) =>
-  sortMissions(missions, filter),
+const getOrder = state => state.order;
+
+export const selectorMissions = createSelector(getMissionsDatas, getOrder, (missions, order) =>
+  sortMissions(missions, order),
+);
+
+const getFilter = state => state.filterMissions;
+
+export const selector = createSelector(selectorMissions, getFilter, (missions, filterMissions) =>
+  myFilterMissions(missions, filterMissions),
 );

@@ -13,7 +13,8 @@ const initialState = {
   missions,
   companies,
   workers,
-  filter: { type: undefined, order: undefined },
+  order: { type: undefined, direction: undefined },
+  filterMissions: { type: undefined },
 };
 
 const store = createStore(reducer, initialState);

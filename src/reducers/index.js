@@ -6,6 +6,8 @@ import {
   TOOGLE_SORT_MISSIONS_BY_NAMES,
   SORT_MISSIONS_BY_STARTDATE,
   SORT_MISSIONS_BY_ENDDATE,
+  FILTER_MISSIONS_IN_PROGRESS,
+  FILTER_MISSIONS_ENDED,
 } from '../actions';
 
 const select = (missions, id) => {
@@ -33,11 +35,16 @@ export default (state, action = {}) => {
     case BLOCK_ACTION:
       return { ...state, blockedAction: action.payload.actionType };
     case TOOGLE_SORT_MISSIONS_BY_NAMES:
-      return { ...state, filter: { type: action.type, order: !state.filter.order } };
+      return { ...state, order: { type: 'name', direction: !state.order.direction } };
     case SORT_MISSIONS_BY_STARTDATE:
-      return { ...state, filter: { type: action.type, order: !state.filter.order } };
+      return { ...state, order: { type: 'startDate', direction: !state.order.direction } };
     case SORT_MISSIONS_BY_ENDDATE:
-      return { ...state, filter: { type: action.type, order: !state.filter.order } };
+      return { ...state, order: { type: 'endDate', direction: !state.order.direction } };
+    case FILTER_MISSIONS_IN_PROGRESS:
+      return { ...state, filterMissions: { type: 'In progress' } };
+    case FILTER_MISSIONS_ENDED:
+      return { ...state, filterMissions: { type: 'Ended' } };
+
     default:
       return state;
   }

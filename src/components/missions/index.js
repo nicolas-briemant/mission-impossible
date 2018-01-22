@@ -23,6 +23,8 @@ const Missions = ({
   sortByMissionsNames,
   sortMissionsByStartDate,
   sortMissionsByEndDate,
+  filterMissionsInProgress,
+  filterMissionsEnded,
 }) => {
   const nbSelectedMissions = missions.filter(mission => mission.isSelected).length;
 
@@ -42,6 +44,10 @@ const Missions = ({
           text="by end date"
           onClick={() => sortMissionsByEndDate()}
         />
+      </ButtonGroup>
+      <ButtonGroup>
+        <Button iconName="" text="In progress" onClick={() => filterMissionsInProgress()} />
+        <Button iconName="" text="Ended" onClick={() => filterMissionsEnded()} />
       </ButtonGroup>
       <Button
         iconName="trash"
@@ -67,6 +73,8 @@ Missions.propTypes = {
   sortByMissionsNames: PropTypes.bool,
   sortMissionsByStartDate: PropTypes.func,
   sortMissionsByEndDate: PropTypes.func,
+  filterMissionsInProgress: PropTypes.func,
+  filterMissionsEnded: PropTypes.func,
 };
 
 export default Missions;
