@@ -2,7 +2,9 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
 import { Button } from '@blueprintjs/core';
+import cx from 'classnames';
 import glamorous from 'glamorous';
+import moment from 'moment';
 
 const MyUlCont = glamorous.ul(
   {
@@ -19,6 +21,8 @@ const MyUlCont = glamorous.ul(
 const Mylist = glamorous.div({
   display: 'flex',
   justifyContent: 'center',
+  marginTop: '10px',
+  marginBottom: '10px',
   ':hover': {
     fontWeight: 'bold',
   },
@@ -55,8 +59,7 @@ class Mission extends React.Component {
 
   render() {
     const { mission, removeMission, selectMission, selectedMissions, count } = this.props;
-    const { id, name, clientId, partnerId, managerId, addenda } = mission;
-
+    const { id, name, client, partner, addenda, manager, startDate, endDate } = mission;
     if (count <= 0) {
       const noMission = (
         <MyDivCont>
@@ -65,6 +68,13 @@ class Mission extends React.Component {
       );
       return noMission;
     }
+    const today = moment().subtract(1, 'days');
+    const isWip = endDate < today;
+
+    const cls = cx({
+      'pt-tag pt-intent-sucess': isWip,
+      'pt-tag pt-intent-warning': !isWip,
+    });
 
     return (
       <Fragment>
@@ -74,17 +84,22 @@ class Mission extends React.Component {
           onMouseEnter={this.updateIsHovered}
           onMouseLeave={this.updateIsHovered}
         >
-          <Mylist>id: {id} </Mylist>
-          <Mylist>name: {name} </Mylist>
-          <Mylist>clientId: {clientId} </Mylist>
-          <Mylist>partnerId: {partnerId}</Mylist>
-          <Mylist>managerId: {managerId}</Mylist>
-          <Mylist>addenda longueur = {addenda.length}</Mylist>
-          {addenda.map(({ workerId }) => (
+          <Mylist>Mission: {name} </Mylist>
+          <Mylist>Client: {client.name} </Mylist>
+          {partner ? <Mylist>Partner: {partner.name}</Mylist> : null}
+          <Mylist>
+            Manager : {manager.firstName} {manager.lastName}
+          </Mylist>
+          {addenda.map(({ worker }) => (
             <div key={uniqid()}>
-              <Mylist>workerId: {workerId}</Mylist>
+              <Mylist>
+                Worker: {worker.firstName} {worker.lastName}
+              </Mylist>
             </div>
           ))}
+          <Mylist>{startDate.format('LL')} </Mylist>
+          <Mylist>{endDate ? `End Date: ${endDate.format('LL')}` : null} </Mylist>
+          <Mylist className={cls}>{isWip ? 'Termined' : 'Work in progress...'}</Mylist>
           {this.state.isHovered ? (
             <AlignCenter>
               <Button iconName="trash" text="remove" onClick={() => removeMission(id)} />

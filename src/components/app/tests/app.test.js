@@ -5,14 +5,22 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import App from '../app';
 import missions from '../../../data/missions2';
+import companies from '../../../data/companies';
+import workers from '../../../data/workers';
 import reducer from '../../../reducers';
 import { firewall, logger } from '../../../middlewares';
+import { arrayToObject } from '../../../utils/lib';
 
 const initialState = {
   missions,
+  workers: arrayToObject(workers),
+  companies: arrayToObject(companies),
   selectedMissions: {},
-  people: {},
   alert: '',
+  sort: {
+    type: '',
+    direction: true,
+  },
 };
 
 const store = createStore(reducer, initialState, applyMiddleware(firewall, logger));

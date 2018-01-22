@@ -12,3 +12,6 @@ export const removeSelectedMissions = selectedMissions => ({
 
 export const BLOCKED_ACTION = 'BLOCKED_ACTION';
 export const blockedAction = (typeBlocked = '') => ({ type: BLOCKED_ACTION, payload: { typeBlocked } });
+
+export const MY_SORT_BY = 'SORT';
+export const mySortBy = (name, toggle) => ({ type: MY_SORT_BY, payload: { type: name, direction: toggle } });
