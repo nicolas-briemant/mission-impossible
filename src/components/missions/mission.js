@@ -7,11 +7,20 @@ import { Button, Classes } from '@blueprintjs/core';
 import 'normalize.css/normalize.css';
 import '@blueprintjs/core/dist/blueprint.css';
 
-const Worker = ({ workerId }) => <li>Id: {workerId}</li>;
+const Worker = ({ name }) => <li>{name}</li>;
 
 Worker.propTypes = {
-  workerId: PropTypes.string,
+  name: PropTypes.string,
 };
+
+const FlexDiv = glamorous.div({
+  display: 'flex',
+});
+
+const Logo = glamorous.img({
+  width: 15,
+  height: 15,
+});
 
 const CellMission = glamorous.div(
   {
@@ -35,7 +44,20 @@ export default class Mission extends Component {
   }
 
   render() {
-    const { id, name, clientId, partnerId, managerId, addenda, isSelected, selectMission, removeMission } = this.props;
+    const {
+      id,
+      name,
+      client,
+      partner,
+      manager,
+      workers,
+      startDate,
+      endDate,
+      status,
+      isSelected,
+      selectMission,
+      removeMission,
+    } = this.props;
 
     return (
       <CellMission
@@ -45,16 +67,27 @@ export default class Mission extends Component {
         isSelected={isSelected}
       >
         <b>{name}</b>
-        <p>
-          clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
-        </p>
-        <ul>{addenda.map(worker => <Worker key={uniqid()} {...worker} />)}</ul>
+        <FlexDiv>
+          <p>client: {client.name}</p>
+          {client.avatar.src ? <Logo src={client.avatar.src} /> : null}
+        </FlexDiv>
+        {partner ? (
+          <FlexDiv>
+            <p>partner: {partner.name}</p>
+            {partner.avatar.src ? <Logo src={partner.avatar.src} /> : null}
+          </FlexDiv>
+        ) : null}
+        {manager ? <p>manager: {`${manager.firstName} ${manager.lastName}`}</p> : null}
+        <ul>{workers.map(worker => <Worker key={uniqid()} name={`${worker.firstName} ${worker.lastName}`} />)}</ul>
         {this.state.isHovered ? (
           <div>
             <Button iconName="select" text="select" onClick={() => selectMission(id)} />
             <Button iconName="trash" text="remove" onClick={() => removeMission(id)} />
           </div>
         ) : null}
+        <p>Start date: {startDate.format('LL')}</p>
+        <p>End date: {endDate.format('LL')}</p>
+        <p>{status}</p>
       </CellMission>
     );
   }
@@ -63,14 +96,22 @@ export default class Mission extends Component {
 Mission.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  clientId: PropTypes.string.isRequired,
-  partnerId: PropTypes.string,
-  managerId: PropTypes.string.isRequired,
-  addenda: PropTypes.arrayOf(
-    PropTypes.shape({
-      workerId: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  client: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    src: PropTypes.string,
+  }).isRequired,
+  partner: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    src: PropTypes.string,
+  }),
+  manager: PropTypes.shape({
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+  }).isRequired,
+  workers: PropTypes.array,
+  startDate: PropTypes.object,
+  endDate: PropTypes.object,
+  status: PropTypes.string,
   isSelected: PropTypes.bool,
   selectMission: PropTypes.func.isRequired,
   removeMission: PropTypes.func.isRequired,
