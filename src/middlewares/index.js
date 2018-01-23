@@ -12,7 +12,7 @@ export const logger = store => next => action => {
 };
 
 export const firewall = () => next => action => {
-  const FORBIDDEN_ACTION_TYPES = ['REMOVE_MISSION', 'REMOVE_SELECTED_MISSIONS'];
+  const FORBIDDEN_ACTION_TYPES = ['REMOVE_SELECTED_MISSIONS'];
   if (!FORBIDDEN_ACTION_TYPES.includes(action.type)) return next(action);
   return next(blockedAction(action.type));
 };

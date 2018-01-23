@@ -10,7 +10,18 @@ const MyDivCont = glamorous.div({
   flexWrap: 'wrap',
 });
 
-const Missions = ({ missions, removeMission, removeSelectedMissions, selectMission, selectedMissions, alert }) => {
+const Missions = props => {
+  const {
+    alert,
+    missions,
+    removeMission,
+    removeSelectedMissions,
+    selectMission,
+    selectedMissions,
+    mySortBy,
+    sort,
+  } = props;
+
   const count = missions.length;
   return (
     <div>
@@ -20,6 +31,8 @@ const Missions = ({ missions, removeMission, removeSelectedMissions, selectMissi
         removeSelectedMissions={removeSelectedMissions}
         selectedMissions={selectedMissions}
         alert={alert}
+        sort={sort}
+        mySortBy={mySortBy}
       />
       <MyDivCont>
         {missions.map(mission => (
@@ -43,7 +56,6 @@ Missions.propTypes = {
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
       clientId: PropTypes.string.isRequired,
-      partnerId: PropTypes.string,
       managerId: PropTypes.string.isRequired,
       addenda: PropTypes.arrayOf(
         PropTypes.shape({
@@ -57,6 +69,11 @@ Missions.propTypes = {
   removeSelectedMissions: PropTypes.func.isRequired,
   selectedMissions: PropTypes.object.isRequired,
   alert: PropTypes.string.isRequired,
+  mySortBy: PropTypes.func.isRequired,
+  sort: PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    direction: PropTypes.bool.isRequired,
+  }).isRequired,
 };
 
 export default Missions;

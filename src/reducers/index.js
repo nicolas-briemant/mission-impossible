@@ -1,4 +1,4 @@
-import { REMOVE_MISSION, SELECT_MISSION, REMOVE_SELECTED_MISSIONS, BLOCKED_ACTION } from '../actions';
+import { REMOVE_MISSION, SELECT_MISSION, REMOVE_SELECTED_MISSIONS, BLOCKED_ACTION, MY_SORT_BY } from '../actions';
 
 const findIndexMission = (missions, id) => missions.findIndex(mission => mission.id === id);
 
@@ -30,6 +30,8 @@ export default (state, action = {}) => {
       };
     case BLOCKED_ACTION:
       return { ...state, alert: `Access Denied ${action.payload.typeBlocked}` };
+    case MY_SORT_BY:
+      return { ...state, sort: { ...state.sort, type: action.payload.type, direction: !action.payload.direction } };
     default:
       return state;
   }
