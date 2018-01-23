@@ -30,7 +30,7 @@ const initialState = {
 };
 
 const logger = createLogger({ collapsed: true });
-const store = createStore(reducer(initialState), initialState, applyMiddleware(logger));
+const store = createStore(reducer(initialState), applyMiddleware(logger));
 
 ReactDOM.render(
   <Provider store={store}>

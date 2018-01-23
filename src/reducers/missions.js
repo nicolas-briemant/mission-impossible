@@ -8,7 +8,7 @@ import {
   SPOTLIGHT_MISSIONS,
 } from '../actions';
 
-export default (state, action = {}) => {
+export default (initialState) => (state = initialState, action = {}) => {
   switch(action.type) {
     case REMOVE_MISSION:
       return {

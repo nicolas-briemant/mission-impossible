@@ -1,32 +1,95 @@
-import { filter, map, sortBy, prop, identity, reverse, compose, length } from 'ramda';
+import { filter, map, test, sortBy, prop, identity, reverse, compose, length, reduce, values } from 'ramda';
 import { createSelector } from 'reselect';
+import moment from 'moment';
 
-export const getMissions = (state) => state.missions.collection;
+export const getMissions = (state) => state.missions;
 export const getCompanies = (state) => state.companies;
 export const getWorkers = (state) => state.workers;
-export const getMissionSort = (state) => state.missions.sort;
 
 export const getClient = (clientId, companies) => companies[clientId];
 export const getPartner = (partnerId, companies) => companies[partnerId];
-export const getWorker = (workerId, workers) => workers[workerId];
+export const getWorker = (managerId, workers) => workers[managerId];
+export const getPreparedWorkers = (addenda, workers) => reduce(
+  (memo, addendum) => {
+    const id = addendum.workerId;
+    const isAlreadyThere = memo[id];
+    const isOpen = moment(addendum.endDate).isSameOrAfter(moment())
+    if (!isAlreadyThere && isOpen) return { ...memo, [id]: { ...addendum, ...getWorker(id, workers) } };
+    return memo;
+  },
+  {},
+  addenda
+);
+export const getMissionBoundaries = (addenda) => reduce(
+  (memo, addendum) => {
+    const aStartDate = addendum.startDate ? moment(addendum.startDate) : undefined;
+    const mStartDate = memo.startDate;
+    let startDate = moment();
+    if (mStartDate && aStartDate) {
+      startDate = mStartDate.isBefore(aStartDate) ? mStartDate : aStartDate;
+    } else if (aStartDate) {
+      startDate = aStartDate;
+    }
 
-export const getSelectedMissions = createSelector(getMissions, filter(prop('isSelected')));
+    const aEndDate = addendum.endDate ? moment(addendum.endDate) : undefined;
+    const mEndDate = memo.endDate;
+    let endDate = moment();
+    if (mEndDate && aEndDate) {
+      endDate = mEndDate.isAfter(aEndDate) ? mEndDate : aEndDate;
+    } else if (aEndDate) {
+      endDate = aEndDate;
+    }
 
+    return { startDate, endDate };
+  },
+  {},
+  addenda
+);
+
+export const getMissionsCollection = createSelector(getMissions, (missions) => missions.collection);
+export const getMissionsSpotlight = createSelector(getMissions, (missions) => missions.spotlight);
+export const getMissionsFilter = createSelector(getMissions, (missions) => missions.filter);
+export const getMissionsSort = createSelector(getMissions, (missions) => missions.sort);
 export const getEnhancedMissions = createSelector(
-  getMissions, getCompanies, getWorkers,
+  getMissionsCollection, getCompanies, getWorkers,
   (missions, companies, workers) => map(
-    ({ clientId, partnerId, managerId, ...rest}) => ({
-      ...rest,
-      client: getClient(clientId, companies),
-      partner: getPartner(partnerId, companies),
-      manager: getWorker(managerId, workers),
-    }),
+    ({ clientId, partnerId, managerId, addenda, ...rest}) => {
+      const boundaries = getMissionBoundaries(addenda);
+      return {
+        ...rest,
+        ...boundaries,
+        client: getClient(clientId, companies),
+        partner: getPartner(partnerId, companies),
+        manager: getWorker(managerId, workers),
+        workers: getPreparedWorkers(addenda, workers),
+        isOpen: boundaries.endDate.isSameOrAfter(moment()),
+      };
+    },
     missions
   )
 );
-
+export const getFilteredMissions = createSelector(
+  getEnhancedMissions, getMissionsFilter,
+  (missions, missionsFilter) => filter(
+    (mission) => {
+      switch(missionsFilter) {
+        case 'open': return mission.isOpen;
+        case 'close': return !missions.isOpen;
+        default: return true;
+      }
+    },
+    missions
+  )
+);
+export const getSpotlightedMissions = createSelector(
+  getFilteredMissions, getMissionsSpotlight,
+  (missions, spotlight) => filter(
+    (mission) => test(new RegExp(spotlight), mission.name),
+    missions
+  )
+);
 export const getSortedMissions = createSelector(
-  getEnhancedMissions, getMissionSort,
+  getSpotlightedMissions, getMissionsSort,
   (missions, sort) => sortBy(
     compose(
       prop(sort.type),
@@ -34,7 +97,11 @@ export const getSortedMissions = createSelector(
     )
   )(missions)
 );
-
-export const getMissionTotalCount = createSelector(getMissions, length);
-export const getMissionSelectedCount = createSelector(getSelectedMissions, length);
-export const getMissionCount = createSelector(getSortedMissions, length);
+export const getPreparedMissions = createSelector(
+  getSortedMissions,
+  (missions) => missions
+);
+export const getMissionTotalCount = createSelector(getMissionsCollection, compose(length, values));
+export const getSelectedMissions = createSelector(getMissionsCollection, filter(prop('isSelected')));
+export const getMissionSelectedCount = createSelector(getSelectedMissions, compose(length, values));
+export const getMissionCount = createSelector(getPreparedMissions, compose(length, values));

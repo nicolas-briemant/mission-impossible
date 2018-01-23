@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { compose, map, values } from 'ramda';
 import { Classes, Button } from '@blueprintjs/core';
 import cx from 'classnames';
 import glamorous from 'glamorous';
+import uuid from 'uuid/v4';
 import Company from '../company';
 import Worker from '../worker';
-import { getWorker } from '../../selectors';
 
 const StyledMission = glamorous.div({
   margin: '10px 0',
@@ -43,25 +44,34 @@ class Mission extends Component {
   }
 
   render() {
-    const {
-      id, name, client, partner, manager, workers, addenda, isSelected, toggleMission, removeMission
-    } = this.props;
+    const { id, name, client, partner, manager, workers, isOpen, isSelected, toggleMission, removeMission } = this.props;
+    const cls = cx(
+      {
+        [Classes.INTENT_SUCCESS]: isSelected,
+        [Classes.iconClass('automatic-updates')]: isOpen,
+        [Classes.iconClass('box')]: !isOpen,
+      },
+      Classes.CALLOUT
+    );
 
     return (
       <StyledMission
         onMouseEnter={this.boundUpdateIsHovered}
         onMouseLeave={this.boundUpdateIsHovered}
-        className={cx({[Classes.INTENT_SUCCESS]: isSelected}, Classes.CALLOUT)}
+        className={cls}
       >
         <StyledContent>
           <h5>{name}</h5>
           <Company {...client} />
           { partner ? <Company {...partner} /> : null }
           <Worker {...manager} />
-          <hr />
-          <Fragment>
-            {addenda.map(({workerId}) => <Worker {...getWorker(workerId, workers)} />)}
-          </Fragment>
+          <ul>
+            {compose(
+              values,
+              map((worker) => <li key={uuid()}><Worker {...worker} /></li>)
+             )(workers)
+            }
+          </ul>
         </StyledContent>
         { this.state.isHovered
           ? <StyledActions>
@@ -91,14 +101,10 @@ Mission.propTypes = {
   partner: PropTypes.object,
   manager: PropTypes.object.isRequired,
   workers: PropTypes.object.isRequired,
-  addenda: PropTypes.arrayOf(
-    PropTypes.shape({
-      workerId: PropTypes.string.isRequired,
-    })
-  ).isRequired,
   toggleMission: PropTypes.func.isRequired,
   removeMission: PropTypes.func.isRequired,
   isSelected: PropTypes.bool,
+  isOpen: PropTypes.bool,
 };
 
 export default Mission;

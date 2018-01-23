@@ -55,89 +55,93 @@ const initialState = {
   availableFilters: ['open', 'close', 'all'],
 };
 
-describe('missions', () => {
-  it('should return the initial state', () => {
-    deepFreeze(initialState);
-    expect(missions(initialState)).toEqual(initialState);
-  });
+const reducer = missions({ missions: initialState});
 
-  it('should handle REMOVE_MISSION', () => {
-    const expectedState = {
-      ...initialState,
-      collection: { [mission2.id]: mission2 },
-    };
-    deepFreeze(initialState);
-    expect(missions(initialState, actions.removeMission(mission1.id))).toEqual(expectedState);
-  });
+describe('reducers', () => {
+  describe('missions', () => {
+    it('should return the initial state', () => {
+      deepFreeze(initialState);
+      expect(reducer(initialState)).toEqual(initialState);
+    });
 
-  it('should handle REMOVE_MISSIONS', () => {
-    const expectedState = {
-      ...initialState,
-      collection: { [mission1.id]: mission1 },
-    };
-    deepFreeze(initialState);
-    expect(missions(initialState, actions.removeMissions())).toEqual(expectedState);
-  });
+    it('should handle REMOVE_MISSION', () => {
+      const expectedState = {
+        ...initialState,
+        collection: { [mission2.id]: mission2 },
+      };
+      deepFreeze(initialState);
+      expect(reducer(initialState, actions.removeMission(mission1.id))).toEqual(expectedState);
+    });
 
-  it('should handle TOGGLE_MISSION (select)', () => {
-    const expectedState = {
-      ...initialState,
-      collection: {
-        ...initialState.collection,
-        [mission1.id]: { ...mission1, isSelected: true },
-      },
-    };
-    deepFreeze(initialState);
-    expect(missions(initialState, actions.toggleMission(mission1.id))).toEqual(expectedState);
-  });
+    it('should handle REMOVE_MISSIONS', () => {
+      const expectedState = {
+        ...initialState,
+        collection: { [mission1.id]: mission1 },
+      };
+      deepFreeze(initialState);
+      expect(reducer(initialState, actions.removeMissions())).toEqual(expectedState);
+    });
 
-  it('should handle TOGGLE_MISSION (unselect)', () => {
-    const expectedState = {
-      ...initialState,
-      collection: {
-        ...initialState.collection,
-        [mission2.id]: { ...mission2, isSelected: false },
-      },
-    };
-    deepFreeze(initialState);
-    expect(missions(initialState, actions.toggleMission(mission2.id))).toEqual(expectedState);
-  });
-  
-  it('should handle SORT_MISSIONS (same)', () => {
-    const expectedState = {
-      ...initialState,
-      sort: {
-        ...initialState.sort,
-        id: 'name',
-        direction: false,
-      },
-    };
-    deepFreeze(initialState);
-    expect(missions(initialState, actions.sortMissions('name'))).toEqual(expectedState);
-  });
+    it('should handle TOGGLE_MISSION (select)', () => {
+      const expectedState = {
+        ...initialState,
+        collection: {
+          ...initialState.collection,
+          [mission1.id]: { ...mission1, isSelected: true },
+        },
+      };
+      deepFreeze(initialState);
+      expect(reducer(initialState, actions.toggleMission(mission1.id))).toEqual(expectedState);
+    });
 
-  it('should handle SORT_MISSIONS (different)', () => {
-    const expectedState = {
-      ...initialState,
-      sort: {
-        ...initialState.sort,
-        id: 'startDate',
-        direction: true,
-      },
-    };
-    deepFreeze(initialState);
-    expect(missions(initialState, actions.sortMissions('startDate'))).toEqual(expectedState);
-  });
+    it('should handle TOGGLE_MISSION (unselect)', () => {
+      const expectedState = {
+        ...initialState,
+        collection: {
+          ...initialState.collection,
+          [mission2.id]: { ...mission2, isSelected: false },
+        },
+      };
+      deepFreeze(initialState);
+      expect(reducer(initialState, actions.toggleMission(mission2.id))).toEqual(expectedState);
+    });
+    
+    it('should handle SORT_MISSIONS (same)', () => {
+      const expectedState = {
+        ...initialState,
+        sort: {
+          ...initialState.sort,
+          id: 'name',
+          direction: false,
+        },
+      };
+      deepFreeze(initialState);
+      expect(reducer(initialState, actions.sortMissions('name'))).toEqual(expectedState);
+    });
 
-  it('should handle FILTER_MISSIONS', () => {
-    const expectedState = { ...initialState, filter: 'open' };
-    deepFreeze(initialState);
-    expect(missions(initialState, actions.filterMissions('open'))).toEqual(expectedState);
-  });
+    it('should handle SORT_MISSIONS (different)', () => {
+      const expectedState = {
+        ...initialState,
+        sort: {
+          ...initialState.sort,
+          id: 'startDate',
+          direction: true,
+        },
+      };
+      deepFreeze(initialState);
+      expect(reducer(initialState, actions.sortMissions('startDate'))).toEqual(expectedState);
+    });
 
-  it('should handle SPOTLIGHT_MISSIONS', () => {
-    const expectedState = { ...initialState, spotlight: 'soluta' };
-    deepFreeze(initialState);
-    expect(missions(initialState, actions.spotlightMissions('soluta'))).toEqual(expectedState);
+    it('should handle FILTER_MISSIONS', () => {
+      const expectedState = { ...initialState, filter: 'open' };
+      deepFreeze(initialState);
+      expect(reducer(initialState, actions.filterMissions('open'))).toEqual(expectedState);
+    });
+
+    it('should handle SPOTLIGHT_MISSIONS', () => {
+      const expectedState = { ...initialState, spotlight: 'soluta' };
+      deepFreeze(initialState);
+      expect(reducer(initialState, actions.spotlightMissions('soluta'))).toEqual(expectedState);
+    });
   });
 });

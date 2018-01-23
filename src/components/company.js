@@ -23,12 +23,10 @@ const Company = ({ name, avatar }) => (
 
 Company.propTypes = {
   name: PropTypes.string.isRequired,
-  avatar: PropTypes.objectOf(
-    PropTypes.shape({
-      src: PropTypes.string,
-      url: PropTypes.string,
-    })
-  ),
+  avatar: PropTypes.shape({
+    src: PropTypes.string,
+    url: PropTypes.string,
+  }),
 };
 
 export default Company;
