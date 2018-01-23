@@ -1,20 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 import cx from 'classnames';
-import { Button } from '@blueprintjs/core';
-
-const StyleMission = glamorous.div(
-  {
-    width: '300px',
-    padding: '20px',
-    textAlign: 'center',
-    border: '1px solid #c8c8c8',
-  },
-  ({ isSelected }) => ({
-    backgroundColor: isSelected ? 'indianred' : 'white',
-  }),
-);
+import { Menu, MenuItem, Popover, Position, Checkbox } from '@blueprintjs/core';
+import Mission from './mission';
 
 const MainContainer = glamorous.div({
   margin: '2rem',
@@ -40,67 +29,46 @@ const MissionsContainer = glamorous.div({
   justifyContent: 'center',
 });
 
-class Mission extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isHovered: false };
-    this.boundUpdateIsHovered = this.updateIsHovered.bind(this);
-  }
-
-  updateIsHovered() {
-    this.setState({ isHovered: !this.state.isHovered });
-  }
-
-  render() {
-    const { id, name, clientId, partnerId, managerId, addenda, isSelected, removeMission, toggleMission } = this.props;
-    return (
-      <StyleMission
-        isHovered={this.state.isHovered}
-        isSelected={isSelected}
-        onMouseEnter={() => this.boundUpdateIsHovered()}
-        onMouseLeave={() => this.boundUpdateIsHovered()}
-      >
-        <h3>{name}</h3>
-        <p>
-          clientId: {clientId}, partnerId: {partnerId}, managerId: {managerId}
-        </p>
-        <p>
-          Workers ({addenda.length}): {addenda.map(w => w.workerId).join(' ')}
-        </p>
-        {this.state.isHovered ? (
-          <div>
-            <Button iconName="trash" text="Supprimer" onClick={() => removeMission(id)} />
-            <Button iconName="add" text="Sélectionner" onClick={() => toggleMission(id)} />
-          </div>
-        ) : null}
-      </StyleMission>
-    );
-  }
-}
-
-Mission.propTypes = {
-  id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  clientId: PropTypes.string,
-  partnerId: PropTypes.string,
-  managerId: PropTypes.string,
-  addenda: PropTypes.arrayOf(
-    PropTypes.shape({
-      workerId: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  isSelected: PropTypes.bool,
-  removeMission: PropTypes.func.isRequired,
-  toggleMission: PropTypes.func.isRequired,
-};
-
-const Missions = ({ missions, removeMission, toggleMission, removeMissions, filterAction }) => {
+const Missions = ({
+  missions,
+  removeMission,
+  toggleMission,
+  removeMissions,
+  filterMissionOpen,
+  filterMissionEnd,
+  filterMissions,
+  sortMissions,
+}) => {
   const colorNbMissions = {
     red: false,
     green: true,
   };
-
   const isAnyoneIsSelected = missions.filter(e => e.isSelected === true);
+
+  const filterAndSortMenu = (
+    <Menu>
+      <li className="pt-menu-header">
+        <h6>Tri</h6>
+      </li>
+      <MenuItem iconName="pt-icon-sort-alphabetical" text="Trier par nom" onClick={() => sortMissions('SORT_NAME')} />
+      <MenuItem
+        iconName="pt-icon-sort-numerical"
+        text="Trier par date de debut"
+        onClick={() => sortMissions('SORT_DATE_START')}
+      />
+      <MenuItem
+        iconName="pt-icon-sort-numerical"
+        text="Trier par date de fin"
+        onClick={() => sortMissions('SORT_DATE_END')}
+      />
+      <li className="pt-menu-header">
+        <h6>Filtre</h6>
+      </li>
+      <Checkbox checked={filterMissions.missionOpen} onChange={() => filterMissionOpen()} label="Missions en cours" />
+      <Checkbox checked={filterMissions.missionEnd} onChange={() => filterMissionEnd()} label="Missions terminée" />
+    </Menu>
+  );
+
   return (
     <MainContainer>
       <Toolbar>
@@ -112,10 +80,11 @@ const Missions = ({ missions, removeMission, toggleMission, removeMissions, filt
               <span className="pt-icon-standard pt-icon-cross pt-align-right" />
             </button>
           ) : null}
-          <button type="button" className="pt-button pt-intent-primary" onClick={() => filterAction()}>
-            Filtre
-            <span className="pt-icon-standard pt-icon-arrow-right pt-align-right" />
-          </button>
+          <Popover content={filterAndSortMenu} position={Position.BOTTOM}>
+            <button className="pt-button pt-icon-filter" type="button">
+              Filtre et tri
+            </button>
+          </Popover>
         </div>
       </Toolbar>
       <MissionsContainer>
@@ -136,7 +105,10 @@ Missions.propTypes = {
   removeMission: PropTypes.func.isRequired,
   toggleMission: PropTypes.func.isRequired,
   removeMissions: PropTypes.func.isRequired,
-  filterAction: PropTypes.func.isRequired,
+  sortMissions: PropTypes.func.isRequired,
+  filterMissionOpen: PropTypes.func.isRequired,
+  filterMissionEnd: PropTypes.func.isRequired,
+  filterMissions: PropTypes.object.isRequired,
 };
 
 export default Missions;

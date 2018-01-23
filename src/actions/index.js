@@ -12,5 +12,11 @@ export const blockedAction = actionType => ({ type: BLOCKED_ACTION, payload: { a
 export const HIDE_ALERT = 'HIDE_ALERT';
 export const hideAlert = () => ({ type: HIDE_ALERT });
 
-export const FILTER_ACTION = 'FILTER_ACTION';
-export const filterAction = () => ({ type: FILTER_ACTION });
+export const SORT_MISSIONS = 'SORT_MISSIONS';
+export const sortMissions = actionType => ({ type: SORT_MISSIONS, payload: { actionType } });
+
+export const FILTER_MISSION_OPEN = 'FILTER_MISSION_OPEN';
+export const filterMissionOpen = () => ({ type: FILTER_MISSION_OPEN });
+
+export const FILTER_MISSION_END = 'FILTER_MISSION_END';
+export const filterMissionEnd = () => ({ type: FILTER_MISSION_END });

@@ -1,3 +1,5 @@
+import { reduce } from 'ramda';
+
 const add = a => b => a + b;
 export const increm = add(1);
 
@@ -23,3 +25,6 @@ export const concatAsync = (s1, s2, callback) => {
     }
   }, 1000);
 };
+
+// export const arrayToObject = list => reduce((memo, element) => ({ ...memo}, element }), {}, list);
+export const arrayToObjectWithId = list => reduce((memo, element) => ({ ...memo, [element.id]: element }), {}, list);

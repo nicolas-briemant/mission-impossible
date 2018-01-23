@@ -1,6 +1,6 @@
 const workers = [
   {
-    _id: '1',
+    id: '1',
     email: 'eric.basley@redpelicans.com',
     avatar: {
       color: '#67ae3f',
@@ -21,7 +21,7 @@ const workers = [
     ],
   },
   {
-    _id: '2',
+    id: '2',
     prefix: 'Mr',
     firstName: 'Nicolas',
     lastName: 'Briemant',
@@ -42,7 +42,7 @@ const workers = [
     },
   },
   {
-    _id: '3',
+    id: '3',
     email: 'lucas.charvolin@redpelicans.com',
     avatar: {
       url: 'https://lh4.googleusercontent.com/-g5KIWLrszUA/AAAAAAAAAAI/AAAAAAAAAL4/K9bcZJ5Jagk/s96-c/photo.jpg',
@@ -63,7 +63,7 @@ const workers = [
     ],
   },
   {
-    _id: '4',
+    id: '4',
     email: 'mehdi.aissa-brahim@redpelicans.com',
     avatar: {
       color: '#67ae3f',
@@ -84,7 +84,7 @@ const workers = [
     ],
   },
   {
-    _id: '5',
+    id: '5',
     email: 'dimitri.roncoli@redpelicans.com',
     avatar: {
       color: '#bdc3c7',
@@ -105,7 +105,7 @@ const workers = [
     ],
   },
   {
-    _id: '6',
+    id: '6',
     email: 'marianne.porcel@redpelicans.com',
     avatar: {
       color: '#f1c40f',
@@ -126,7 +126,7 @@ const workers = [
     ],
   },
   {
-    _id: '7',
+    id: '7',
     email: 'arnaud.lefloch@redpelicans.com',
     avatar: {
       color: '#95a5a6',
@@ -134,7 +134,7 @@ const workers = [
     roles: ['access'],
     prefix: 'Mr',
     firstName: 'Arnaud',
-    lastName: 'LeFloch',
+    lastName: 'Le Floch',
     type: 'worker',
     jobType: 'developer',
     companyId: '1',
@@ -147,7 +147,7 @@ const workers = [
     ],
   },
   {
-    _id: '8',
+    id: '8',
     email: 'mike.velluet@redpelicans.com',
     avatar: {
       color: '#2ecc71',
@@ -168,7 +168,7 @@ const workers = [
     ],
   },
   {
-    _id: '9',
+    id: '9',
     email: 'thomas.tridon@redpelicans.com',
     avatar: {
       color: '#7f8c8d',
@@ -189,7 +189,7 @@ const workers = [
     ],
   },
   {
-    _id: '10',
+    id: '10',
     email: 'mahmoud.chebbou@nearteam.fr ',
     avatar: {
       color: '#bdc3c7',

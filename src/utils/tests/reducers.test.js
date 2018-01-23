@@ -1,5 +1,14 @@
 import deepFreeze from 'deep-freeze';
-import { removeMission, removeMissions, toggleMission, blockedAction, hideAlert } from '../../actions';
+import {
+  removeMission,
+  removeMissions,
+  toggleMission,
+  blockedAction,
+  hideAlert,
+  sortMissions,
+  filterMissionOpen,
+  filterMissionEnd,
+} from '../../actions';
 import reducer from '../../reducers';
 
 const mission1 = {
@@ -106,5 +115,29 @@ describe('reducer', () => {
 
     deepFreeze(initialState);
     expect(reducer(initialState, hideAlert())).toEqual(expected);
+  });
+
+  it('should sort_missions', () => {
+    const initialState = { missions: [mission1, mission2], sort: { type: '', direction: false } };
+    const expected = { missions: [mission1, mission2], sort: { type: 'SORT_NAME', direction: true } };
+
+    deepFreeze(initialState);
+    expect(reducer(initialState, sortMissions('SORT_NAME'))).toEqual(expected);
+  });
+
+  it('should filter_mission_open', () => {
+    const initialState = { missions: [mission1, mission2], filterMissions: { missionOpen: false, missionEnd: false } };
+    const expected = { missions: [mission1, mission2], filterMissions: { missionOpen: true, missionEnd: false } };
+
+    deepFreeze(initialState);
+    expect(reducer(initialState, filterMissionOpen())).toEqual(expected);
+  });
+
+  it('should filter_mission_end', () => {
+    const initialState = { missions: [mission1, mission2], filterMissions: { missionOpen: false, missionEnd: false } };
+    const expected = { missions: [mission1, mission2], filterMissions: { missionOpen: false, missionEnd: true } };
+
+    deepFreeze(initialState);
+    expect(reducer(initialState, filterMissionEnd())).toEqual(expected);
   });
 });
