@@ -6,6 +6,9 @@ import { Button } from '@blueprintjs/core';
 import { Toolbar, ToolbarLeft, ToolbarRight } from '../toolbar';
 import Status from '../status';
 
+const Logo = glamorous.img({
+  width: '5%',
+});
 const StyledMission = glamorous.div({
   marginTop: '20px',
   background: '#ccebff',
@@ -35,7 +38,7 @@ class Mission extends React.Component {
   }
 
   render() {
-    const { id, name, clientId, partnerId, managerId, addenda, removeMission, toggleMission, isSelected } = this.props;
+    const { id, name, client, partner, manager, developers, removeMission, toggleMission, isSelected } = this.props;
     return (
       <StyledMission
         className={cx({ selected: isSelected })}
@@ -44,12 +47,21 @@ class Mission extends React.Component {
       >
         <h2> Mission {id}</h2>
         <h3>{name}</h3>
-        <p>
-          {clientId}, {partnerId}, {managerId}
-        </p>
-        <p>
-          Workers ({addenda.length}): {addenda.map(worker => worker.workerId)}
-        </p>
+        <ul>
+          <li>
+            Client: {client.name}
+            {client.logo ? <Logo alt="avatar" src={client.avatar.src} /> : null}
+          </li>
+          <li>
+            Partner:{partner ? partner.name : null}
+            {partner ? <Logo src={partner.avatar.src} /> : null}
+          </li>
+          <li>
+            Manager: {manager.firstName} {manager.lastName}
+          </li>
+        </ul>
+        Workers ({developers.length}):{' '}
+        {developers.map(worker => <p key={worker.id}>{`${worker.firstName} ${worker.lastName}`}</p>)}
         {this.state.isHovered ? (
           <Fragment>
             <Button iconName="select" text="select" onClick={() => toggleMission(id)} />
@@ -63,16 +75,12 @@ class Mission extends React.Component {
 
 Mission.propTypes = {
   id: PropTypes.number,
+  manager: PropTypes.object,
   isSelected: PropTypes.bool,
   name: PropTypes.string.isRequired,
-  clientId: PropTypes.string,
-  partnerId: PropTypes.string,
-  managerId: PropTypes.string,
-  addenda: PropTypes.arrayOf(
-    PropTypes.shape({
-      workerId: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  client: PropTypes.object,
+  partner: PropTypes.object,
+  developers: PropTypes.array,
   removeMission: PropTypes.func.isRequired,
   toggleMission: PropTypes.func.isRequired,
 };
@@ -89,7 +97,17 @@ const StyledLabel = glamorous.label({
   color: 'white',
   width: '100px',
 });
-const Missions = ({ missions, removeMission, toggleMission, removeMissions, unauthorized, isClicked }) => (
+const Missions = ({
+  missions,
+  sortByEndDate,
+  sortByStartDate,
+  removeMission,
+  toggleMission,
+  removeMissions,
+  unauthorized,
+  isClicked,
+  sortByName,
+}) => (
   <Fragment>
     <Toolbar>
       <ToolbarLeft>
@@ -98,6 +116,10 @@ const Missions = ({ missions, removeMission, toggleMission, removeMissions, unau
       <ToolbarRight isClicked={isClicked}>
         <Button iconName="trash" text="Remove Missions" onClick={() => removeMissions()} />
         <Button iconName="error" text="Don't Click" onClick={() => unauthorized()} />
+        <Button iconName="sort" text="Sort By Name" onClick={() => sortByName()} />
+        <Button iconName="sort" text="Sort By Start Date" onClick={() => sortByStartDate()} />
+        <Button iconName="sort" text="Sort By End Date" onClick={() => sortByEndDate()} />
+
         {isClicked ? <StyledLabel> {"Next time don't Click"} </StyledLabel> : null}
       </ToolbarRight>
     </Toolbar>
@@ -113,8 +135,11 @@ Missions.propTypes = {
   missions: PropTypes.array,
   removeMission: PropTypes.func.isRequired,
   toggleMission: PropTypes.func.isRequired,
+  sortByStartDate: PropTypes.func.isRequired,
+  sortByEndDate: PropTypes.func.isRequired,
   removeMissions: PropTypes.func.isRequired,
   unauthorized: PropTypes.func.isRequired,
+  sortByName: PropTypes.func.isRequired,
   isClicked: PropTypes.bool,
 };
 

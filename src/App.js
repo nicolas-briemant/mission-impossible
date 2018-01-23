@@ -6,7 +6,16 @@ import { Menu } from './components/menu';
 import { Title } from './components/title';
 import Missions from './components/missions/index';
 import './App.css';
-import { removeMission, toggleMission, removeMissions, unauthorized } from './actions';
+import {
+  removeMission,
+  toggleMission,
+  removeMissions,
+  unauthorized,
+  sortByName,
+  sortByStartDate,
+  sortByEndDate,
+} from './actions';
+import { missionsSelector } from './selectors';
 
 //import connect from './connect';
 
@@ -23,7 +32,18 @@ const App = props => (
     <Missions {...props} />
   </div>
 );
-const mapDispatchToProps = { removeMission, removeMissions, toggleMission, unauthorized };
-const mapStateToProps = state => state;
+const mapDispatchToProps = {
+  removeMission,
+  removeMissions,
+  toggleMission,
+  unauthorized,
+  sortByName,
+  sortByStartDate,
+  sortByEndDate,
+};
+const mapStateToProps = state => ({
+  ...state,
+  missions: missionsSelector(state),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
