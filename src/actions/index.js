@@ -20,3 +20,19 @@ export const filterMissionOpen = () => ({ type: FILTER_MISSION_OPEN });
 
 export const FILTER_MISSION_END = 'FILTER_MISSION_END';
 export const filterMissionEnd = () => ({ type: FILTER_MISSION_END });
+
+export const CHANGE_ICON = 'CHANGE_ICON';
+export const changeIcon = data => ({ type: CHANGE_ICON, iconElement: data });
+
+export const REQUEST_ICON = 'REQUEST_ICON';
+export const requestAction = () => dispatch => {
+  fetch('https://hook.io/eric-basley/fruit​')
+    .then(results => results.json())
+    .then(data => {
+      dispatch(changeIcon(data));
+    });
+  dispatch(changeIcon({ icon: 'spinner fa-spin', color: '' }));
+};
+
+export const SEARCH_BAR = 'SEARCH_BAR';
+export const searchBar = string => ({ type: SEARCH_BAR, payload: { string } });

@@ -14,6 +14,8 @@ import {
   filterMissionOpen,
   filterMissionEnd,
   sortMissions,
+  requestAction,
+  searchBar,
 } from './actions';
 import { getSortedMissions, filterMissions } from './selectors';
 
@@ -50,6 +52,8 @@ const mapDispatchToProps = {
   filterMissionOpen,
   filterMissionEnd,
   sortMissions,
+  requestAction,
+  searchBar,
 };
 const mapStateToProps = state => {
   return {

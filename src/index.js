@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import './index.css';
 import App from './App';
 import missions from './data/missions2';
@@ -26,9 +27,11 @@ const initialState = {
     missionOpen: false,
     missionEnd: false,
   },
+  iconElement: '',
+  search: '',
 };
 
-const store = createStore(reducer, initialState, applyMiddleware(firewall, logger));
+const store = createStore(reducer, initialState, applyMiddleware(thunk, firewall, logger));
 
 ReactDOM.render(
   <Provider store={store}>
