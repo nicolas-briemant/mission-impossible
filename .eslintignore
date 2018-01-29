@@ -5,4 +5,5 @@ stats.json
 server/middlewares/generated.*
 internals/scripts
 src/data
+src/exercises
 src/registerServiceWorker.js

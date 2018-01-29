@@ -1,11 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Header, HeaderLeft, HeaderRight, Title, Menu } from './components/app';
+import glamorous from 'glamorous';
+import { Header, HeaderLeft, HeaderRight } from './components/header';
+import Title from './components/title';
+import Menu from './components/menu';
 import Missions from './components/missions';
-import { removeMission, removeMissions, toggleMission } from './actions';
 
-const App = (props) => (
+const Main = glamorous.div({
+  padding: 40,
+  paddingTop: 20,
+  paddingBottom: 20,
+});
+
+const App = () => (
   <div className="pt-dark">
     <Header isFixed>
       <HeaderRight>
@@ -13,18 +19,12 @@ const App = (props) => (
       </HeaderRight>
       <HeaderLeft>
         <Title />
-        {props.shallNotPassLog ? <code>shallNotPassLog: {props.shallNotPassLog}</code> : null }
       </HeaderLeft>
     </Header>
-    <Missions {...props} />
+    <Main>
+      <Missions />
+    </Main>
   </div>
 );
 
-App.propTypes = {
-  shallNotPassLog: PropTypes.string,
-};
-
-const mapDispatchToProps = { removeMission, removeMissions, toggleMission };
-const mapStateToProps = (state) => state;
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

@@ -1,7 +1,10 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import glamorous from 'glamorous';
-import logger from '../logger';
+import { map } from 'ramda';
+import { removeMission as removeMissionAC, toggleMission as toggleMissionAC } from '../../actions';
+import { getPreparedMissions } from '../../selectors';
 import Mission from './mission';
 import Toolbar from './toolbar';
 
@@ -12,18 +15,19 @@ const StyledMissions = glamorous.div({
   padding: '0 15px',
 });
 
-const Missions = ({ missions, removeMissions, toggleMission, removeMission }) => (
+const Missions = ({ missions, toggleMission, removeMission }) => (
   <Fragment>
-    <Toolbar missions={missions} removeMissions={removeMissions} />
+    <Toolbar />
     <StyledMissions>
-      {missions.map((mission) => (
-        <Mission
-          key={mission.id}
-          {...mission}
-          toggleMission={toggleMission}
-          removeMission={removeMission}
-        />
-      ))}
+      {map((mission) => (
+          <Mission
+            key={mission.id}
+            {...mission}
+            toggleMission={toggleMission}
+            removeMission={removeMission}
+          />
+        ), missions)
+      }
     </StyledMissions>
   </Fragment>
 );
@@ -31,12 +35,21 @@ const Missions = ({ missions, removeMissions, toggleMission, removeMission }) =>
 Missions.propTypes = {
   missions: PropTypes.arrayOf(
     PropTypes.shape({
-      _id: PropTypes.number,
+      id: PropTypes.number.isRequired,
     })
   ).isRequired,
-  removeMissions: PropTypes.func.isRequired,
   toggleMission: PropTypes.func.isRequired,
   removeMission: PropTypes.func.isRequired,
 };
 
-export default logger('Missions')(Missions);
+const mapDispatchToProps = {
+  removeMission: removeMissionAC,
+  toggleMission: toggleMissionAC,
+};
+
+const mapStateToProps = (state) => ({
+  ...state,
+  missions: getPreparedMissions(state),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Missions);

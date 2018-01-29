@@ -1,8 +1,12 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose, map, values } from 'ramda';
 import { Classes, Button } from '@blueprintjs/core';
 import cx from 'classnames';
 import glamorous from 'glamorous';
+import uuid from 'uuid/v4';
+import Company from '../company';
+import Worker from '../worker';
 
 const StyledMission = glamorous.div({
   margin: '10px 0',
@@ -40,24 +44,34 @@ class Mission extends Component {
   }
 
   render() {
-    const {
-      id, name, clientId, partnerId, managerId, addenda, isSelected, toggleMission, removeMission
-    } = this.props;
-    const relationships = [clientId, partnerId, managerId];
+    const { id, name, client, partner, manager, workers, isOpen, isSelected, toggleMission, removeMission } = this.props;
+    const cls = cx(
+      {
+        [Classes.INTENT_SUCCESS]: isSelected,
+        [Classes.iconClass('automatic-updates')]: isOpen,
+        [Classes.iconClass('box')]: !isOpen,
+      },
+      Classes.CALLOUT
+    );
 
     return (
       <StyledMission
         onMouseEnter={this.boundUpdateIsHovered}
         onMouseLeave={this.boundUpdateIsHovered}
-        className={cx({[Classes.INTENT_SUCCESS]: isSelected}, Classes.CALLOUT)}
+        className={cls}
       >
         <StyledContent>
           <h5>{name}</h5>
-          <Fragment>
-            { relationships.map((rid, i) => <code key={`${rid}-${i}`}>{rid}</code>)}
-          </Fragment>
-          <div>(#{addenda.length} addenda)</div>
-          <code>{addenda.map((a) => a.workerId).join(' - ')}</code>
+          <Company {...client} />
+          { partner ? <Company {...partner} /> : null }
+          <Worker {...manager} />
+          <div>
+            {compose(
+              values,
+              map((worker) => <Worker key={uuid()} {...worker} isShort />)
+             )(workers)
+            }
+          </div>
         </StyledContent>
         { this.state.isHovered
           ? <StyledActions>
@@ -83,17 +97,14 @@ class Mission extends Component {
 Mission.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  clientId: PropTypes.string,
-  partnerId: PropTypes.string,
-  managerId: PropTypes.string,
-  addenda: PropTypes.arrayOf(
-    PropTypes.shape({
-      workerId: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  client: PropTypes.object.isRequired,
+  partner: PropTypes.object,
+  manager: PropTypes.object.isRequired,
+  workers: PropTypes.object.isRequired,
   toggleMission: PropTypes.func.isRequired,
   removeMission: PropTypes.func.isRequired,
   isSelected: PropTypes.bool,
+  isOpen: PropTypes.bool,
 };
 
 export default Mission;
