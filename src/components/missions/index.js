@@ -38,6 +38,9 @@ const Missions = ({
   filterMissionEnd,
   filterMissions,
   sortMissions,
+  requestAction,
+  iconElement,
+  searchBar,
 }) => {
   const colorNbMissions = {
     red: false,
@@ -72,7 +75,17 @@ const Missions = ({
   return (
     <MainContainer>
       <Toolbar>
-        <i className={cx((colorNbMissions: missions.length))}>Nombre de mission(s) : {missions.length}</i>
+        <b className={cx((colorNbMissions: missions.length))}>Nombre de mission(s) : {missions.length}</b>
+        <div className="pt-input-group .modifier">
+          <span className="pt-icon pt-icon-search" />
+          <input
+            className="pt-input"
+            type="search"
+            placeholder="Recherche"
+            dir="auto"
+            onChange={e => searchBar(e.target.value)}
+          />
+        </div>
         <div>
           {isAnyoneIsSelected.length ? (
             <button type="button" className="pt-button pt-intent-danger" onClick={() => removeMissions()}>
@@ -80,6 +93,14 @@ const Missions = ({
               <span className="pt-icon-standard pt-icon-cross pt-align-right" />
             </button>
           ) : null}
+          <button
+            disabled={iconElement.icon === 'spinner fa-spin'}
+            type="button"
+            className="pt-button"
+            onClick={() => requestAction()}
+          >
+            <i className={`fa fa-${iconElement.icon} fa-1x`} style={{ color: iconElement.color }} />
+          </button>
           <Popover content={filterAndSortMenu} position={Position.BOTTOM}>
             <button className="pt-button pt-icon-filter" type="button">
               Filtre et tri
@@ -109,6 +130,9 @@ Missions.propTypes = {
   filterMissionOpen: PropTypes.func.isRequired,
   filterMissionEnd: PropTypes.func.isRequired,
   filterMissions: PropTypes.object.isRequired,
+  searchBar: PropTypes.string,
+  iconElement: PropTypes.obj,
+  requestAction: PropTypes.func,
 };
 
 export default Missions;

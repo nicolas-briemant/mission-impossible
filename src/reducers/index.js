@@ -7,6 +7,8 @@ import {
   FILTER_MISSION_OPEN,
   FILTER_MISSION_END,
   SORT_MISSIONS,
+  CHANGE_ICON,
+  SEARCH_BAR,
 } from '../actions';
 
 const removeMissionFromArray = (missions, id) => {
@@ -44,6 +46,10 @@ export default (state, action = {}) => {
       return { ...state, blockedAction: action.payload.actionType, showAlert: true };
     case HIDE_ALERT:
       return { ...state, showAlert: false };
+    case CHANGE_ICON:
+      return { ...state, iconElement: action.iconElement };
+    case SEARCH_BAR:
+      return { ...state, search: action.payload.string };
     default:
       return state;
   }

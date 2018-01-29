@@ -48,6 +48,8 @@ export const filterMissions = (state, missions) => {
   let tmpMissions = missions;
   if (state.filterMissions.missionOpen) tmpMissions = tmpMissions.filter(mission => mission.open === true, tmpMissions);
   if (state.filterMissions.missionEnd) tmpMissions = tmpMissions.filter(mission => mission.open === false, tmpMissions);
+  if (state.search.length)
+    tmpMissions = tmpMissions.filter(mission => mission.name.includes(state.search), tmpMissions);
   return tmpMissions;
 };
 
