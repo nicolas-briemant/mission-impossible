@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import glamorous from 'glamorous';
-import { compose, map, values } from 'ramda';
+import { map } from 'ramda';
 import { removeMission as removeMissionAC, toggleMission as toggleMissionAC } from '../../actions';
 import { getPreparedMissions } from '../../selectors';
 import Mission from './mission';
@@ -19,16 +19,14 @@ const Missions = ({ missions, toggleMission, removeMission }) => (
   <Fragment>
     <Toolbar />
     <StyledMissions>
-      {compose(
-        values,
-        map((mission) => (
+      {map((mission) => (
           <Mission
             key={mission.id}
             {...mission}
             toggleMission={toggleMission}
             removeMission={removeMission}
           />
-        )))(missions)
+        ), missions)
       }
     </StyledMissions>
   </Fragment>

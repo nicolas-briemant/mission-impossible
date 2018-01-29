@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose, map, values } from 'ramda';
 import { Classes, Button } from '@blueprintjs/core';
@@ -65,13 +65,13 @@ class Mission extends Component {
           <Company {...client} />
           { partner ? <Company {...partner} /> : null }
           <Worker {...manager} />
-          <ul>
+          <div>
             {compose(
               values,
-              map((worker) => <li key={uuid()}><Worker {...worker} /></li>)
+              map((worker) => <Worker key={uuid()} {...worker} isShort />)
              )(workers)
             }
-          </ul>
+          </div>
         </StyledContent>
         { this.state.isHovered
           ? <StyledActions>
